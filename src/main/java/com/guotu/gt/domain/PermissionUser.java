@@ -21,8 +21,7 @@ public class PermissionUser {
     private String name;
 
     @ApiModelProperty(value = "性别", allowableValues = "男，女")
-    // TODO char(2) 类型
-    private Character sex;
+    private String sex;
 
     @ApiModelProperty("所属机构编码，外键")
     private String departmentCode;
