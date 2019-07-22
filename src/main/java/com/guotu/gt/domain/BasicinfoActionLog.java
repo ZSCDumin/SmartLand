@@ -17,10 +17,9 @@ import java.util.Date;
 @ApiModel("用户操作日志信息实体")
 @Data
 @AllArgsConstructor
-// TODO 变量大小写
 public class BasicinfoActionLog {
     @ApiModelProperty("编码，主键")
-    private String code;
+    private Byte code;
     
     @ApiModelProperty("用户编号，外键")
     private String userCode;

@@ -17,7 +17,6 @@ import java.util.Date;
 @ApiModel("用户登录日志信息实体")
 @Data
 @AllArgsConstructor
-// TODO 有些变量的命名大小写？
 public class BasicinfoLoginLog {
     @ApiModelProperty("编码，主键")
     private Byte code;

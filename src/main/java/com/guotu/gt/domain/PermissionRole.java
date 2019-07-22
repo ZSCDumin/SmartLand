@@ -14,7 +14,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class PermissionRole {
-    // TODO 主键是写在注释里还是注解里？
     @ApiModelProperty("角色编码，主键")
     private Byte code;
 
@@ -22,9 +21,8 @@ public class PermissionRole {
     private String name;
 
     @ApiModelProperty("角色描述说明")
-    private String description;
-
-    // TODO 备注问题
-    @ApiModelProperty(value = "标志位", notes = "0表示系统创建")
+    private String description;  // null
+	
+    @ApiModelProperty(value = "标志位", notes = "标志位：0表示系统创建，不允许删除")
     private Byte flag;
 }
