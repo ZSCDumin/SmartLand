@@ -16,7 +16,7 @@
     </insert>
 
     <update id="updateByRoleCode" parameterType="com.guotu.gt.domain.PermissionRoleMenu2Operation">
-        UPDATE permission_role
+        UPDATE permission_role_menu2_operation
         SET menu2_code =#{menu2Code},
         operation_code =#{operationCode}
         WHERE role_code =#{roleCode}
