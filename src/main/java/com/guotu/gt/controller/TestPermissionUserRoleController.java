@@ -2,7 +2,6 @@ package com.guotu.gt.controller;
 
 import com.guotu.gt.domain.PermissionUserRole;
 import com.guotu.gt.service.TestPermissionUserRoleService;
-import com.guotu.gt.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
