@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.guotu.gt.mapper.PermissionRoleMenu2OperationMapper">
+
+    <select id="selectByRoleCode" parameterType="Byte" resultType="com.guotu.gt.domain.PermissionRoleMenu2Operation">
+        SELECT * FROM permission_role_menu2_operation
+        WHERE role_code =#{roleCode}
+    </select>
+
+    <insert id="insert" parameterType="com.guotu.gt.domain.PermissionRoleMenu2Operation">
+        INSERT INTO permission_role_menu2_operation
+        VALUES(#{roleCode},
+        #{menu2Code},
+        #{operationCode})
+    </insert>
+
+    <update id="updateByRoleCode" parameterType="com.guotu.gt.domain.PermissionRoleMenu2Operation">
+        UPDATE permission_role
+        SET menu2_code =#{menu2Code},
+        operation_code =#{operationCode}
+        WHERE role_code =#{roleCode}
+    </update>
+
+    <delete id="deleteByRoleCode" parameterType="Byte">
+        DELETE FROM permission_role_menu2_operation
+        WHERE role_code =#{roleCode}
+    </delete>
+
+</mapper>
