@@ -20,7 +20,6 @@ public interface PermissionUserRoleMapper {
      * @param oldRoleCode 旧角色
      * @param newRoleCode 新角色
      */
-    // TODO 多参数传递
     void updateRoleCodeToNew(@Param("oldRoleCode") Byte oldRoleCode, @Param("newRoleCode") Byte newRoleCode);
 
     //测试

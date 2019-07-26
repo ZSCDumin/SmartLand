@@ -20,6 +20,7 @@ public interface PermissionRoleMapper {
 
     /**
      * 查询所有角色
+     * 返回的结果按照编码从小到大排序
      * @return 角色信息列表
      */
     List<PermissionRoleDTO> selectAll();

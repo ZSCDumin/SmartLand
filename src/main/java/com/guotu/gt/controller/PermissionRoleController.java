@@ -8,17 +8,22 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 角色管理界面 - 控制层
+ *
+ * @author YalandHong
+ */
+
 @RestController
 @Api(tags = "角色管理界面")
-@RequestMapping("/permissionUser")
+@RequestMapping("/permissionRole")
 public class PermissionRoleController {
 
-    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/all")
     @ApiOperation(value = "获取所有角色")
     public Result<List<PermissionRoleDTO>> getAllRole() {
         return ResultUtil.success(permissionRoleService.selectAll());
@@ -26,8 +31,9 @@ public class PermissionRoleController {
 
     @PostMapping("/update")
     @ApiOperation(value = "根据编码更新角色", notes = "只能更新角色的名字和描述")
-    public void updateByCode(@RequestBody PermissionRoleDTO permissionRoleDTO) {
+    public Result<Object> updateByCode(@RequestBody PermissionRoleDTO permissionRoleDTO) {
         permissionRoleService.updateByCode(permissionRoleDTO);
+        return ResultUtil.success();
     }
 
     @PutMapping("/add")
@@ -38,9 +44,10 @@ public class PermissionRoleController {
     }
 
     @DeleteMapping("/delete")
-    @ApiOperation(value = "根据编码删除一个角色")
-    public void deleteByCode(@ApiParam(value = "角色编码", required = true) @RequestParam Byte code) {
+    @ApiOperation(value = "根据编码删除一个角色", notes = "删除一个用户添加的角色，系统创建的角色不能删除")
+    public Result<Object> deleteByCode(@ApiParam(value = "角色编码", required = true) @RequestParam Byte code) {
         permissionRoleService.deleteByCode(code);
+        return ResultUtil.success();
     }
 
     @Autowired

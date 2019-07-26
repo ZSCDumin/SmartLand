@@ -6,6 +6,7 @@
     <select id="selectAll" resultType="com.guotu.gt.dto.PermissionRoleDTO">
         SELECT code, name, description
         FROM permission_role
+        ORDER BY code
     </select>
 
     <select id="selectByName" parameterType="String" resultType="com.guotu.gt.dto.PermissionRoleDTO">
@@ -23,7 +24,7 @@
     <update id="updateByCode" parameterType="com.guotu.gt.dto.PermissionRoleDTO">
         UPDATE permission_role
         SET name =#{name},
-        description =#{description},
+        description =#{description}
         WHERE code =#{code}
     </update>
 

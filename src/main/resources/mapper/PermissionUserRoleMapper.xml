@@ -3,7 +3,7 @@
 
 <mapper namespace="com.guotu.gt.mapper.PermissionUserRoleMapper">
 
-    <update id="updateToNormalUser">
+    <update id="updateRoleCodeToNew">
         UPDATE permission_user_role
         SET role_code =#{newRoleCode}
         WHERE role_code =#{oldRoleCode}
