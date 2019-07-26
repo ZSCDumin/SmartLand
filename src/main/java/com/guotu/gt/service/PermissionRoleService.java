@@ -18,4 +18,24 @@ public interface PermissionRoleService {
      */
     List<PermissionRoleDTO> selectAll();
 
+    /**
+     * 根据编码更新角色信息
+     * @param permissionRoleDTO 新的角色信息
+     */
+    void updateByCode(PermissionRoleDTO permissionRoleDTO);
+
+    /**
+     * 新增角色信息
+     * @param name 角色名
+     * @param description 角色描述
+     * @return 新角色的信息
+     */
+    PermissionRoleDTO insert(String name, String description);
+
+    /**
+     * 根据编码删除角色
+     * @param code 角色编码
+     */
+    void deleteByCode(Byte code);
+
 }

@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 @ApiModel(description = "角色管理界面数据实体")
 @Data
 @AllArgsConstructor

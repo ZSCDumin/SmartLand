@@ -4,7 +4,8 @@
 <mapper namespace="com.guotu.gt.mapper.PermissionRoleMapper">
 
     <select id="selectAll" resultType="com.guotu.gt.dto.PermissionRoleDTO">
-        SELECT * FROM permission_role
+        SELECT code, name, description
+        FROM permission_role
     </select>
 
     <select id="selectByName" parameterType="String" resultType="com.guotu.gt.dto.PermissionRoleDTO">
@@ -13,12 +14,25 @@
         WHERE name =#{name}
     </select>
 
-    <insert id="insert" parameterType="com.guotu.gt.domain.PermissionRole">
+    <select id="selectByCode" parameterType="Byte" resultType="com.guotu.gt.dto.PermissionRoleDTO">
+        SELECT code, name, description
+        FROM permission_role
+        WHERE code =#{code}
+    </select>
+
+    <update id="updateByCode" parameterType="com.guotu.gt.dto.PermissionRoleDTO">
+        UPDATE permission_role
+        SET name =#{name},
+        description =#{description},
+        WHERE code =#{code}
+    </update>
+
+    <insert id="insert" parameterType="com.guotu.gt.dto.PermissionRoleDTO">
         INSERT INTO permission_role
         VALUES(#{code},
         #{name},
         #{description},
-        #{flag})
+        1)
     </insert>
 
     <select id="selectFlagByCode" parameterType="Byte" resultType="Byte">
@@ -31,19 +45,5 @@
         DELETE FROM permission_role
         WHERE code =#{code}
     </delete>
-
-    <select id="selectByCode" parameterType="Byte" resultType="com.guotu.gt.domain.PermissionRole">
-        SELECT *
-        FROM permission_role
-        WHERE code =#{code}
-    </select>
-
-    <update id="updateByCode" parameterType="com.guotu.gt.domain.PermissionRole">
-        UPDATE permission_role
-        SET name =#{name},
-        description =#{description},
-        flag =#{flag}
-        WHERE code =#{code}
-    </update>
 
 </mapper>

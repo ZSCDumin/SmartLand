@@ -32,10 +32,16 @@ public interface PermissionRoleMapper {
     PermissionRoleDTO selectByName(String name);
 
     /**
-     * 插入角色信息
-     * @param permissionRole 角色信息
+     * 根据编码查询
+     * @param code 角色编码
      */
-    void insert(PermissionRole permissionRole);
+    PermissionRoleDTO selectByCode(Byte code);
+
+    /**
+     * 插入角色信息
+     * @param permissionRoleDTO 角色信息
+     */
+    void insert(PermissionRoleDTO permissionRoleDTO);
 
     /**
      * 根据编码获取标志位
@@ -51,14 +57,8 @@ public interface PermissionRoleMapper {
     void deleteByCode(Byte code);
 
     /**
-     * 根据编码查询
-     * @param code 角色编码
-     */
-    PermissionRole selectByCode(Byte code);
-
-    /**
      * 根据编码更新
-     * @param permissionRole 角色信息
+     * @param permissionRoleDTO 角色信息
      */
-    void updateByCode(PermissionRole permissionRole);
+    void updateByCode(PermissionRoleDTO permissionRoleDTO);
 }

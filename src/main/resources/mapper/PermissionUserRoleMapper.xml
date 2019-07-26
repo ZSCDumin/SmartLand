@@ -3,6 +3,13 @@
 
 <mapper namespace="com.guotu.gt.mapper.PermissionUserRoleMapper">
 
+    <update id="updateToNormalUser">
+        UPDATE permission_user_role
+        SET role_code =#{newRoleCode}
+        WHERE role_code =#{oldRoleCode}
+    </update>
+
+<!--  测试  -->
     <select id="selectByUserCode" parameterType="String" resultType="com.guotu.gt.domain.PermissionUserRole">
         SELECT * FROM permission_user_role
         WHERE user_code = #{code}
