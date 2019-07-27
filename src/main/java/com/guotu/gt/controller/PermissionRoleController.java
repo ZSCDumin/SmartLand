@@ -39,7 +39,7 @@ public class PermissionRoleController {
     @PutMapping("/add")
     @ApiOperation(value = "新增一个角色")
     public Result<PermissionRoleDTO> addNewRole(@ApiParam(value = "角色名称", required = true) @RequestParam String name,
-                    @ApiParam(value = "角色描述", allowEmptyValue = true) @RequestParam String description) {
+                    @ApiParam(value = "角色描述") @RequestParam(required = false) String description) {
         return ResultUtil.success(permissionRoleService.insert(name, description));
     }
 

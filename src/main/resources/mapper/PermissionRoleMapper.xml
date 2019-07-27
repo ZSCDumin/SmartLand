@@ -37,7 +37,7 @@
     </insert>
 
     <select id="selectFlagByCode" parameterType="Byte" resultType="Byte">
-        select flag
+        SELECT flag
         FROM permission_role
         WHERE code =#{code}
     </select>
@@ -46,5 +46,11 @@
         DELETE FROM permission_role
         WHERE code =#{code}
     </delete>
+
+    <select id="selectAllCodeAscend" resultType="Byte">
+        SELECT code
+        FROM permission_role
+        ORDER BY code
+    </select>
 
 </mapper>

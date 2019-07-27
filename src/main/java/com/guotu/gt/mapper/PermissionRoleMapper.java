@@ -1,6 +1,5 @@
 package com.guotu.gt.mapper;
 
-import com.guotu.gt.domain.PermissionRole;
 import com.guotu.gt.dto.PermissionRoleDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -62,4 +61,10 @@ public interface PermissionRoleMapper {
      * @param permissionRoleDTO 角色信息
      */
     void updateByCode(PermissionRoleDTO permissionRoleDTO);
+
+    /**
+     * 获取所有编码，按递增顺序返回
+     * @return 递增的编码列表
+     */
+    List<Byte> selectAllCodeAscend();
 }

@@ -14,7 +14,7 @@
         WHERE code =#{code}
     </select>
 
-    <select id="selectByPeriod" resultType="com.guotu.gt.dto.BasicinfoActionLogDTO">
+    <!--<select id="selectByPeriod" resultType="com.guotu.gt.dto.BasicinfoActionLogDTO">
         SELECT bal.code AS code,
         bal.name AS name,
         bd.department_name AS departmentName,
@@ -26,7 +26,20 @@
         basicinfo_department AS bd
         WHERE (bal.opt_time BETWEEN #{startTime} AND #{endTime})
         AND (bal.user_code = pu.code)
-        AND ((pu.department_code = bd.code) OR ((pu.deparment_code IS NULL) AND (bd.code IS NULL)))
+        AND (pu.department_code = bd.code)
+    </select>-->
+
+    <select id="selectByPeriod" resultType="com.guotu.gt.dto.BasicinfoActionLogDTO">
+        SELECT bal.code AS code,
+        bal.name AS name,
+        bd.department_name AS departmentName,
+        bal.opt_object AS optObject,
+        bal.description AS description,
+        bal.opt_time AS optTime
+        FROM permission_user AS pu
+        RIGHT JOIN basicinfo_action_log AS bal ON (bal.user_code = pu.code)
+        LEFT JOIN basicinfo_department AS bd ON (pu.department_code = bd.code)
+        WHERE (bal.opt_time BETWEEN #{startTime} AND #{endTime})
     </select>
 
 </mapper>
