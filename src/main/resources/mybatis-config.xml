@@ -13,7 +13,7 @@
 
     <!-- 设置几个包的别名-->
     <typeAliases>
-        <package name="com.jinchi.common.domain"/>
-        <package name="com.jinchi.common.dto"/>
+        <package name="com.guotu.gt.domain"/>
+        <package name="com.guotu.gt.dto"/>
     </typeAliases>
 </configuration>

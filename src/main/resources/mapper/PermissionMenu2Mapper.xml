@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guotu.gt.mapper.PermissionMenu2Mapper">
+
+    <!--增加一个二级菜单信息-->
+    <insert id="add" parameterType="PermissionMenu2" useGeneratedKeys="true" keyProperty="code">
+        INSERT INTO permission_menu2(code, name, path, rank, model_code, menu1_code, inter, page)
+        VALUES (#{code},#{name},#{path},#{rank},#{model_code},#{menu1_code},#{inter},#{page})
+    </insert>
+
+    <!--更新一个二级菜单信息-->
+    <update id="update" parameterType="PermissionMenu2">
+        update permission_menu2 set
+        code = #{code},
+        name = #{name},
+        path = #{path},
+        rank = #{rank},
+        model_code = #{modelCode},
+        menu1_code = #{menu1Code},
+        inter = #{inter},
+        page = #{page}
+        where code = #{code}
+    </update>
+
+    <!--根据code删除-->
+    <delete id="delete" parameterType="Byte">
+        delete from permission_menu2 where code = #{code}
+    </delete>
+
+    <!--根据code查询-->
+    <select id="findByCode" parameterType="Byte" resultType="PermissionMenu2">
+        select * from permission_menu2
+        where bd.code = #{code}
+    </select>
+
+    <!--查询所有-->
+    <select id="findAll" resultType="PermissionMenu2">
+        select * from permission_menu2
+    </select>
+</mapper>

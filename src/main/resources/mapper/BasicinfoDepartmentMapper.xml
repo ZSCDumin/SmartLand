@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guotu.gt.mapper.BasicinfoDepartmentMapper">
+
+    <!--增加一个机构信息-->
+    <insert id="add" parameterType="BasicinfoDepartment" useGeneratedKeys="true" keyProperty="code">
+        INSERT INTO basicinfo_department(code, name, info, department_code, department_name)
+        VALUES (#{code},#{name},#{info},#{departmentCode},#{departmentName})
+    </insert>
+
+    <!--更新一个机构信息-->
+    <update id="update" parameterType="BasicinfoDepartment">
+        update basicinfo_department set
+        code = #{code},
+        name = #{name},
+        info = #{info},
+        department_code = #{departmentCode},
+        department_name = #{departmentName}
+        where code = #{code}
+    </update>
+
+    <!--根据code删除-->
+    <delete id="delete" parameterType="String">
+        delete from basicinfo_department where code = #{code}
+    </delete>
+
+    <!--根据code查询-->
+    <select id="findByCode" parameterType="String" resultType="BasicinfoDepartment">
+        select * from basicinfo_department bd
+        where bd.code = #{code}
+    </select>
+
+    <!--查询所有-->
+    <select id="findAll" resultType="BasicinfoDepartment">
+        select * from basicinfo_department
+    </select>
+</mapper>

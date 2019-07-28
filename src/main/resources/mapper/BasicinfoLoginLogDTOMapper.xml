@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guotu.gt.mapper.BasicinfoLoginLogDTOMapper">
+    <!--根据code删除-->
+    <delete id="delete" parameterType="Byte">
+        delete from basicinfo_login_log where code = #{code}
+    </delete>
+
+    <!--根据时间段查询记录-->
+    <select id="search" resultType="BasicinfoLoginLogDTO">
+        select bll.code, bll.name, bd.name as department, bll.ip_address, bll.machine_name, bll.log_time
+        from permission_user pu
+        right join basicinfo_login_log bll on pu.code = bll.user_code
+        left join basicinfo_department bd on bd.code =pu.department_code
+        where bll.log_time between #{start} and #{end}
+    </select>
+
+    <!--查询当天所有记录-->
+    <select id="open" resultType="BasicinfoLoginLogDTO">
+        select bll.code, bll.name, bd.name as department, bll.ip_address, bll.machine_name, bll.log_time
+        from permission_user pu
+        right join basicinfo_login_log bll on pu.code = bll.user_code
+        left join basicinfo_department bd on bd.code =pu.department_code
+    </select>
+</mapper>
