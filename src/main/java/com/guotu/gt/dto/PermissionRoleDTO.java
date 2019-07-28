@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class PermissionRoleDTO {
     
-    @ApiModelProperty("角色编码")
+    @ApiModelProperty(value = "角色编码", dataType = "integer")
     private Byte code;
 
     @ApiModelProperty("角色名")

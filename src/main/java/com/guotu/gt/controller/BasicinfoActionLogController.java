@@ -39,7 +39,8 @@ public class BasicinfoActionLogController {
 
     @DeleteMapping("/delete")
     @ApiOperation(value = "根据编码删除操作")
-    public Result<Object> deleteByCode(@ApiParam(value = "操作编码", required = true) @RequestParam byte code) {
+    public Result<Object> deleteByCode(@ApiParam(value = "操作编码", required = true, type = "integer")
+                                           @RequestParam Byte code) {
         basicinfoActionLogService.deleteByCode(code);
         return ResultUtil.success();
     }
@@ -50,7 +51,8 @@ public class BasicinfoActionLogController {
 
     // TEST
     @GetMapping("/getByCode")
-    public Result<BasicinfoActionLog> selectByCode(@ApiParam(required = true) @RequestParam Byte code) {
+    public Result<BasicinfoActionLog> selectByCode(@ApiParam(required = true, type = "integer")
+                                                       @RequestParam Byte code) {
         return ResultUtil.success(basicinfoActionLogService.selectByCode(code));
     }
 
