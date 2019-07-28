@@ -42,4 +42,16 @@
         WHERE (bal.opt_time BETWEEN #{startTime} AND #{endTime})
     </select>
 
+<!-- TEST -->
+    <select id="selectByCode" parameterType="Byte" resultType="com.guotu.gt.domain.BasicinfoActionLog">
+        SELECT *
+        FROM basicinfo_action_log
+        WHERE code =#{code}
+    </select>
+
+    <insert id="insert" parameterType="com.guotu.gt.domain.BasicinfoActionLog">
+        INSERT INTO basicinfo_action_log
+        VALUES (#{code}, #{userCode}, #{name}, #{optObject}, #{optType}, #{description}, #{optTime})
+    </insert>
+
 </mapper>

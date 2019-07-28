@@ -1,5 +1,6 @@
 package com.guotu.gt.service;
 
+import com.guotu.gt.domain.BasicinfoActionLog;
 import com.guotu.gt.dto.BasicinfoActionLogDTO;
 import com.guotu.gt.mapper.BasicinfoActionLogMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,18 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
     @Override
     public List<BasicinfoActionLogDTO> selectByPeriod(Date startTime, Date endTime) {
 
+        startTime.setHours(0);
+        startTime.setMinutes(0);
+        startTime.setSeconds(0);
+        endTime.setHours(23);
+        endTime.setMinutes(59);
+        endTime.setSeconds(59);
+
+        System.out.println(startTime.toString());
+        System.out.println(endTime.toString());
+
         // 检查日期是否合法 okay
-        Assert.isTrue(endTime.after(startTime), "结束时间必须晚于开始时间");
+        Assert.isTrue(endTime.after(startTime), "结束时间必须等于或晚于开始时间");
 
         return basicinfoActionLogMapper.selectByPeriod(startTime, endTime);
     }
@@ -41,4 +52,16 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
 
     @Autowired
     private BasicinfoActionLogMapper basicinfoActionLogMapper;
+
+
+    // TEST
+    @Override
+    public BasicinfoActionLog selectByCode(Byte code) {
+        return basicinfoActionLogMapper.selectByCode(code);
+    }
+
+    @Override
+    public void insert(BasicinfoActionLog basicinfoActionLog) {
+        basicinfoActionLogMapper.insert(basicinfoActionLog);
+    }
 }

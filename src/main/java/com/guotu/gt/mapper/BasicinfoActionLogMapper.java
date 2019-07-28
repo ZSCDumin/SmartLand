@@ -1,5 +1,6 @@
 package com.guotu.gt.mapper;
 
+import com.guotu.gt.domain.BasicinfoActionLog;
 import com.guotu.gt.dto.BasicinfoActionLogDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -38,4 +39,19 @@ public interface BasicinfoActionLogMapper {
      * @return 操作信息
      */
     String selectNameByCode(Byte code);
+
+    // TEST
+
+    /**
+     * 根据编码返回操作日志信息
+     * @param code 编码
+     * @return 操作日志信息
+     */
+    BasicinfoActionLog selectByCode(Byte code);
+
+    /**
+     * 插入新的操作日志信息
+     * @param basicinfoActionLog 操作日志信息
+     */
+    void insert(BasicinfoActionLog basicinfoActionLog);
 }

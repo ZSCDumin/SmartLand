@@ -2,6 +2,7 @@ package com.guotu.gt.service;
 
 import com.guotu.gt.dto.PermissionRoleDTO;
 import com.guotu.gt.mapper.PermissionRoleMapper;
+import com.guotu.gt.mapper.PermissionRoleMenu2OperationMapper;
 import com.guotu.gt.mapper.PermissionUserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,7 +75,7 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
 
         // 生成编码 okay
         Byte[] codeList = permissionRoleMapper.selectAllCodeAscend().toArray(new Byte[0]);
-        Assert.isTrue(codeList.length < (int) MAX_ROLE_COUNT, "角色个数已达到上限");
+        Assert.isTrue(codeList.length < MAX_ROLE_COUNT, "角色个数已达到上限");
         Byte code = FIRST_USER_ROLE_CODE;
         while (true) {
             if (Arrays.binarySearch(codeList, code) < 0) {  // 有效编码
@@ -101,8 +102,10 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
         Assert.isTrue(!flag.equals(SYSTEM_ROLE_FLAG), "不能删除系统角色");
 
         // 清除关联用户角色  okay
-        // FIXME 有好几张表里面都出现过role code，需要把它们全部删掉！
         permissionUserRoleMapper.updateRoleCodeToNew(code, SYSTEM_ROLE_NORMAL_USER_CODE);
+
+        // 删除角色的权限信息
+        permissionRoleMenu2OperationMapper.deleteByRoleCode(code);
 
         permissionRoleMapper.deleteByCode(code);
     }
@@ -112,7 +115,10 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
     private PermissionRoleMapper permissionRoleMapper;
 
     @Autowired
-    PermissionUserRoleMapper permissionUserRoleMapper;
+    private PermissionUserRoleMapper permissionUserRoleMapper;
+
+    @Autowired
+    private PermissionRoleMenu2OperationMapper permissionRoleMenu2OperationMapper;
 
     // 定义： 系统角色 标志位为0
     private static final Byte SYSTEM_ROLE_FLAG = 0;

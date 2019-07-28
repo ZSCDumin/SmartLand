@@ -30,6 +30,6 @@ public class BasicinfoActionLogDTO {
 
     @ApiModelProperty("操作时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")  // 规定日期格式和时区
     private Date optTime;
 }

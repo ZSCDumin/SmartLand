@@ -1,5 +1,6 @@
 package com.guotu.gt.controller;
 
+import com.guotu.gt.domain.BasicinfoActionLog;
 import com.guotu.gt.dto.BasicinfoActionLogDTO;
 import com.guotu.gt.dto.Result;
 import com.guotu.gt.service.BasicinfoActionLogService;
@@ -29,10 +30,10 @@ public class BasicinfoActionLogController {
     @GetMapping("/getPeriod")
     @ApiOperation(value = "获取时间段内的所有操作")
     public Result<List<BasicinfoActionLogDTO>> getActionByPeriod(
-            @ApiParam(value = "开始时间", required = true, example = "2019-01-02 12:34:56")
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,
-            @ApiParam(value = "结束时间", required = true, example = "2019-09-10 11:12:59")
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime) {
+            @ApiParam(value = "开始时间", required = true, example = "2019-01-02")
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,
+            @ApiParam(value = "结束时间", required = true, example = "2019-09-10")
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime) {
         return ResultUtil.success(basicinfoActionLogService.selectByPeriod(startTime, endTime));
     }
 
@@ -45,4 +46,20 @@ public class BasicinfoActionLogController {
 
     @Autowired
     private BasicinfoActionLogService basicinfoActionLogService;
+
+
+    // TEST
+    @GetMapping("/getByCode")
+    public Result<BasicinfoActionLog> selectByCode(@ApiParam(required = true) @RequestParam Byte code) {
+        return ResultUtil.success(basicinfoActionLogService.selectByCode(code));
+    }
+
+    @PutMapping("/insert")
+    public Result<Object> insert(@ApiParam(required = true) @RequestParam Byte code) {
+        Date now = new Date();
+        System.out.println(now.toString());
+        basicinfoActionLogService.insert(
+                new BasicinfoActionLog(code, "2", "A", "B", "C", "D", now));
+        return ResultUtil.success();
+    }
 }

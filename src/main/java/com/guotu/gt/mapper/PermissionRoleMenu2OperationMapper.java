@@ -17,16 +17,19 @@ import org.springframework.stereotype.Component;
 public interface PermissionRoleMenu2OperationMapper {
 
     /**
-     * 根据编码查询
-     * @param roleCode 角色编码
-     */
-    PermissionRoleMenu2Operation selectByRoleCode(Byte roleCode);
-
-    /**
      * 根据编码删除
      * @param roleCode 角色编码
      */
     void deleteByRoleCode(Byte roleCode);
+
+
+    // 测试
+
+    /**
+     * 根据编码查询
+     * @param roleCode 角色编码
+     */
+    PermissionRoleMenu2Operation selectByRoleCode(Byte roleCode);
 
     /**
      * 根据编码更新

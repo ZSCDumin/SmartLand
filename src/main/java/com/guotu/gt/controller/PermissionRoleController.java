@@ -44,7 +44,8 @@ public class PermissionRoleController {
     }
 
     @DeleteMapping("/delete")
-    @ApiOperation(value = "根据编码删除一个角色", notes = "删除一个用户添加的角色，系统创建的角色不能删除")
+    @ApiOperation(value = "根据编码删除一个角色",
+            notes = "删除一个用户添加的角色，系统创建的角色不能删除。关联用户的角色会变成普通用户，同时角色相应的权限分配会被删除")
     public Result<Object> deleteByCode(@ApiParam(value = "角色编码", required = true) @RequestParam Byte code) {
         permissionRoleService.deleteByCode(code);
         return ResultUtil.success();
