@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guotu.gt.mapper.PermissionUserDTOMapper">
+
+    <!--增加一个机构信息-->
+    <insert id="add" parameterType="PermissionUserDTO" useGeneratedKeys="true" keyProperty="code">
+        INSERT INTO permission_user(name, password, email, contact, description, department_code)
+        VALUES (#{name},#{password},#{email},#{contact},#{description},
+        (select code  from basicinfo_department where name = #{department}))
+    </insert>
+
+    <!--更新一个机构信息-->
+    <update id="update" parameterType="PermissionUserDTO">
+        update permission_user pu inner join (select code,name from basicinfo_department)bd
+        on bd.name = #{department} set
+        pu.name = #{name},
+        pu.password = #{password},
+        pu.email = #{email},
+        pu.contact = #{contact},
+        pu.description = #{description},
+        pu.department_code = bd.code
+        where pu.name = #{name}
+    </update>
+
+    <!--根据name删除-->
+    <delete id="delete" parameterType="String">
+        delete from permission_user where name = #{name}
+    </delete>
+
+    <!--查询所有-->
+    <select id="findAll" resultType="PermissionUserDTO">
+        select pu.name, pu.password, pu.email, pu.contact, pu.description,
+        bd.name as department
+         from permission_user pu left join basicinfo_department bd
+         on pu.department_code = bd.code
+    </select>
+</mapper>

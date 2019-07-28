@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guotu.gt.mapper.PermissionOperationMapper">
+
+    <!--增加一个机构信息-->
+    <insert id="add" parameterType="PermissionOperation" useGeneratedKeys="true" keyProperty="code">
+        INSERT INTO permission_operation(code, name)
+        VALUES (#{code},#{name})
+    </insert>
+
+    <!--更新一个机构信息-->
+    <update id="update" parameterType="PermissionOperation">
+        update permission_operation set
+        code = #{code},
+        name = #{name},
+        where code = #{code}
+    </update>
+
+    <!--根据code删除-->
+    <delete id="delete" parameterType="Byte">
+        delete from permission_operation where code = #{code}
+    </delete>
+
+    <!--根据code查询-->
+    <select id="findByCode" parameterType="Byte" resultType="PermissionOperation">
+        select * from permission_operation
+        where code = #{code}
+    </select>
+
+    <!--查询所有-->
+    <select id="findAll" resultType="PermissionOperation">
+        select * from permission_operation
+    </select>
+</mapper>

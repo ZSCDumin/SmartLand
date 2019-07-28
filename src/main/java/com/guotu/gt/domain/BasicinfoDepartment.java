@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @ApiModel(description = "机构信息实体")
-public class BasicInfoDepartment {
+public class BasicinfoDepartment {
 
    /**
     * 主键
@@ -32,6 +32,6 @@ public class BasicInfoDepartment {
    private String departmentCode;
 
    @ApiModelProperty("所属机构名称")
-   private String createPersonId;
+   private String departmentName;
 
 }
