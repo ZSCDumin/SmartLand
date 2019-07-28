@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.guotu.gt.mapper.PermissionUserMapper">
+
+    <select id="selectByCode" parameterType="String" resultType="com.guotu.gt.domain.PermissionUser">
+        SELECT * FROM permission_user
+        WHERE code =#{code}
+    </select>
+
+    <insert id="insert" parameterType="com.guotu.gt.domain.PermissionUser">
+        INSERT INTO permission_user
+        VALUES(#{code},
+        #{name},
+        #{sex},
+        #{departmentCode},
+        #{password},
+        #{contact},
+        #{email},
+        #{description},
+        #{enable})
+    </insert>
+
+    <update id="updateByCode" parameterType="com.guotu.gt.domain.PermissionUser">
+        UPDATE permission_user
+        SET name =#{name},
+        sex =#{sex},
+        department_code =#{departmentCode},
+        password =#{password},
+        contact =#{contact},
+        email =#{email},
+        description =#{description},
+        enable =#{enable}
+        WHERE code =#{code}
+    </update>
+
+    <delete id="deleteByCode" parameterType="java.lang.String">
+        DELETE FROM permission_user
+        WHERE code=#{code}
+    </delete>
+
+</mapper>

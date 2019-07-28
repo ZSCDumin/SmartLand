@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.guotu.gt.mapper.BasicinfoActionLogMapper">
+
+    <delete id="deleteByCode" parameterType="Byte">
+        DELETE FROM basicinfo_action_log
+        WHERE code =#{code}
+    </delete>
+
+    <select id="selectNameByCode" parameterType="Byte" resultType="String">
+        SELECT name
+        FROM basicinfo_action_log
+        WHERE code =#{code}
+    </select>
+
+    <!--<select id="selectByPeriod" resultType="com.guotu.gt.dto.BasicinfoActionLogDTO">
+        SELECT bal.code AS code,
+        bal.name AS name,
+        bd.department_name AS departmentName,
+        bal.opt_object AS optObject,
+        bal.description AS description,
+        bal.opt_time AS optTime
+        FROM basicinfo_action_log AS bal,
+        permission_user AS pu,
+        basicinfo_department AS bd
+        WHERE (bal.opt_time BETWEEN #{startTime} AND #{endTime})
+        AND (bal.user_code = pu.code)
+        AND (pu.department_code = bd.code)
+    </select>-->
+
+    <select id="selectByPeriod" resultType="com.guotu.gt.dto.BasicinfoActionLogDTO">
+        SELECT bal.code AS code,
+        bal.name AS name,
+        bd.department_name AS departmentName,
+        bal.opt_object AS optObject,
+        bal.description AS description,
+        bal.opt_time AS optTime
+        FROM permission_user AS pu
+        RIGHT JOIN basicinfo_action_log AS bal ON (bal.user_code = pu.code)
+        LEFT JOIN basicinfo_department AS bd ON (pu.department_code = bd.code)
+        WHERE (bal.opt_time BETWEEN #{startTime} AND #{endTime})
+    </select>
+
+<!-- TEST -->
+    <select id="selectByCode" parameterType="Byte" resultType="com.guotu.gt.domain.BasicinfoActionLog">
+        SELECT *
+        FROM basicinfo_action_log
+        WHERE code =#{code}
+    </select>
+
+    <insert id="insert" parameterType="com.guotu.gt.domain.BasicinfoActionLog">
+        INSERT INTO basicinfo_action_log
+        VALUES (#{code}, #{userCode}, #{name}, #{optObject}, #{optType}, #{description}, #{optTime})
+    </insert>
+
+</mapper>

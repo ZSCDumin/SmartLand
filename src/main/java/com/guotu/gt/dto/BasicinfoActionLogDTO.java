@@ -1,4 +1,4 @@
-package com.guotu.gt.domain;
+package com.guotu.gt.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -9,31 +9,23 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-/**
- * 用户操作日志信息表
- * @author YalandHong
- *
- */
-@ApiModel("用户操作日志信息实体")
+@ApiModel(description = "操作日志管理界面数据")
 @Data
 @AllArgsConstructor
-public class BasicinfoActionLog {
-    @ApiModelProperty("编码，主键")
+public class BasicinfoActionLogDTO {
+    @ApiModelProperty(value = "操作编码", dataType = "integer")
     private Byte code;
-    
-    @ApiModelProperty("用户编号，外键")
-    private String userCode;
 
-    @ApiModelProperty("用户名称")
+    @ApiModelProperty("用户名")
     private String name;
+
+    @ApiModelProperty("机构名称")
+    private String departmentName;
 
     @ApiModelProperty("操作对象")
     private String optObject;
 
-    @ApiModelProperty("操作类型")
-    private String optType;
-
-    @ApiModelProperty("操作数据描述")
+    @ApiModelProperty("操作描述")
     private String description;
 
     @ApiModelProperty("操作时间")
