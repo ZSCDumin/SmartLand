@@ -34,14 +34,14 @@ public class BasicinfoDepartmentController {
 
     @DeleteMapping
     @ApiOperation(value = "根据code删除一个机构信息")
-    public Result<Object> delete(@RequestParam("code") String code){
+    public Result<Object> delete(@RequestParam("code") int code){
         basicinfoDepartmentService.delete(code);
         return ResultUtil.success();
     }
 
     @GetMapping("/findByCode")
     @ApiOperation(value = "根据code查询机构信息")
-    public Result<BasicinfoDepartment> findByCode(@RequestParam("code") String code){
+    public Result<BasicinfoDepartment> findByCode(@RequestParam("code") int code){
         return ResultUtil.success(basicinfoDepartmentService.findByCode(code));
     }
 

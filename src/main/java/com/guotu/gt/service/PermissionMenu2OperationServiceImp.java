@@ -23,12 +23,12 @@ public class PermissionMenu2OperationServiceImp implements PermissionMenu2Operat
     }
 
     @Override
-    public void delete(Byte code){
+    public void delete(int code){
         permissionMenu2OperationMapper.delete(code);
     }
 
     @Override
-    public PermissionMenu2Operation findByCode(Byte code){
+    public PermissionMenu2Operation findByCode(int code){
         return permissionMenu2OperationMapper.findByCode(code);
     }
 

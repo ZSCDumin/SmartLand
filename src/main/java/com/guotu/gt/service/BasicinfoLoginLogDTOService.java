@@ -13,7 +13,7 @@ public interface BasicinfoLoginLogDTOService {
      * @param code
      * @return
      */
-    void delete(Byte code);
+    void delete(int code);
 
     /**
      * 根据输入的日期范围查询

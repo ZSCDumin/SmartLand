@@ -23,12 +23,12 @@ public class PermissionModelServiceImp implements PermissionModelService {
     }
 
     @Override
-    public void delete(Byte code){
+    public void delete(int code){
         permissionModelMapper.delete(code);
     }
 
     @Override
-    public PermissionModel findByCode(Byte code){
+    public PermissionModel findByCode(int code){
         return permissionModelMapper.findByCode(code);
     }
 

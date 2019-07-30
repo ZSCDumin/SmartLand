@@ -15,7 +15,7 @@ public class BasicinfoLoginLogDTOServiceImp implements BasicinfoLoginLogDTOServi
     private BasicinfoLoginLogDTOMapper basicinfoLoginLogDTOMapper;
 
     @Override
-    public void delete(Byte code){
+    public void delete(int code){
         basicinfoLoginLogDTOMapper.delete(code);
     }
 

@@ -26,14 +26,14 @@ public interface PermissionMenu2Mapper {
      * 根据code删除一个一级菜单信息
      * @param code
      */
-    void delete(Byte code);
+    void delete(int code);
 
     /**
      * 根据code查找一级菜单信息
      * @param code
      * @return
      */
-    PermissionMenu2 findByCode(Byte code);
+    PermissionMenu2 findByCode(int code);
 
     /**
      * 查询所有一级菜单信息

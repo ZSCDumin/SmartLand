@@ -21,12 +21,12 @@
     </update>
 
     <!--根据code删除-->
-    <delete id="delete" parameterType="Byte">
+    <delete id="delete" parameterType="int">
         delete from permission_model where code = #{code}
     </delete>
 
     <!--根据code查询-->
-    <select id="findByCode" parameterType="Byte" resultType="PermissionModel">
+    <select id="findByCode" parameterType="int" resultType="PermissionModel">
         select * from permission_model
         where code = #{code}
     </select>

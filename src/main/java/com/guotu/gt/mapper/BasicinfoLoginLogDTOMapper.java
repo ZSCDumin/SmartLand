@@ -14,7 +14,7 @@ public interface BasicinfoLoginLogDTOMapper {
      * @param code
      * @return
      */
-    BasicinfoLoginLogDTO delete(Byte code);
+    BasicinfoLoginLogDTO delete(int code);
 
     /**
      * 根据输入的日期范围查询

@@ -33,14 +33,14 @@ public class PermissionMenu2OperationController {
 
     @DeleteMapping
     @ApiOperation(value = "根据code删除一个菜单操作分配信息")
-    public Result<Object> delete(@RequestParam("code") Byte code){
+    public Result<Object> delete(@RequestParam("code") int code){
         permissionMenu2OperationService.delete(code);
         return ResultUtil.success();
     }
 
     @GetMapping("/findByCode")
     @ApiOperation(value = "根据code查询菜单操作分配信息")
-    public Result<PermissionMenu2Operation> findByCode(@RequestParam("code") Byte code){
+    public Result<PermissionMenu2Operation> findByCode(@RequestParam("code") int code){
         return ResultUtil.success(permissionMenu2OperationService.findByCode(code));
     }
 

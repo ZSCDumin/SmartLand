@@ -24,14 +24,14 @@ public interface PermissionModelService {
      * 根据code删除一个机构信息
      * @param code
      */
-    void delete(Byte code);
+    void delete(int code);
 
     /**
      * 根据code查找机构信息
      * @param code
      * @return
      */
-    PermissionModel findByCode(Byte code);
+    PermissionModel findByCode(int code);
 
     /**
      * 查询所有机构信息

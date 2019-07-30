@@ -13,7 +13,7 @@ import java.util.Date;
 public class BasicinfoLoginLogDTO {
 
     @ApiModelProperty("用户登录日志信息编码")
-    private Byte code;
+    private int code;
 
     @ApiModelProperty("用户名称")
     private String name;
