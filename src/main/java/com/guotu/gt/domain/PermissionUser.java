@@ -39,5 +39,5 @@ public class PermissionUser {
     private String description;  //null
 
     @ApiModelProperty(value = "是否启用", allowableValues = "0不启用，1启用")
-    private Byte enable;
+    private Integer enable;
 }
