@@ -3,12 +3,12 @@
 
 <mapper namespace="com.guotu.gt.mapper.BasicinfoActionLogMapper">
 
-    <delete id="deleteByCode" parameterType="Byte">
+    <delete id="deleteByCode" parameterType="Integer">
         DELETE FROM basicinfo_action_log
         WHERE code =#{code}
     </delete>
 
-    <select id="selectNameByCode" parameterType="Byte" resultType="String">
+    <select id="selectNameByCode" parameterType="Integer" resultType="String">
         SELECT name
         FROM basicinfo_action_log
         WHERE code =#{code}
@@ -24,6 +24,7 @@
         FROM permission_user AS pu
         RIGHT JOIN basicinfo_action_log AS bal ON (bal.user_code = pu.code)
         LEFT JOIN basicinfo_department AS bd ON (pu.department_code = bd.code)
+        ORDER BY bal.opt_time
     </select>
 
     <select id="selectByPeriod" resultType="com.guotu.gt.dto.BasicinfoActionLogDTO">
@@ -37,10 +38,11 @@
         RIGHT JOIN basicinfo_action_log AS bal ON (bal.user_code = pu.code)
         LEFT JOIN basicinfo_department AS bd ON (pu.department_code = bd.code)
         WHERE (bal.opt_time BETWEEN #{startTime} AND #{endTime})
+        ORDER BY bal.opt_time
     </select>
 
 <!-- TEST -->
-    <select id="selectByCode" parameterType="Byte" resultType="com.guotu.gt.domain.BasicinfoActionLog">
+    <select id="selectByCode" parameterType="Integer" resultType="com.guotu.gt.domain.BasicinfoActionLog">
         SELECT *
         FROM basicinfo_action_log
         WHERE code =#{code}

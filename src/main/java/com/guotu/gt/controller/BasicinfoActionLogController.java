@@ -45,8 +45,8 @@ public class BasicinfoActionLogController {
 
     @DeleteMapping("/delete")
     @ApiOperation(value = "根据编码删除操作")
-    public Result<Object> deleteByCode(@ApiParam(value = "操作编码", required = true, type = "integer")
-                                           @RequestParam Byte code) {
+    public Result<Object> deleteByCode(@ApiParam(value = "操作编码", required = true)
+                                           @RequestParam Integer code) {
         basicinfoActionLogService.deleteByCode(code);
         return ResultUtil.success();
     }
