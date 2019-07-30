@@ -3,7 +3,7 @@
 
 <mapper namespace="com.guotu.gt.mapper.PermissionRoleMenu2OperationMapper">
 
-    <select id="selectByRoleCode" parameterType="Byte" resultType="com.guotu.gt.domain.PermissionRoleMenu2Operation">
+    <select id="selectByRoleCode" parameterType="Integer" resultType="com.guotu.gt.domain.PermissionRoleMenu2Operation">
         SELECT * FROM permission_role_menu2_operation
         WHERE role_code =#{roleCode}
     </select>
@@ -22,7 +22,7 @@
         WHERE role_code =#{roleCode}
     </update>
 
-    <delete id="deleteByRoleCode" parameterType="Byte">
+    <delete id="deleteByRoleCode" parameterType="Integer">
         DELETE FROM permission_role_menu2_operation
         WHERE role_code =#{roleCode}
     </delete>

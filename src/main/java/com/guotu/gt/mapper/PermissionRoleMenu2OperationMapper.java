@@ -20,7 +20,7 @@ public interface PermissionRoleMenu2OperationMapper {
      * 根据编码删除
      * @param roleCode 角色编码
      */
-    void deleteByRoleCode(Byte roleCode);
+    void deleteByRoleCode(Integer roleCode);
 
 
     // 测试
@@ -29,7 +29,7 @@ public interface PermissionRoleMenu2OperationMapper {
      * 根据编码查询
      * @param roleCode 角色编码
      */
-    PermissionRoleMenu2Operation selectByRoleCode(Byte roleCode);
+    PermissionRoleMenu2Operation selectByRoleCode(Integer roleCode);
 
     /**
      * 根据编码更新
