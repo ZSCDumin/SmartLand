@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guotu.gt.mapper.BasicinfoLoginLogDTOMapper">
     <!--根据code删除-->
-    <delete id="delete" parameterType="Byte">
+    <delete id="delete" parameterType="int">
         delete from basicinfo_login_log where code = #{code}
     </delete>
 

@@ -24,12 +24,12 @@ public class PermissionOperationServiceImp implements PermissionOperationService
     }
 
     @Override
-    public void delete(Byte code){
+    public void delete(int code){
         permissionOperationMapper.delete(code);
     }
 
     @Override
-    public PermissionOperation findByCode(Byte code){
+    public PermissionOperation findByCode(int code){
         return permissionOperationMapper.findByCode(code);
     }
 

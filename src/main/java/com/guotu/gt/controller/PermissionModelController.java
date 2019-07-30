@@ -32,14 +32,14 @@ public class PermissionModelController {
 
     @DeleteMapping
     @ApiOperation(value = "根据code删除一个模块信息")
-    public Result<Object> delete(@RequestParam("code") Byte code){
+    public Result<Object> delete(@RequestParam("code") int code){
         permissionModelService.delete(code);
         return ResultUtil.success();
     }
 
     @GetMapping("/findByCode")
     @ApiOperation(value = "根据code查询模块信息")
-    public Result<PermissionModel> findByCode(@RequestParam("code") Byte code){
+    public Result<PermissionModel> findByCode(@RequestParam("code") int code){
         return ResultUtil.success(permissionModelService.findByCode(code));
     }
 

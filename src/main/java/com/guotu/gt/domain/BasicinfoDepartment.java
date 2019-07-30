@@ -17,7 +17,7 @@ public class BasicinfoDepartment {
     * 主键
     */
    @ApiModelProperty("机构编码，主键")
-   private String code;
+   private int code;
 
    @ApiModelProperty("机构名称")
    private String name;
@@ -29,7 +29,7 @@ public class BasicinfoDepartment {
     * 机构信息表的机构编码的外键
     */
    @ApiModelProperty("所属机构编码，外键")
-   private String departmentCode;
+   private int departmentCode;
 
    @ApiModelProperty("所属机构名称")
    private String departmentName;

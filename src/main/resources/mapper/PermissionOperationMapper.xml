@@ -19,12 +19,12 @@
     </update>
 
     <!--根据code删除-->
-    <delete id="delete" parameterType="Byte">
+    <delete id="delete" parameterType="int">
         delete from permission_operation where code = #{code}
     </delete>
 
     <!--根据code查询-->
-    <select id="findByCode" parameterType="Byte" resultType="PermissionOperation">
+    <select id="findByCode" parameterType="int" resultType="PermissionOperation">
         select * from permission_operation
         where code = #{code}
     </select>

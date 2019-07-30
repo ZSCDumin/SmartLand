@@ -19,12 +19,12 @@
     </update>
 
     <!--根据menu2_code删除-->
-    <delete id="delete" parameterType="Byte">
+    <delete id="delete" parameterType="int">
         delete from permission_menu2_operation where menu2_code = #{menu2Code}
     </delete>
 
     <!--根据menu2_code查询-->
-    <select id="findByCode" parameterType="Byte" resultType="PermissionMenu2Operation">
+    <select id="findByCode" parameterType="int" resultType="PermissionMenu2Operation">
         select * from permission_menu2_operation
         where menu2_code = #{menu2Code}
     </select>

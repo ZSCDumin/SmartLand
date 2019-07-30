@@ -5,8 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
-
 /**
  * 模块信息表
  */
@@ -19,7 +17,7 @@ public class PermissionModel {
      * 主键
      */
     @ApiModelProperty("模块编码，主键")
-    private Byte code;
+    private int code;
 
     @ApiModelProperty("模块名称")
     private String name;

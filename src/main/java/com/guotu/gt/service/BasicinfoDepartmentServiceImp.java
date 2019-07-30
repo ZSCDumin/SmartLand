@@ -23,12 +23,12 @@ public class BasicinfoDepartmentServiceImp implements BasicinfoDepartmentService
     }
 
     @Override
-    public void delete(String code){
+    public void delete(int code){
         basicinfoDepartmentMapper.delete(code);
     }
 
     @Override
-    public BasicinfoDepartment findByCode(String code){
+    public BasicinfoDepartment findByCode(int code){
         return basicinfoDepartmentMapper.findByCode(code);
     }
 

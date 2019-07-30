@@ -5,8 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
-
 /**
  * 菜单操作分配表
  */
@@ -19,12 +17,12 @@ public class PermissionMenu2Operation {
      * 二级菜单信息表的外键
      */
     @ApiModelProperty("菜单编码，外键")
-    private Byte code;
+    private int code;
 
     /**
      * 操作信息表的外键
      */
     @ApiModelProperty("操作编码，外键")
-    private Byte name;
+    private int name;
 
 }

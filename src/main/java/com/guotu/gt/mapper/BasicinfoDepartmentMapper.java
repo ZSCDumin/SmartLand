@@ -26,14 +26,14 @@ public interface BasicinfoDepartmentMapper {
      * 根据code删除一个机构信息
      * @param code
      */
-    void delete(String code);
+    void delete(int code);
 
     /**
      * 根据code查找机构信息
      * @param code
      * @return
      */
-    BasicinfoDepartment findByCode(String code);
+    BasicinfoDepartment findByCode(int code);
 
     /**
      * 查询所有机构信息
