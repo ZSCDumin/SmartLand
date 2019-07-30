@@ -15,7 +15,7 @@
         WHERE name =#{name}
     </select>
 
-    <select id="selectByCode" parameterType="Byte" resultType="com.guotu.gt.dto.PermissionRoleDTO">
+    <select id="selectByCode" parameterType="Integer" resultType="com.guotu.gt.dto.PermissionRoleDTO">
         SELECT code, name, description
         FROM permission_role
         WHERE code =#{code}
@@ -36,18 +36,18 @@
         1)
     </insert>
 
-    <select id="selectFlagByCode" parameterType="Byte" resultType="Byte">
+    <select id="selectFlagByCode" parameterType="Integer" resultType="Integer">
         SELECT flag
         FROM permission_role
         WHERE code =#{code}
     </select>
 
-    <delete id="deleteByCode" parameterType="Byte">
+    <delete id="deleteByCode" parameterType="Integer">
         DELETE FROM permission_role
         WHERE code =#{code}
     </delete>
 
-    <select id="selectAllCode" resultType="Byte">
+    <select id="selectAllCode" resultType="Integer">
         SELECT code
         FROM permission_role
     </select>

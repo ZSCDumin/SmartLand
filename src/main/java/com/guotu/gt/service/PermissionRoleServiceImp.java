@@ -73,10 +73,10 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
         // 判断是否重名  okay
         Assert.isNull(permissionRoleMapper.selectByName(name), "已存在一个名为\"" + name + "\"的角色");
 
-        // 生成编码 okay
-        Byte[] codeList = permissionRoleMapper.selectAllCode().toArray(new Byte[0]);
-        Assert.isTrue(codeList.length < MAX_ROLE_COUNT, "角色个数已达到上限");
-        Byte code = CodeGenerator.byteCodeGenerator(FIRST_USER_ROLE_CODE, codeList);
+        // 生成编码
+        // TODO test
+        Integer code = CodeGenerator.getFirstMissingPositiveInteger(
+                permissionRoleMapper.selectAllCode().toArray(new Integer[0]));
         Assert.notNull(code, "角色编码生成异常");
 
         PermissionRoleDTO permissionRoleDTO = new PermissionRoleDTO(code, name, description);
@@ -85,8 +85,8 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
     }
 
     @Override
-    public void deleteByCode(Byte code) {
-        Byte flag = permissionRoleMapper.selectFlagByCode(code);
+    public void deleteByCode(Integer code) {
+        Integer flag = permissionRoleMapper.selectFlagByCode(code);
 
         // 判断角色编码是否存在  okay
         Assert.notNull(flag, String.format("编码为%d的角色不存在", code));
@@ -114,18 +114,15 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
     private PermissionRoleMenu2OperationMapper permissionRoleMenu2OperationMapper;
 
     // 定义： 系统角色 标志位为0
-    private static final Byte SYSTEM_ROLE_FLAG = 0;
+    private static final Integer SYSTEM_ROLE_FLAG = 0;
 
     // 定义：系统管理员 编码为0
-    private static final Byte SYSTEM_ROLE_SYSTEM_MANAGER_CODE = 0;
+    private static final Integer SYSTEM_ROLE_SYSTEM_MANAGER_CODE = 0;
 
     // 定义：普通用户 编码为1
-    private static final Byte SYSTEM_ROLE_NORMAL_USER_CODE = 1;
-
-    // 定义：最大角色数目 为128
-    private static final int MAX_ROLE_COUNT = 128;
+    private static final Integer SYSTEM_ROLE_NORMAL_USER_CODE = 1;
 
     // 定义：第一个用户自定义角色的编码从2开始
-    private static final Byte FIRST_USER_ROLE_CODE = 2;
+    private static final Integer FIRST_USER_ROLE_CODE = 2;
 
 }
