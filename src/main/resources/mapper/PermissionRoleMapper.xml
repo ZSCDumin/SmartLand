@@ -47,10 +47,9 @@
         WHERE code =#{code}
     </delete>
 
-    <select id="selectAllCodeAscend" resultType="Byte">
+    <select id="selectAllCode" resultType="Byte">
         SELECT code
         FROM permission_role
-        ORDER BY code
     </select>
 
 </mapper>

@@ -4,11 +4,11 @@ import com.guotu.gt.dto.PermissionRoleDTO;
 import com.guotu.gt.mapper.PermissionRoleMapper;
 import com.guotu.gt.mapper.PermissionRoleMenu2OperationMapper;
 import com.guotu.gt.mapper.PermissionUserRoleMapper;
+import com.guotu.gt.utils.CodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -74,18 +74,11 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
         Assert.isNull(permissionRoleMapper.selectByName(name), "已存在一个名为\"" + name + "\"的角色");
 
         // 生成编码 okay
-        Byte[] codeList = permissionRoleMapper.selectAllCodeAscend().toArray(new Byte[0]);
+        Byte[] codeList = permissionRoleMapper.selectAllCode().toArray(new Byte[0]);
         Assert.isTrue(codeList.length < MAX_ROLE_COUNT, "角色个数已达到上限");
-        Byte code = FIRST_USER_ROLE_CODE;
-        while (true) {
-            if (Arrays.binarySearch(codeList, code) < 0) {  // 有效编码
-                break;
-            }
-            if (code.equals(Byte.MAX_VALUE)) {  // 角色编码生成异常
-                Assert.isTrue(false, "角色编码生成异常");
-            }
-            code = (byte) (code + 1);
-        }
+        Byte code = CodeGenerator.byteCodeGenerator(FIRST_USER_ROLE_CODE, codeList);
+        Assert.notNull(code, "角色编码生成异常");
+
         PermissionRoleDTO permissionRoleDTO = new PermissionRoleDTO(code, name, description);
         permissionRoleMapper.insert(permissionRoleDTO);
         return permissionRoleDTO;

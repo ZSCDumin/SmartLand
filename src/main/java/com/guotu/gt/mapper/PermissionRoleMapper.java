@@ -63,8 +63,8 @@ public interface PermissionRoleMapper {
     void updateByCode(PermissionRoleDTO permissionRoleDTO);
 
     /**
-     * 获取所有编码，按递增顺序返回
-     * @return 递增的编码列表
+     * 获取所有编码
+     * @return 编码列表
      */
-    List<Byte> selectAllCodeAscend();
+    List<Byte> selectAllCode();
 }
