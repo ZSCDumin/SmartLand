@@ -43,11 +43,20 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
      * @param code 操作编码
      */
     @Override
-    public void deleteByCode(Byte code) {
+    public void deleteByCode(Integer code) {
         // 判断指定操作是否存在 okay
         Assert.notNull(basicinfoActionLogMapper.selectNameByCode(code), "不存在编码为" + code + "操作");
 
         basicinfoActionLogMapper.deleteByCode(code);
+    }
+
+    /**
+     * 查询所有操作
+     * @return 操作记录列表
+     */
+    @Override
+    public List<BasicinfoActionLogDTO> selectAll() {
+        return basicinfoActionLogMapper.selectAll();
     }
 
     @Autowired
@@ -56,7 +65,7 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
 
     // TEST
     @Override
-    public BasicinfoActionLog selectByCode(Byte code) {
+    public BasicinfoActionLog selectByCode(Integer code) {
         return basicinfoActionLogMapper.selectByCode(code);
     }
 

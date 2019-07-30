@@ -15,7 +15,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class PermissionRole {
     @ApiModelProperty("角色编码，主键")
-    private Byte code;
+    private Integer code;
 
     @ApiModelProperty("角色名称")
     private String name;
@@ -24,5 +24,5 @@ public class PermissionRole {
     private String description;  // null
 	
     @ApiModelProperty(value = "标志位", notes = "标志位：0表示系统创建，不允许删除")
-    private Byte flag;
+    private Integer flag;
 }

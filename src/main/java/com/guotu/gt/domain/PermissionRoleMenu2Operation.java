@@ -17,11 +17,11 @@ import lombok.Data;
 public class PermissionRoleMenu2Operation {
     
     @ApiModelProperty("角色编码，外键")
-    private Byte roleCode;
+    private Integer roleCode;
     
     @ApiModelProperty("菜单编码，外键")
-    private Byte menu2Code;
+    private Integer menu2Code;
 
     @ApiModelProperty("操作编码，外键")
-    private Byte operationCode;
+    private Integer operationCode;
 }

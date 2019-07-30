@@ -36,6 +36,6 @@ public interface PermissionRoleService {
      * 根据编码删除角色
      * @param code 角色编码
      */
-    void deleteByCode(Byte code);
+    void deleteByCode(Integer code);
 
 }

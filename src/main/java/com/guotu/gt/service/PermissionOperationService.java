@@ -24,14 +24,14 @@ public interface PermissionOperationService {
      * 根据code删除一个操作信息
      * @param code
      */
-    void delete(Byte code);
+    void delete(int code);
 
     /**
      * 根据code查找操作信息
      * @param code
      * @return
      */
-    com.guotu.gt.domain.PermissionOperation findByCode(Byte code);
+    com.guotu.gt.domain.PermissionOperation findByCode(int code);
 
     /**
      * 查询所有操作信息

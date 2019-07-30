@@ -19,7 +19,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class BasicinfoActionLog {
     @ApiModelProperty("编码，主键")
-    private Byte code;
+    private Integer code;
     
     @ApiModelProperty("用户编号，外键")
     private String userCode;

@@ -35,7 +35,7 @@ public interface PermissionRoleMapper {
      * 根据编码查询
      * @param code 角色编码
      */
-    PermissionRoleDTO selectByCode(Byte code);
+    PermissionRoleDTO selectByCode(Integer code);
 
     /**
      * 插入角色信息
@@ -48,13 +48,13 @@ public interface PermissionRoleMapper {
      * @param code 角色编码
      * @return 角色标志位
      */
-    Byte selectFlagByCode(Byte code);
+    Integer selectFlagByCode(Integer code);
 
     /**
      * 根据编码删除角色
      * @param code 角色编码
      */
-    void deleteByCode(Byte code);
+    void deleteByCode(Integer code);
 
     /**
      * 根据编码更新
@@ -63,8 +63,8 @@ public interface PermissionRoleMapper {
     void updateByCode(PermissionRoleDTO permissionRoleDTO);
 
     /**
-     * 获取所有编码，按递增顺序返回
-     * @return 递增的编码列表
+     * 获取所有编码
+     * @return 编码列表
      */
-    List<Byte> selectAllCodeAscend();
+    List<Integer> selectAllCode();
 }

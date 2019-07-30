@@ -24,14 +24,14 @@ public interface PermissionMenu1Service {
      * 根据code删除一个一级菜单信息
      * @param code
      */
-    void delete(Byte code);
+    void delete(int code);
 
     /**
      * 根据code查找一级菜单信息
      * @param code
      * @return
      */
-    PermissionMenu1 findByCode(Byte code);
+    PermissionMenu1 findByCode(int code);
 
     /**
      * 查询所有一级菜单信息

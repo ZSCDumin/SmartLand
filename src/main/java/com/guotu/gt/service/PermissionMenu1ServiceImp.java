@@ -23,12 +23,12 @@ public class PermissionMenu1ServiceImp implements PermissionMenu1Service{
     }
 
     @Override
-    public void delete(Byte code){
+    public void delete(int code){
         permissionMenu1Mapper.delete(code);
     }
 
     @Override
-    public PermissionMenu1 findByCode(Byte code){
+    public PermissionMenu1 findByCode(int code){
         return permissionMenu1Mapper.findByCode(code);
     }
 

@@ -27,7 +27,7 @@ import java.util.List;
 public class BasicinfoActionLogController {
 
     // 注意：只能有一个RequestBody！
-    @GetMapping("/getPeriod")
+    @GetMapping("/search")
     @ApiOperation(value = "获取时间段内的所有操作")
     public Result<List<BasicinfoActionLogDTO>> getActionByPeriod(
             @ApiParam(value = "开始时间", required = true, example = "2019-01-02")
@@ -37,10 +37,16 @@ public class BasicinfoActionLogController {
         return ResultUtil.success(basicinfoActionLogService.selectByPeriod(startTime, endTime));
     }
 
+    @GetMapping("/open")
+    @ApiOperation(value = "获取所有操作记录")
+    public Result<List<BasicinfoActionLogDTO>> getAllAction() {
+        return ResultUtil.success(basicinfoActionLogService.selectAll());
+    }
+
     @DeleteMapping("/delete")
     @ApiOperation(value = "根据编码删除操作")
-    public Result<Object> deleteByCode(@ApiParam(value = "操作编码", required = true, type = "integer")
-                                           @RequestParam Byte code) {
+    public Result<Object> deleteByCode(@ApiParam(value = "操作编码", required = true)
+                                           @RequestParam Integer code) {
         basicinfoActionLogService.deleteByCode(code);
         return ResultUtil.success();
     }
@@ -50,18 +56,18 @@ public class BasicinfoActionLogController {
 
 
     // TEST
-    @GetMapping("/getByCode")
+    /*@GetMapping("/getByCode")
     public Result<BasicinfoActionLog> selectByCode(@ApiParam(required = true, type = "integer")
                                                        @RequestParam Byte code) {
         return ResultUtil.success(basicinfoActionLogService.selectByCode(code));
-    }
+    }*/
 
-    @PutMapping("/insert")
+    /*@PutMapping("/insert")
     public Result<Object> insert(@ApiParam(required = true) @RequestParam Byte code) {
         Date now = new Date();
         System.out.println(now.toString());
         basicinfoActionLogService.insert(
                 new BasicinfoActionLog(code, "2", "A", "B", "C", "D", now));
         return ResultUtil.success();
-    }
+    }*/
 }

@@ -18,5 +18,5 @@ public class PermissionUserRole {
     private String userCode;
 
     @ApiModelProperty("角色编码，外键")
-    private Byte roleCode;
+    private Integer roleCode;
 }

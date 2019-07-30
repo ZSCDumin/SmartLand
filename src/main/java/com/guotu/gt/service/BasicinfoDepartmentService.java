@@ -24,14 +24,14 @@ public interface BasicinfoDepartmentService {
      * 根据code删除机构信息
      * @param code
      */
-    void delete(String code);
+    void delete(int code);
 
     /**
      * 根据code查找
      * @param code
      * @return
      */
-    BasicinfoDepartment findByCode(String code);
+    BasicinfoDepartment findByCode(int code);
 
     /**
      * 查找所有

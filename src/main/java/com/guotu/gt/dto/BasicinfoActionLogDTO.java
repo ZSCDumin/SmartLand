@@ -13,8 +13,8 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 public class BasicinfoActionLogDTO {
-    @ApiModelProperty(value = "操作编码", dataType = "integer")
-    private Byte code;
+    @ApiModelProperty(value = "操作编码")
+    private Integer code;
 
     @ApiModelProperty("用户名")
     private String name;

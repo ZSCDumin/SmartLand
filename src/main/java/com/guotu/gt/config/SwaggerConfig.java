@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    public static final String URL = "http://localhost:8080";
+    public static final String URL = "http://localhost:8899";
 
     @Bean
     public Docket createRestApi() {

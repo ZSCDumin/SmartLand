@@ -31,14 +31,20 @@ public interface BasicinfoActionLogMapper {
      * 根据编码删除操作
      * @param code 操作编码
      */
-    void deleteByCode(Byte code);
+    void deleteByCode(Integer code);
 
     /**
      * 根据编码查询操作人的用户名
      * @param code 操作编码
      * @return 操作信息
      */
-    String selectNameByCode(Byte code);
+    String selectNameByCode(Integer code);
+
+    /**
+     * 查询所有操作
+     * @return 操作记录列表
+     */
+    List<BasicinfoActionLogDTO> selectAll();
 
     // TEST
 
@@ -47,7 +53,7 @@ public interface BasicinfoActionLogMapper {
      * @param code 编码
      * @return 操作日志信息
      */
-    BasicinfoActionLog selectByCode(Byte code);
+    BasicinfoActionLog selectByCode(Integer code);
 
     /**
      * 插入新的操作日志信息

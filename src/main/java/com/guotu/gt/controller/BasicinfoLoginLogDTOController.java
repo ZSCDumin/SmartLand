@@ -23,7 +23,7 @@ public class BasicinfoLoginLogDTOController {
 
     @DeleteMapping
     @ApiOperation("根据编码删除一条登陆日志")
-    public Result<Object> delete(@RequestParam("code") Byte code){
+    public Result<Object> delete(@RequestParam("code") int code){
         basicinfoLoginLogDTOService.delete(code);
         return ResultUtil.success();
     }

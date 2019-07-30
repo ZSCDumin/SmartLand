@@ -26,14 +26,14 @@ public interface PermissionMenu2OperationMapper {
      * 根据code删除一个操作信息
      * @param code
      */
-    void delete(Byte code);
+    void delete(int code);
 
     /**
      * 根据code查找操作信息
      * @param code
      * @return
      */
-    PermissionMenu2Operation findByCode(Byte code);
+    PermissionMenu2Operation findByCode(int code);
 
     /**
      * 查询所有操作信息
