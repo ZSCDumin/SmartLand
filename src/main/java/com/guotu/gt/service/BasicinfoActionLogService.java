@@ -27,6 +27,13 @@ public interface BasicinfoActionLogService {
      */
     void deleteByCode(Byte code);
 
+    /**
+     * 查询所有操作
+     * @return 操作记录列表
+     */
+    List<BasicinfoActionLogDTO> selectAll();
+
+
     // TEST
 
     /**

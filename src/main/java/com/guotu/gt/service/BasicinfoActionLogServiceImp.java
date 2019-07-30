@@ -50,6 +50,15 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
         basicinfoActionLogMapper.deleteByCode(code);
     }
 
+    /**
+     * 查询所有操作
+     * @return 操作记录列表
+     */
+    @Override
+    public List<BasicinfoActionLogDTO> selectAll() {
+        return basicinfoActionLogMapper.selectAll();
+    }
+
     @Autowired
     private BasicinfoActionLogMapper basicinfoActionLogMapper;
 
