@@ -36,4 +36,12 @@
          from permission_user pu left join basicinfo_department bd
          on pu.department_code = bd.code
     </select>
+
+    <!--根据用户名查询一个用户信息实体-->
+    <select id="findDomainByName" resultType="PermissionUser">
+        select *
+        from permission_user
+        where name =#{name}
+    </select>
+
 </mapper>

@@ -15,7 +15,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class PermissionUserRole {
     @ApiModelProperty("用户编码，外键")
-    private String userCode;
+    private Integer userCode;
 
     @ApiModelProperty("角色编码，外键")
     private Integer roleCode;

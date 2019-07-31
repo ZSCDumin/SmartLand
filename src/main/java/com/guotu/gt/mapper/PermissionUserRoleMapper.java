@@ -1,5 +1,6 @@
 package com.guotu.gt.mapper;
 
+import com.guotu.gt.domain.PermissionUserRole;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -20,4 +21,11 @@ public interface PermissionUserRoleMapper {
      * @param newRoleCode 新角色
      */
     void updateRoleCodeToNew(@Param("oldRoleCode") Integer oldRoleCode, @Param("newRoleCode") Integer newRoleCode);
+
+    /**
+     * 根据用户编码返回用户角色信息实体
+     * @param userCode 用户编码
+     * @return 用户角色信息实体
+     */
+    PermissionUserRole findDomainByUserCode(Integer userCode);
 }

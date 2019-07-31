@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 用户信息表
@@ -13,9 +14,10 @@ import lombok.Data;
 @ApiModel("用户信息实体")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class PermissionUser {
-    @ApiModelProperty("编码，主键")
-    private String code;
+    @ApiModelProperty("用户编码，主键")
+    private Integer code;
 
     @ApiModelProperty("姓名")
     private String name;  //null
@@ -24,7 +26,7 @@ public class PermissionUser {
     private String sex;  //null
 
     @ApiModelProperty("所属机构编码，外键")
-    private String departmentCode;  //null
+    private Integer departmentCode;  //null
 
     @ApiModelProperty("密码")
     private String password;  //null

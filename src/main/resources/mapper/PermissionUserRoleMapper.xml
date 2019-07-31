@@ -9,4 +9,10 @@
         WHERE role_code =#{oldRoleCode}
     </update>
 
+    <select id="findDomainByUserCode" parameterType="Integer" resultType="com.guotu.gt.domain.PermissionUserRole">
+        SELECT *
+        FROM permission_user_role
+        WHERE user_code =#{userCode}
+    </select>
+
 </mapper>
