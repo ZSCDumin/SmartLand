@@ -1,8 +1,11 @@
 package com.guotu.gt.mapper;
 
 import com.guotu.gt.domain.PermissionRoleMenu2Operation;
+import com.guotu.gt.dto.UserManagementDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * PermissionRoleMenu2OperationMapper
@@ -38,8 +41,15 @@ public interface PermissionRoleMenu2OperationMapper {
     void updateByRoleCode(PermissionRoleMenu2Operation permissionRoleMenu2Operation);
 
     /**
-     * 插入角色权限分配信息
-     * @param permissionRoleMenu2Operation 角色权限分配信息
+     * 批量插入角色权限分配信息
+     * @param permissionRoleMenu2OperationList 角色权限分配信息
      */
-    void insert(PermissionRoleMenu2Operation permissionRoleMenu2Operation);
+    void insert(List<PermissionRoleMenu2Operation> permissionRoleMenu2OperationList);
+
+    /**
+     * 根据角色编码查找角色权限
+     * @param roleCode
+     * @return
+     */
+    UserManagementDTO open(int roleCode);
 }

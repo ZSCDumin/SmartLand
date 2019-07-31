@@ -10,9 +10,14 @@
 
     <insert id="insert" parameterType="com.guotu.gt.domain.PermissionRoleMenu2Operation">
         INSERT INTO permission_role_menu2_operation
-        VALUES(#{roleCode},
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+        (
+        #{roleCode},
         #{menu2Code},
-        #{operationCode})
+        #{operationCode}
+        )
+        </foreach>
     </insert>
 
     <update id="updateByRoleCode" parameterType="com.guotu.gt.domain.PermissionRoleMenu2Operation">
@@ -27,4 +32,19 @@
         WHERE role_code =#{roleCode}
     </delete>
 
+    <select id="open" parameterType="Integer" resultType="UserManagementDTO">
+        SELECT
+        po.name AS operationName,
+        pm2.name AS menu2Name,
+        pr.name AS roleName,
+        pmo.menu2_code AS menu2Code,
+        pmo.operation_code AS operationCode
+        FROM
+        permission_role_menu2_operation AS prmo
+        INNER JOIN permission_role AS pr ON prmo.role_code = pr.code
+        RIGHT JOIN permission_menu2_operation AS pmo
+        ON prmo.menu2_code = pmo.menu2_code AND prmo.operation_code = pmo.operation_code AND prmo.role_code = #{roleCode}
+        INNER JOIN permission_menu2 AS pm2 ON pmo.menu2_code = pm2.code
+        INNER JOIN permission_operation AS po ON pmo.operation_code = po.code
+    </select>
 </mapper>
