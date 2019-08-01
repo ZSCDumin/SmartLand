@@ -34,18 +34,27 @@ public interface BasicinfoActionLogService {
     List<BasicinfoActionLogDTO> selectAll();
 
 
-    // TEST
-
     /**
+     * 新增一个操作日志
+     * @param userCode 操作用户的编码
+     * @param optObject 操作对象
+     * @param optType 操作类型
+     * @param dataDescription 操作数据
+     * @param optTime 操作时间
+     */
+    void insert(Integer userCode, String optObject, String optType, String dataDescription, Date optTime);
+
+    // TEST
+/*
+
+    */
+/**
      * 根据编码返回操作日志信息
      * @param code 编码
      * @return 操作日志信息
-     */
-    BasicinfoActionLog selectByCode(Integer code);
+     *//*
 
-    /**
-     * 插入新的操作日志信息
-     * @param basicinfoActionLog 操作日志信息
-     */
-    void insert(BasicinfoActionLog basicinfoActionLog);
+    BasicinfoActionLog selectByCode(Integer code);
+*/
+
 }

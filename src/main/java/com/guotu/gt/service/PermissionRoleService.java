@@ -21,8 +21,9 @@ public interface PermissionRoleService {
     /**
      * 根据编码更新角色信息
      * @param permissionRoleDTO 新的角色信息
+     * @return 返回旧的角色信息
      */
-    void updateByCode(PermissionRoleDTO permissionRoleDTO);
+    PermissionRoleDTO updateByCode(PermissionRoleDTO permissionRoleDTO);
 
     /**
      * 新增角色信息

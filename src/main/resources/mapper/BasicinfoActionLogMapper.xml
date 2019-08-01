@@ -19,7 +19,7 @@
         bal.name AS name,
         bd.department_name AS departmentName,
         bal.opt_object AS optObject,
-        bal.description AS description,
+        CONCAT(bal.opt_type, bal.description) AS description,
         bal.opt_time AS optTime
         FROM permission_user AS pu
         RIGHT JOIN basicinfo_action_log AS bal ON (bal.user_code = pu.code)
@@ -32,7 +32,7 @@
         bal.name AS name,
         bd.department_name AS departmentName,
         bal.opt_object AS optObject,
-        bal.description AS description,
+        CONCAT(bal.opt_type, bal.description) AS description,
         bal.opt_time AS optTime
         FROM permission_user AS pu
         RIGHT JOIN basicinfo_action_log AS bal ON (bal.user_code = pu.code)
@@ -41,16 +41,27 @@
         ORDER BY bal.opt_time
     </select>
 
+    <insert id="insert" parameterType="com.guotu.gt.domain.BasicinfoActionLog">
+        INSERT INTO basicinfo_action_log
+        VALUES (#{code},
+        #{userCode},
+        (SELECT name FROM permission_user WHERE code = #{userCode}),
+        #{optObject},
+        #{optType},
+        #{description},
+        #{optTime})
+    </insert>
+
+    <select id="selectAllCode" resultType="Integer">
+        SELECT code
+        FROM basicinfo_action_log
+    </select>
+
 <!-- TEST -->
-    <select id="selectByCode" parameterType="Integer" resultType="com.guotu.gt.domain.BasicinfoActionLog">
+    <!--<select id="selectByCode" parameterType="Integer" resultType="com.guotu.gt.domain.BasicinfoActionLog">
         SELECT *
         FROM basicinfo_action_log
         WHERE code =#{code}
-    </select>
-
-    <insert id="insert" parameterType="com.guotu.gt.domain.BasicinfoActionLog">
-        INSERT INTO basicinfo_action_log
-        VALUES (#{code}, #{userCode}, #{name}, #{optObject}, #{optType}, #{description}, #{optTime})
-    </insert>
+    </select>-->
 
 </mapper>

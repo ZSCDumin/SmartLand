@@ -10,7 +10,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class PermissionRoleDTO {
     
-    @ApiModelProperty(value = "角色编码", dataType = "integer")
+    @ApiModelProperty(value = "角色编码")
     private Integer code;
 
     @ApiModelProperty("角色名")
