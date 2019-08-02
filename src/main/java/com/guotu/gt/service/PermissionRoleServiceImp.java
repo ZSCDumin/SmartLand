@@ -1,11 +1,9 @@
 package com.guotu.gt.service;
 
 import com.guotu.gt.dto.PermissionRoleDTO;
-import com.guotu.gt.dto.PermissionUserDTO;
 import com.guotu.gt.mapper.PermissionRoleMapper;
 import com.guotu.gt.mapper.PermissionRoleMenu2OperationMapper;
 import com.guotu.gt.mapper.PermissionUserRoleMapper;
-import com.guotu.gt.utils.CodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -85,13 +83,7 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
         // 判断是否重名  okay
         Assert.isNull(permissionRoleMapper.selectByName(name), "已存在一个名为\"" + name + "\"的角色");
 
-        // 生成编码
-        // TODO test
-        Integer code = CodeGenerator.getFirstMissingPositiveInteger(
-                permissionRoleMapper.selectAllCode().toArray(new Integer[0]));
-        Assert.notNull(code, "角色编码生成异常");
-
-        PermissionRoleDTO permissionRoleDTO = new PermissionRoleDTO(code, name, description);
+        PermissionRoleDTO permissionRoleDTO = new PermissionRoleDTO(null, name, description);
         permissionRoleMapper.insert(permissionRoleDTO);
         return permissionRoleDTO;
     }
@@ -128,13 +120,10 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
     // 定义： 系统角色 标志位为0
     private static final Integer SYSTEM_ROLE_FLAG = 0;
 
-    // 定义：系统管理员 编码为0
-    private static final Integer SYSTEM_ROLE_SYSTEM_MANAGER_CODE = 0;
+    // 定义：系统管理员 编码为1
+    private static final Integer SYSTEM_ROLE_SYSTEM_MANAGER_CODE = 1;
 
-    // 定义：普通用户 编码为1
-    private static final Integer SYSTEM_ROLE_NORMAL_USER_CODE = 1;
-
-    // 定义：第一个用户自定义角色的编码从2开始
-    private static final Integer FIRST_USER_ROLE_CODE = 2;
+    // 定义：普通用户 编码为2
+    private static final Integer SYSTEM_ROLE_NORMAL_USER_CODE = 2;
 
 }

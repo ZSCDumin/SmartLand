@@ -67,10 +67,4 @@ public interface PermissionRoleMapper {
      * @param permissionRoleDTO 角色信息
      */
     void updateByCode(PermissionRoleDTO permissionRoleDTO);
-
-    /**
-     * 获取所有编码
-     * @return 编码列表
-     */
-    List<Integer> selectAllCode();
 }

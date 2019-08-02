@@ -47,24 +47,9 @@ public interface BasicinfoActionLogMapper {
     List<BasicinfoActionLogDTO> selectAll();
 
     /**
-     * 选择所有现有的编码
-     * @return 编码列表
-     */
-    List<Integer> selectAllCode();
-
-    /**
      * 插入新的操作日志信息
      * @param basicinfoActionLog 操作日志信息
      */
     void insert(BasicinfoActionLog basicinfoActionLog);
 
-
-    // TEST
-
-    /**
-     * 根据编码返回操作日志信息
-     * @param code 编码
-     * @return 操作日志信息
-     */
-    BasicinfoActionLog selectByCode(Integer code);
 }
