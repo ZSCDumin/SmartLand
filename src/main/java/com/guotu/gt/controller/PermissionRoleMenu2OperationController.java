@@ -20,7 +20,7 @@ public class PermissionRoleMenu2OperationController {
     @Autowired
     private PermissionRoleMenu2OperationService permissionRoleMenu2OperationService;
 
-    @PostMapping
+    @PutMapping
     @ApiOperation("修改角色权限")
     public Result<Object> change(@RequestBody @ApiParam(value = "角色操纵权限列表") List<PermissionRoleMenu2Operation> permissionRoleMenu2OperationList,
                                  @RequestParam(value = "roleCode") @ApiParam(value = "角色编码") int roleCode){

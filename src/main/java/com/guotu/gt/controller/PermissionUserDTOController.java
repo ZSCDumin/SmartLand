@@ -19,13 +19,13 @@ public class PermissionUserDTOController {
     @Autowired
     PermissionUserDTOService permissionUserDTOService;
 
-    @PostMapping
+    @PutMapping
     @ApiOperation(value="增加一个用户管理信息")
     public Result<PermissionUserDTO> add(@RequestBody PermissionUserDTO permissionUserDTO){
         return ResultUtil.success(permissionUserDTOService.add(permissionUserDTO));
     }
 
-    @PutMapping
+    @PostMapping
     @ApiOperation(value = "更新一个用户管理信息")
     public Result<PermissionUserDTO> update(@RequestBody PermissionUserDTO permissionUserDTO){
         permissionUserDTOService.update(permissionUserDTO);

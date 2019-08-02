@@ -1,7 +1,6 @@
 package com.guotu.gt.controller;
 
 import com.guotu.gt.constant.OperationType;
-import com.guotu.gt.domain.BasicinfoActionLog;
 import com.guotu.gt.dto.PermissionRoleDTO;
 import com.guotu.gt.dto.Result;
 import com.guotu.gt.service.BasicinfoActionLogService;
@@ -39,7 +38,7 @@ public class PermissionRoleController {
         return ResultUtil.success(permissionRoleService.selectAllRoleName());
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     @ApiOperation(value = "根据编码修改角色", notes = "只能更新角色的名字和描述。返回修改之前的角色信息")
     public Result<Object> updateByCode(@RequestBody PermissionRoleDTO permissionRoleDTO,
                                        @ApiParam(value = "执行操作的用户编码", required = true)
@@ -54,7 +53,7 @@ public class PermissionRoleController {
         return ResultUtil.success(oldRole);
     }
 
-    @PutMapping("/add")
+    @PostMapping("/add")
     @ApiOperation(value = "新增一个角色")
     public Result<PermissionRoleDTO> addNewRole(@ApiParam(value = "角色名称", required = true) @RequestParam String name,
                     @ApiParam(value = "角色描述") @RequestParam(required = false) String description) {

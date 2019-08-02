@@ -19,13 +19,13 @@ public class PermissionOperationController {
     @Autowired
     PermissionOperationService permissionOperationService;
 
-    @PostMapping
+    @PutMapping
     @ApiOperation(value="增加一个操作信息")
     public Result<PermissionOperation> add(@RequestBody PermissionOperation permissionOperation){
         return ResultUtil.success(permissionOperationService.add(permissionOperation));
     }
 
-    @PutMapping
+    @PostMapping
     @ApiOperation(value = "更新一个操作信息")
     public Result<PermissionOperation> update(@RequestBody PermissionOperation permissionOperation){
         return ResultUtil.success(permissionOperationService.update(permissionOperation));
