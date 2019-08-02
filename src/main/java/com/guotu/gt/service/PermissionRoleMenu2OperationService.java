@@ -24,5 +24,5 @@ public interface PermissionRoleMenu2OperationService {
      * @param roleCode
      * @return
      */
-    UserManagementDTO open(int roleCode);
+    List<UserManagementDTO> open(int roleCode);
 }

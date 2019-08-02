@@ -25,7 +25,7 @@ public class PermissionRoleMenu2OperationServiceImp implements PermissionRoleMen
     }
 
     @Override
-    public UserManagementDTO open(int roleCode){
+    public List<UserManagementDTO> open(int roleCode){
         return permissionRoleMenu2OperationMapper.open(roleCode);
     }
 

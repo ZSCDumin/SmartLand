@@ -5,24 +5,25 @@ import com.guotu.gt.dto.Result;
 import com.guotu.gt.dto.UserManagementDTO;
 import com.guotu.gt.service.PermissionRoleMenu2OperationService;
 import com.guotu.gt.utils.ResultUtil;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/usermanagement")
+@Api(tags = "角色权限管理界面")
 public class PermissionRoleMenu2OperationController {
     @Autowired
     private PermissionRoleMenu2OperationService permissionRoleMenu2OperationService;
 
     @PostMapping
     @ApiOperation("修改角色权限")
-    public Result<Object> change(List<PermissionRoleMenu2Operation> permissionRoleMenu2OperationList, int roleCode){
+    public Result<Object> change(@RequestBody @ApiParam(value = "角色操纵权限列表") List<PermissionRoleMenu2Operation> permissionRoleMenu2OperationList,
+                                 @RequestParam(value = "roleCode") @ApiParam(value = "角色编码") int roleCode){
         permissionRoleMenu2OperationService.deleteByRoleCode(roleCode);
         permissionRoleMenu2OperationService.insert(permissionRoleMenu2OperationList);
         return ResultUtil.success();
@@ -30,7 +31,7 @@ public class PermissionRoleMenu2OperationController {
 
     @GetMapping
     @ApiOperation("获取角色权限信息")
-    public Result<UserManagementDTO> open(int roleCode){
+    public Result<List<UserManagementDTO>> open(@RequestParam(value = "roleCode") @ApiParam(value = "角色编码")int roleCode){
         return ResultUtil.success(permissionRoleMenu2OperationService.open(roleCode));
     }
 }

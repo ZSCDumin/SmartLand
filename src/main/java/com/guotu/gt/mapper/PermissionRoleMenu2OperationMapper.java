@@ -51,5 +51,5 @@ public interface PermissionRoleMenu2OperationMapper {
      * @param roleCode
      * @return
      */
-    UserManagementDTO open(int roleCode);
+    List<UserManagementDTO> open(int roleCode);
 }

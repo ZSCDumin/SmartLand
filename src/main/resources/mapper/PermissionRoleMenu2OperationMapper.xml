@@ -3,24 +3,24 @@
 
 <mapper namespace="com.guotu.gt.mapper.PermissionRoleMenu2OperationMapper">
 
-    <select id="selectByRoleCode" parameterType="Integer" resultType="com.guotu.gt.domain.PermissionRoleMenu2Operation">
+    <select id="selectByRoleCode" parameterType="Integer" resultType="PermissionRoleMenu2Operation">
         SELECT * FROM permission_role_menu2_operation
         WHERE role_code =#{roleCode}
     </select>
 
-    <insert id="insert" parameterType="com.guotu.gt.domain.PermissionRoleMenu2Operation">
+    <insert id="insert" parameterType="List">
         INSERT INTO permission_role_menu2_operation
         VALUES
         <foreach collection="list" index="index" item="item" separator=",">
-        (
-        #{roleCode},
-        #{menu2Code},
-        #{operationCode}
-        )
+            (
+            #{item.roleCode},
+            #{item.menu2Code},
+            #{item.operationCode}
+            )
         </foreach>
     </insert>
 
-    <update id="updateByRoleCode" parameterType="com.guotu.gt.domain.PermissionRoleMenu2Operation">
+    <update id="updateByRoleCode" parameterType="PermissionRoleMenu2Operation">
         UPDATE permission_role_menu2_operation
         SET menu2_code =#{menu2Code},
         operation_code =#{operationCode}
