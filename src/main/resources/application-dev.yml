@@ -1,5 +1,7 @@
 server:
   port: 8899
+  servlet:
+    context-path: /smartland
 
 spring:
   datasource:
