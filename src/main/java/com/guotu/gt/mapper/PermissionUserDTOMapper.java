@@ -14,7 +14,7 @@ public interface PermissionUserDTOMapper {
      * @param permissionUserDTO
      * @return
      */
-    PermissionUserDTO add(PermissionUserDTO permissionUserDTO);
+    void add(PermissionUserDTO permissionUserDTO);
 
     /**
      * 更新一个用户信息
@@ -24,10 +24,10 @@ public interface PermissionUserDTOMapper {
     void update(PermissionUserDTO permissionUserDTO);
 
     /**
-     * 根据name删除一个用户信息
-     * @param name
+     * 根据code删除一个用户信息
+     * @param code
      */
-    void delete(String name);
+    void delete(int code);
 
     /**
      * 查询所有用户信息

@@ -14,8 +14,8 @@ public class PermissionUserDTOServiceImp implements PermissionUserDTOService{
     PermissionUserDTOMapper permissionUserDTOMapper;
 
     @Override
-    public PermissionUserDTO add(PermissionUserDTO permissionUserDTO){
-        return permissionUserDTOMapper.add(permissionUserDTO);
+    public void add(PermissionUserDTO permissionUserDTO){
+        permissionUserDTOMapper.add(permissionUserDTO);
     }
 
     @Override
@@ -24,8 +24,8 @@ public class PermissionUserDTOServiceImp implements PermissionUserDTOService{
     }
 
     @Override
-    public void delete(String name){
-        permissionUserDTOMapper.delete(name);
+    public void delete(int code){
+        permissionUserDTOMapper.delete(code);
     }
 
     @Override

@@ -12,7 +12,7 @@ public interface PermissionUserDTOService {
      * @param permissionUserDTO
      * @return
      */
-    PermissionUserDTO add(PermissionUserDTO permissionUserDTO);
+    void add(PermissionUserDTO permissionUserDTO);
 
     /**
      * 更新一个操作信息
@@ -23,13 +23,14 @@ public interface PermissionUserDTOService {
 
     /**
      * 根据code删除一个操作信息
-     * @param name
+     * @param code
      */
-    void delete(String name);
+    void delete(int code);
 
     /**
      * 查询所有操作信息
      * @return
      */
     List<PermissionUserDTO> findAll();
+
 }
