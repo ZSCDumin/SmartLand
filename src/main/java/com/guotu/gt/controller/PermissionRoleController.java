@@ -33,6 +33,12 @@ public class PermissionRoleController {
         return ResultUtil.success(permissionRoleService.selectAll());
     }
 
+    @GetMapping(value = "/allRoleName")
+    @ApiOperation(value = "获取所有角色的姓名", notes = "用于限制用户输入的角色名，保证角色名合法")
+    public Result<List<String>> getAllRoleName() {
+        return ResultUtil.success(permissionRoleService.selectAllRoleName());
+    }
+
     @PostMapping("/update")
     @ApiOperation(value = "根据编码修改角色", notes = "只能更新角色的名字和描述。返回修改之前的角色信息")
     public Result<Object> updateByCode(@RequestBody PermissionRoleDTO permissionRoleDTO,

@@ -25,6 +25,12 @@ public interface PermissionRoleMapper {
     List<PermissionRoleDTO> selectAll();
 
     /**
+     * 获取所有角色的姓名
+     * @return 角色姓名列表
+     */
+    List<String> selectAllRoleName();
+
+    /**
      * 按角色名查询角色信息
      * @param name 角色名
      * @return 指定名字的角色

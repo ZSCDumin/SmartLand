@@ -15,4 +15,18 @@
         WHERE user_code =#{userCode}
     </select>
 
+    <insert id="insertDomain" parameterType="com.guotu.gt.domain.PermissionUserRole">
+        INSERT INTO permission_user_role
+        VALUES(#{userCode},
+        #{roleCode})
+    </insert>
+
+    <insert id="insertCodeName">
+        INSERT INTO permission_user_role
+        VALUES(
+        #{userCode},
+        (SELECT code FROM permission_role WHERE name =#{roleName})
+        )
+    </insert>
+
 </mapper>

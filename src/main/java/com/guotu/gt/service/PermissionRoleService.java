@@ -19,6 +19,12 @@ public interface PermissionRoleService {
     List<PermissionRoleDTO> selectAll();
 
     /**
+     * 获取所有角色的姓名
+     * @return 角色姓名列表
+     */
+    List<String> selectAllRoleName();
+
+    /**
      * 根据编码更新角色信息
      * @param permissionRoleDTO 新的角色信息
      * @return 返回旧的角色信息
