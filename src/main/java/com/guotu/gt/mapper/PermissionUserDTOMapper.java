@@ -1,5 +1,6 @@
 package com.guotu.gt.mapper;
 
+import com.guotu.gt.domain.PermissionUser;
 import com.guotu.gt.dto.PermissionUserDTO;
 import org.springframework.stereotype.Repository;
 
@@ -33,4 +34,12 @@ public interface PermissionUserDTOMapper {
      * @return
      */
     List<PermissionUserDTO> findAll();
+
+    /**
+     * 根据用户名查询用户实体
+     * @param name 用户名
+     * @return 用户实体信息
+     * @author YalandHong
+     */
+    PermissionUser findDomainByName(String name);
 }

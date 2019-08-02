@@ -14,7 +14,7 @@ import java.util.Date;
  * @author YalandHong
  *
  */
-@ApiModel("用户操作日志信息实体")
+@ApiModel("用户操作日志信息插入实体")
 @Data
 @AllArgsConstructor
 public class BasicinfoActionLog {
@@ -22,10 +22,12 @@ public class BasicinfoActionLog {
     private Integer code;
     
     @ApiModelProperty("用户编号，外键")
-    private String userCode;
+    private Integer userCode;
 
+    /*
+    // 用户名称由数据库查询
     @ApiModelProperty("用户名称")
-    private String name;
+    private String name;*/
 
     @ApiModelProperty("操作对象")
     private String optObject;

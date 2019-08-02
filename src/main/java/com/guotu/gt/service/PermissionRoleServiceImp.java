@@ -1,6 +1,7 @@
 package com.guotu.gt.service;
 
 import com.guotu.gt.dto.PermissionRoleDTO;
+import com.guotu.gt.dto.PermissionUserDTO;
 import com.guotu.gt.mapper.PermissionRoleMapper;
 import com.guotu.gt.mapper.PermissionRoleMenu2OperationMapper;
 import com.guotu.gt.mapper.PermissionUserRoleMapper;
@@ -30,21 +31,30 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
     }
 
     /**
+     * 获取所有角色的姓名
+     * @return 角色姓名列表
+     */
+    @Override
+    public List<String> selectAllRoleName() {
+        return permissionRoleMapper.selectAllRoleName();
+    }
+
+    /**
      * 根据角色编码更新角色信息
      * @param permissionRoleDTO 新的角色信息
-     *
+     * @return 返回旧的角色信息
      *
      */
     @Override
-    public void updateByCode(PermissionRoleDTO permissionRoleDTO) {
+    public PermissionRoleDTO updateByCode(PermissionRoleDTO permissionRoleDTO) {
 
         //判断名字是否为空  okay
         Assert.notNull(permissionRoleDTO.getName(), "角色名不能为空");
         Assert.isTrue(!permissionRoleDTO.getName().trim().isEmpty(), "角色名不能为空白");
 
-        //判断角色编码是否存在  okay
-        Assert.notNull(permissionRoleMapper.selectByCode(permissionRoleDTO.getCode()),
-                String.format("编码为%d的角色不存在", permissionRoleDTO.getCode()));
+        //判断角色编码是否存在，同时获取之前的角色信息
+        PermissionRoleDTO oldRole = permissionRoleMapper.selectByCode(permissionRoleDTO.getCode());
+        Assert.notNull(oldRole, String.format("编码为%d的角色不存在", permissionRoleDTO.getCode()));
 
         //重名判断：要求 不存在同名角色 或者 同名角色是自己  okay
         PermissionRoleDTO checkRole = permissionRoleMapper.selectByName(permissionRoleDTO.getName());
@@ -56,12 +66,14 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
                 "不能修改系统角色");
 
         permissionRoleMapper.updateByCode(permissionRoleDTO);
+        return oldRole;
     }
 
     /**
      * 新增角色信息
      * @param name 角色名
      * @param description 角色描述
+     * @return 新增的角色信息
      */
     @Override
     public PermissionRoleDTO insert(String name, String description) {

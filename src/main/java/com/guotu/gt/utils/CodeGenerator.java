@@ -16,6 +16,9 @@ public class CodeGenerator {
      * @return 生成Integer编码，如果异常则返回NULL
      */
     public static Integer getFirstMissingPositiveInteger(Integer[] originalCodeList) {
+        if (originalCodeList == null || originalCodeList.length == 0) {
+            return 0;
+        }
         // 将Integer数组转化为int数组
         if (originalCodeList.length == Integer.MAX_VALUE) {  // 无可用的编码
             return null;

@@ -9,6 +9,12 @@
         ORDER BY code
     </select>
 
+    <select id="selectAllRoleName" resultType="String">
+        SELECT name
+        FROM permission_role
+        ORDER BY code
+    </select>
+
     <select id="selectByName" parameterType="String" resultType="com.guotu.gt.dto.PermissionRoleDTO">
         SELECT code, name, description
         FROM permission_role
