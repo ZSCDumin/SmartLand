@@ -1,5 +1,6 @@
 package com.guotu.gt.mapper;
 
+import com.guotu.gt.domain.PermissionRole;
 import com.guotu.gt.dto.PermissionRoleDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -50,11 +51,11 @@ public interface PermissionRoleMapper {
     void insert(PermissionRoleDTO permissionRoleDTO);
 
     /**
-     * 根据编码获取标志位
+     * 根据编码获取角色实体
      * @param code 角色编码
-     * @return 角色标志位
+     * @return 角色实体
      */
-    Integer selectFlagByCode(Integer code);
+    PermissionRole selectDomainByCode(Integer code);
 
     /**
      * 根据编码删除角色

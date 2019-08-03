@@ -37,8 +37,8 @@
         VALUES (#{name}, #{description}, 1)
     </insert>
 
-    <select id="selectFlagByCode" parameterType="Integer" resultType="Integer">
-        SELECT flag
+    <select id="selectDomainByCode" parameterType="Integer" resultType="PermissionRole">
+        SELECT *
         FROM permission_role
         WHERE code =#{code}
     </select>

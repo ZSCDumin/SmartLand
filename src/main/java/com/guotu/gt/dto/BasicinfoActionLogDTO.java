@@ -13,16 +13,16 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 public class BasicinfoActionLogDTO {
-    @ApiModelProperty(value = "操作编码")
+    @ApiModelProperty(value = "操作日志条目编码")
     private Integer code;
 
-    @ApiModelProperty("用户名")
+    @ApiModelProperty("执行操作的用户名")
     private String name;
 
     @ApiModelProperty("机构名称")
     private String departmentName;
 
-    @ApiModelProperty("操作对象")
+    @ApiModelProperty("操作的模块或界面的名称")
     private String optObject;
 
     @ApiModelProperty("操作描述")

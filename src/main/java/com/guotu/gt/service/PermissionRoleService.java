@@ -27,7 +27,7 @@ public interface PermissionRoleService {
     /**
      * 根据编码更新角色信息
      * @param permissionRoleDTO 新的角色信息
-     * @return 返回旧的角色信息
+     * @return 旧的角色信息
      */
     PermissionRoleDTO updateByCode(PermissionRoleDTO permissionRoleDTO);
 
@@ -42,7 +42,8 @@ public interface PermissionRoleService {
     /**
      * 根据编码删除角色
      * @param code 角色编码
+     * @return 删除的角色信息实体
      */
-    void deleteByCode(Integer code);
+    PermissionRoleDTO deleteByCode(Integer code);
 
 }

@@ -45,7 +45,8 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
     @Override
     public void deleteByCode(Integer code) {
         // 判断指定操作是否存在 okay
-        Assert.notNull(basicinfoActionLogMapper.selectNameByCode(code), "不存在编码为" + code + "操作");
+        Assert.notNull(basicinfoActionLogMapper.selectNameByCode(code),
+                "不存在编码为" + code + "的操作日志条目");
 
         basicinfoActionLogMapper.deleteByCode(code);
     }
