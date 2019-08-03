@@ -21,13 +21,13 @@ public class BasicinfoDepartmentController {
     @Autowired
     private BasicinfoDepartmentService basicinfoDepartmentService;
 
-    @PostMapping
+    @PutMapping
     @ApiOperation(value="增加一个机构信息")
     public Result<BasicinfoDepartment> add(@RequestBody BasicinfoDepartment basicinfoDepartment){
         return ResultUtil.success(basicinfoDepartmentService.add(basicinfoDepartment));
     }
 
-    @PutMapping
+    @PostMapping
     @ApiOperation(value = "更新一个机构信息")
     public Result<BasicinfoDepartment> update(@RequestBody BasicinfoDepartment basicinfoDepartment){
         return ResultUtil.success(basicinfoDepartmentService.update(basicinfoDepartment));

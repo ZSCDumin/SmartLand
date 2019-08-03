@@ -15,6 +15,10 @@
         WHERE user_code =#{userCode}
     </select>
 
+    <delete id="deleteByUserCode" parameterType="int">
+        delete from permission_user_role where user_code = #{code}
+    </delete>
+
     <insert id="insertDomain" parameterType="com.guotu.gt.domain.PermissionUserRole">
         INSERT INTO permission_user_role
         VALUES(#{userCode},
@@ -29,4 +33,9 @@
         )
     </insert>
 
+    <update id="updateCodeName">
+        UPDATE permission_user_role
+        SET role_code = (SELECT code FROM permission_role WHERE name =#{roleName})
+        WHERE user_code =#{userCode}
+    </update>
 </mapper>

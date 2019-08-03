@@ -8,6 +8,9 @@ import lombok.Data;
 @Data
 public class PermissionUserDTO {
 
+    @ApiModelProperty("用户编码")
+    private int code;
+
     @ApiModelProperty("用户名")
     private String name;
 
@@ -21,7 +24,7 @@ public class PermissionUserDTO {
     private String contact;
 
     @ApiModelProperty("角色")
-    private String description;
+    private String roleName;
 
     @ApiModelProperty("所属机构")
     private String department;
