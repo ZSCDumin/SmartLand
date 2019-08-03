@@ -18,13 +18,13 @@ public class PermissionModelController {
     @Autowired
     private PermissionModelService permissionModelService;
 
-    @PostMapping
+    @PutMapping
     @ApiOperation(value="增加一个模块信息")
     public Result<PermissionModel> add(@RequestBody PermissionModel permissionModel){
         return ResultUtil.success(permissionModelService.add(permissionModel));
     }
 
-    @PutMapping
+    @PostMapping
     @ApiOperation(value = "更新一个模块信息")
     public Result<PermissionModel> update(@RequestBody PermissionModel permissionModel){
         return ResultUtil.success(permissionModelService.update(permissionModel));

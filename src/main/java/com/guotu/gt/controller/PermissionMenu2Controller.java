@@ -19,13 +19,13 @@ public class PermissionMenu2Controller {
     @Autowired
     private PermissionMenu2Service permissionMenu2Service;
 
-    @PostMapping
+    @PutMapping
     @ApiOperation(value="增加一个二级菜单信息")
     public Result<PermissionMenu2> add(@RequestBody PermissionMenu2 permissionMenu2){
         return ResultUtil.success(permissionMenu2Service.add(permissionMenu2));
     }
 
-    @PutMapping
+    @PostMapping
     @ApiOperation(value = "更新一个二级菜单信息")
     public Result<PermissionMenu2> update(@RequestBody PermissionMenu2 permissionMenu2){
         return ResultUtil.success(permissionMenu2Service.update(permissionMenu2));

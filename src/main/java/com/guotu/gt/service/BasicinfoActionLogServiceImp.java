@@ -3,7 +3,6 @@ package com.guotu.gt.service;
 import com.guotu.gt.domain.BasicinfoActionLog;
 import com.guotu.gt.dto.BasicinfoActionLogDTO;
 import com.guotu.gt.mapper.BasicinfoActionLogMapper;
-import com.guotu.gt.utils.CodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -46,7 +45,8 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
     @Override
     public void deleteByCode(Integer code) {
         // 判断指定操作是否存在 okay
-        Assert.notNull(basicinfoActionLogMapper.selectNameByCode(code), "不存在编码为" + code + "操作");
+        Assert.notNull(basicinfoActionLogMapper.selectNameByCode(code),
+                "不存在编码为" + code + "的操作日志条目");
 
         basicinfoActionLogMapper.deleteByCode(code);
     }
@@ -70,26 +70,11 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
      */
     @Override
     public void insert(Integer userCode, String optObject, String optType, String dataDescription, Date optTime) {
-        // TODO 生成编码test
-        Integer code = CodeGenerator.getFirstMissingPositiveInteger(
-                basicinfoActionLogMapper.selectAllCode().toArray(new Integer[0]));
-        Assert.notNull(code, "操作日志编码生成异常");
-
         // 插入操作日志
         basicinfoActionLogMapper.insert(
-                new BasicinfoActionLog(code, userCode, optObject, optType, dataDescription, optTime));
+                new BasicinfoActionLog(null, userCode, optObject, optType, dataDescription, optTime));
     }
 
     @Autowired
     private BasicinfoActionLogMapper basicinfoActionLogMapper;
-
-    // TEST
-/*
-    @Override
-    public BasicinfoActionLog selectByCode(Integer code) {
-        return basicinfoActionLogMapper.selectByCode(code);
-    }
-*/
-
-
 }

@@ -1,6 +1,5 @@
 package com.guotu.gt.service;
 
-import com.guotu.gt.domain.BasicinfoActionLog;
 import com.guotu.gt.dto.BasicinfoActionLogDTO;
 
 import java.util.Date;
@@ -43,18 +42,4 @@ public interface BasicinfoActionLogService {
      * @param optTime 操作时间
      */
     void insert(Integer userCode, String optObject, String optType, String dataDescription, Date optTime);
-
-    // TEST
-/*
-
-    */
-/**
-     * 根据编码返回操作日志信息
-     * @param code 编码
-     * @return 操作日志信息
-     *//*
-
-    BasicinfoActionLog selectByCode(Integer code);
-*/
-
 }

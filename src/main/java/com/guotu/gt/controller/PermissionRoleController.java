@@ -1,7 +1,6 @@
 package com.guotu.gt.controller;
 
 import com.guotu.gt.constant.OperationType;
-import com.guotu.gt.domain.BasicinfoActionLog;
 import com.guotu.gt.dto.PermissionRoleDTO;
 import com.guotu.gt.dto.Result;
 import com.guotu.gt.service.BasicinfoActionLogService;
@@ -13,6 +12,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 
@@ -40,35 +40,42 @@ public class PermissionRoleController {
     }
 
     @PostMapping("/update")
-    @ApiOperation(value = "根据编码修改角色", notes = "只能更新角色的名字和描述。返回修改之前的角色信息")
-    public Result<Object> updateByCode(@RequestBody PermissionRoleDTO permissionRoleDTO,
+    @ApiOperation(value = "根据编码修改角色", notes = "更新角色的名字和描述。不能修改系统角色")
+    public Result<Object> updateByCode(@RequestBody @Valid PermissionRoleDTO permissionRoleDTO,
                                        @ApiParam(value = "执行操作的用户编码", required = true)
                                        @RequestParam Integer operatorCode) {
-        PermissionRoleDTO oldRole = permissionRoleService.updateByCode(permissionRoleDTO);
 
+        PermissionRoleDTO oldRole = permissionRoleService.updateByCode(permissionRoleDTO);
         // 记录操作日志
-        // TODO test
         basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.UPDATE,
                 "角色\"" + oldRole.getName() + "\"", new Date());
 
-        return ResultUtil.success(oldRole);
+        return ResultUtil.success();
     }
 
     @PutMapping("/add")
-    @ApiOperation(value = "新增一个角色")
+    @ApiOperation(value = "新增一个角色", notes = "返回新插入的角色信息")
     public Result<PermissionRoleDTO> addNewRole(@ApiParam(value = "角色名称", required = true) @RequestParam String name,
-                    @ApiParam(value = "角色描述") @RequestParam(required = false) String description) {
-        Result<PermissionRoleDTO> result = ResultUtil.success(permissionRoleService.insert(name, description));
-        // TODO log
-        return result;
+                    @ApiParam(value = "角色描述") @RequestParam(required = false) String description,
+                    @ApiParam(value = "执行操作的用户编码", required = true) @RequestParam Integer operatorCode) {
+
+        PermissionRoleDTO newRole = permissionRoleService.insert(name, description);
+        // 记录操作日志
+        basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.INSERT,
+                "角色\"" + newRole.getName() + "\"", new Date());
+        return ResultUtil.success(newRole);
     }
 
     @DeleteMapping("/delete")
     @ApiOperation(value = "根据编码删除一个角色",
-            notes = "删除一个用户添加的角色，系统创建的角色不能删除。关联用户的角色会变成普通用户，同时角色相应的权限分配会被删除")
-    public Result<Object> deleteByCode(@ApiParam(value = "角色编码", required = true) @RequestParam Integer code) {
-        permissionRoleService.deleteByCode(code);
-        // TODO log
+            notes = "删除一个用户添加的角色，系统角色不能删除。关联用户的角色会变成普通用户，同时角色相应的权限分配会被删除")
+    public Result<Object> deleteByCode(@ApiParam(value = "角色编码", required = true) @RequestParam Integer code,
+                    @ApiParam(value = "执行操作的用户编码", required = true) @RequestParam Integer operatorCode) {
+
+        PermissionRoleDTO deletedRole = permissionRoleService.deleteByCode(code);
+        // 记录操作日志
+        basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.DELETE,
+                "角色\"" + deletedRole.getName() + "\"", new Date());
         return ResultUtil.success();
     }
 
