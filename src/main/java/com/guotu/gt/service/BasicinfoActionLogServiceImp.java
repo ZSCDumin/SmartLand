@@ -52,6 +52,15 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
     }
 
     /**
+     * 根据用户编码删除操作日志
+     * @param userCode 用户编码
+     */
+    @Override
+    public void deleteByUserCode(Integer userCode) {
+        basicinfoActionLogMapper.deleteByUserCode(userCode);
+    }
+
+    /**
      * 查询所有操作
      * @return 操作记录列表
      */
@@ -70,6 +79,7 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
      */
     @Override
     public void insert(Integer userCode, String optObject, String optType, String dataDescription, Date optTime) {
+        // FIXME 判断指定的用户编码是否存在，需要为用户管理补充selectByCode
         // 插入操作日志
         basicinfoActionLogMapper.insert(
                 new BasicinfoActionLog(null, userCode, optObject, optType, dataDescription, optTime));
