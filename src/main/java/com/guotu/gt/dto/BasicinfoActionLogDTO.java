@@ -9,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@ApiModel(description = "操作日志管理界面数据")
+@ApiModel("操作日志管理界面数据")
 @Data
 @AllArgsConstructor
 public class BasicinfoActionLogDTO {
