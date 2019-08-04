@@ -3,6 +3,7 @@ package com.guotu.gt.service;
 import com.guotu.gt.domain.BasicinfoActionLog;
 import com.guotu.gt.dto.BasicinfoActionLogDTO;
 import com.guotu.gt.mapper.BasicinfoActionLogMapper;
+import com.guotu.gt.mapper.PermissionUserDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -79,7 +80,9 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
      */
     @Override
     public void insert(Integer userCode, String optObject, String optType, String dataDescription, Date optTime) {
-        // FIXME 判断指定的用户编码是否存在，需要为用户管理补充selectByCode
+        // 判断指定的用户编码是否存在
+        Assert.notNull(permissionUserDTOMapper.findByCode(userCode),
+                "日志插入失败：不存在编码为" + userCode + "的用户");
         // 插入操作日志
         basicinfoActionLogMapper.insert(
                 new BasicinfoActionLog(null, userCode, optObject, optType, dataDescription, optTime));
@@ -87,4 +90,7 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
 
     @Autowired
     private BasicinfoActionLogMapper basicinfoActionLogMapper;
+
+    @Autowired
+    private PermissionUserDTOMapper permissionUserDTOMapper;
 }
