@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
-@ApiModel(description = "角色管理界面数据实体")
+@ApiModel("角色管理界面数据实体")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

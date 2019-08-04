@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
  *
  * @author huxudong
  */
-@ApiModel(description = "HTTP请求返回的数据对象")
+@ApiModel("HTTP请求返回的数据对象")
 public class Result<T> {
     /**
      * 编码

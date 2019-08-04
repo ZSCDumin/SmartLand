@@ -10,7 +10,7 @@ import lombok.Data;
  * @author YalandHong
  *
  */
-@ApiModel(description = "角色信息实体")
+@ApiModel("角色信息实体")
 @Data
 @AllArgsConstructor
 public class PermissionRole {

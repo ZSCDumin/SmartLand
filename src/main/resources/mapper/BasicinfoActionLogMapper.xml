@@ -8,6 +8,11 @@
         WHERE code =#{code}
     </delete>
 
+    <delete id="deleteByUserCode" parameterType="Integer">
+        DELETE FROM basicinfo_action_log
+        WHERE user_code =#{userCode}
+    </delete>
+
     <select id="selectNameByCode" parameterType="Integer" resultType="String">
         SELECT name
         FROM basicinfo_action_log

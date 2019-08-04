@@ -3,6 +3,7 @@ package com.guotu.gt.service;
 import com.guotu.gt.domain.BasicinfoActionLog;
 import com.guotu.gt.dto.BasicinfoActionLogDTO;
 import com.guotu.gt.mapper.BasicinfoActionLogMapper;
+import com.guotu.gt.mapper.PermissionUserDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -52,6 +53,15 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
     }
 
     /**
+     * 根据用户编码删除操作日志
+     * @param userCode 用户编码
+     */
+    @Override
+    public void deleteByUserCode(Integer userCode) {
+        basicinfoActionLogMapper.deleteByUserCode(userCode);
+    }
+
+    /**
      * 查询所有操作
      * @return 操作记录列表
      */
@@ -70,6 +80,9 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
      */
     @Override
     public void insert(Integer userCode, String optObject, String optType, String dataDescription, Date optTime) {
+        // 判断指定的用户编码是否存在
+        Assert.notNull(permissionUserDTOMapper.findByCode(userCode),
+                "日志插入失败：不存在编码为" + userCode + "的用户");
         // 插入操作日志
         basicinfoActionLogMapper.insert(
                 new BasicinfoActionLog(null, userCode, optObject, optType, dataDescription, optTime));
@@ -77,4 +90,7 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
 
     @Autowired
     private BasicinfoActionLogMapper basicinfoActionLogMapper;
+
+    @Autowired
+    private PermissionUserDTOMapper permissionUserDTOMapper;
 }
