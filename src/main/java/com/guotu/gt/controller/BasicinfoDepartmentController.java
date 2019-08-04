@@ -2,6 +2,7 @@ package com.guotu.gt.controller;
 
 
 import com.guotu.gt.domain.BasicinfoDepartment;
+import com.guotu.gt.dto.BasicinfoDepartmentDTO;
 import com.guotu.gt.dto.Result;
 import com.guotu.gt.service.BasicinfoDepartmentService;
 import com.guotu.gt.utils.ResultUtil;
@@ -23,14 +24,16 @@ public class BasicinfoDepartmentController {
 
     @PutMapping
     @ApiOperation(value="增加一个机构信息")
-    public Result<BasicinfoDepartment> add(@RequestBody BasicinfoDepartment basicinfoDepartment){
-        return ResultUtil.success(basicinfoDepartmentService.add(basicinfoDepartment));
+    public Result<BasicinfoDepartmentDTO> add(@RequestBody BasicinfoDepartment basicinfoDepartment){
+        basicinfoDepartmentService.add(basicinfoDepartment);
+        return ResultUtil.success(basicinfoDepartmentService.findByCode(basicinfoDepartment.getCode()));
     }
 
     @PostMapping
     @ApiOperation(value = "更新一个机构信息")
-    public Result<BasicinfoDepartment> update(@RequestBody BasicinfoDepartment basicinfoDepartment){
-        return ResultUtil.success(basicinfoDepartmentService.update(basicinfoDepartment));
+    public Result<BasicinfoDepartmentDTO> update(@RequestBody BasicinfoDepartment basicinfoDepartment){
+        basicinfoDepartmentService.update(basicinfoDepartment);
+        return ResultUtil.success(basicinfoDepartmentService.findByCode(basicinfoDepartment.getCode()));
     }
 
     @DeleteMapping
@@ -42,13 +45,13 @@ public class BasicinfoDepartmentController {
 
     @GetMapping("/findByCode")
     @ApiOperation(value = "根据code查询机构信息")
-    public Result<BasicinfoDepartment> findByCode(@RequestParam("code")@ApiParam(value = "机构编码") int code){
+    public Result<BasicinfoDepartmentDTO> findByCode(@RequestParam("code")@ApiParam(value = "机构编码") int code){
         return ResultUtil.success(basicinfoDepartmentService.findByCode(code));
     }
 
     @GetMapping("/findAll")
     @ApiOperation(value = "查询所有机构信息")
-    public Result<List<BasicinfoDepartment>> findAll(){
+    public Result<List<BasicinfoDepartmentDTO>> findAll(){
         return ResultUtil.success(basicinfoDepartmentService.findAll());
     }
 }

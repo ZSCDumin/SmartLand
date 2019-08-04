@@ -1,6 +1,7 @@
 package com.guotu.gt.service;
 
 import com.guotu.gt.domain.BasicinfoDepartment;
+import com.guotu.gt.dto.BasicinfoDepartmentDTO;
 
 import java.util.List;
 
@@ -11,14 +12,14 @@ public interface BasicinfoDepartmentService {
      * @param basicinfoDepartment
      * @return
      */
-    BasicinfoDepartment add(BasicinfoDepartment basicinfoDepartment);
+    void add(BasicinfoDepartment basicinfoDepartment);
 
     /**
      * 更新一个机构信息
      * @param basicinfoDepartment
      * @return
      */
-    BasicinfoDepartment update(BasicinfoDepartment basicinfoDepartment);
+    void update(BasicinfoDepartment basicinfoDepartment);
 
     /**
      * 根据code删除机构信息
@@ -31,12 +32,12 @@ public interface BasicinfoDepartmentService {
      * @param code
      * @return
      */
-    BasicinfoDepartment findByCode(int code);
+    BasicinfoDepartmentDTO findByCode(int code);
 
     /**
      * 查找所有
      * @return
      */
-    List<BasicinfoDepartment> findAll();
+    List<BasicinfoDepartmentDTO> findAll();
 
 }

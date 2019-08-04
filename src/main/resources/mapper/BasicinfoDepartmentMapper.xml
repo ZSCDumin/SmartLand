@@ -6,8 +6,8 @@
 
     <!--增加一个机构信息-->
     <insert id="add" parameterType="BasicinfoDepartment" useGeneratedKeys="true" keyProperty="code">
-        INSERT INTO basicinfo_department(code, name, info, department_code, department_name)
-        VALUES (#{code},#{name},#{info},#{departmentCode},#{departmentName})
+        INSERT INTO basicinfo_department( name, info, department_code, department_name, region_id)
+        VALUES (#{name},#{info},#{departmentCode},#{departmentName},#{regionId})
     </insert>
 
     <!--更新一个机构信息-->
@@ -17,7 +17,8 @@
         name = #{name},
         info = #{info},
         department_code = #{departmentCode},
-        department_name = #{departmentName}
+        department_name = #{departmentName},
+        region_id = #{regionId}
         where code = #{code}
     </update>
 
@@ -27,13 +28,40 @@
     </delete>
 
     <!--根据code查询-->
-    <select id="findByCode" parameterType="int" resultType="BasicinfoDepartment">
-        select * from basicinfo_department bd
+    <select id="findByCode" parameterType="int" resultType="BasicinfoDepartmentDTO">
+        SELECT
+        bd.code as institutionCode,
+        bd.name,
+        bd.info,
+        bd.department_code,
+        bd.department_name,
+        br1.region_name as region,
+        br2.region_name as country,
+        br3.region_name as province
+        FROM
+        basicinfo_department AS bd
+        left JOIN basicinfo_region AS br1 ON bd.region_id = br1.region_id
+        left JOIN basicinfo_region AS br2 ON br1.region_parent_id = br2.region_id
+        left JOIN basicinfo_region AS br3 ON br3.region_id = br2.region_parent_id
         where bd.code = #{code}
     </select>
 
     <!--查询所有-->
-    <select id="findAll" resultType="BasicinfoDepartment">
-        select * from basicinfo_department
+    <select id="findAll" resultType="BasicinfoDepartmentDTO">
+    SELECT
+    bd.code as institutionCode,
+    bd.name,
+    bd.info,
+    bd.department_code,
+    bd.department_name,
+    br1.region_name as region,
+    br2.region_name as country,
+    br3.region_name as province
+    FROM
+    basicinfo_department AS bd
+    left JOIN basicinfo_region AS br1 ON bd.region_id = br1.region_id
+    left JOIN basicinfo_region AS br2 ON br1.region_parent_id = br2.region_id
+    left JOIN basicinfo_region AS br3 ON br3.region_id = br2.region_parent_id
     </select>
+
 </mapper>

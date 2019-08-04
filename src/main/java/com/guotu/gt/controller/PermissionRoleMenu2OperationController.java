@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usermanagement")
+@RequestMapping("/authoritymanagement")
 @Api(tags = "角色权限管理界面")
 public class PermissionRoleMenu2OperationController {
     @Autowired
