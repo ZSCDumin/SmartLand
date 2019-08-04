@@ -24,7 +24,7 @@ import javax.validation.Valid;
 @RequestMapping("/userlogin")
 public class LoginUserController {
 
-    @PutMapping
+    @PostMapping
     @ApiOperation(value = "用户登录接口",
             notes = "输入非空白的用户名和密码，验证成功后返回用户编码、角色权限等信息。"
             + "\n如果用户名或密码错误，则抛出错误信息，并返回NULL")

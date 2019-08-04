@@ -1,9 +1,9 @@
 package com.guotu.gt.service;
 
-import com.guotu.gt.domain.PermissionUser;
 import com.guotu.gt.domain.PermissionUserRole;
 import com.guotu.gt.dto.LoginUserDTO;
 import com.guotu.gt.dto.LoginUserSigninDTO;
+import com.guotu.gt.dto.PermissionUserDTO;
 import com.guotu.gt.mapper.PermissionUserDTOMapper;
 import com.guotu.gt.mapper.PermissionUserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +27,16 @@ public class LoginUserServiceImp implements LoginUserService {
     @Override
     public LoginUserDTO login(LoginUserSigninDTO loginUserSigninDTO) {
         // 根据用户名查询用户信息
-        PermissionUser permissionUser = permissionUserDTOMapper.findDomainByName(loginUserSigninDTO.getUserName());
-        Assert.isTrue(permissionUser != null
-                        && permissionUser.getPassword().equals(loginUserSigninDTO.getPassword()),
+        PermissionUserDTO permissionUserDTO = permissionUserDTOMapper.findByName(loginUserSigninDTO.getUserName());
+        Assert.isTrue(permissionUserDTO != null
+                        && permissionUserDTO.getPassword().equals(loginUserSigninDTO.getPassword()),
                 "用户名或密码错误");  // 用户名不存在或者密码错误 okay
 
         // 获取用户的角色 okay
-        PermissionUserRole permissionUserRole = permissionUserRoleMapper.findDomainByUserCode(permissionUser.getCode());
-        Assert.notNull(permissionUserRole, "用户\"" + permissionUser.getName() + "\"未分配角色");
+        PermissionUserRole permissionUserRole = permissionUserRoleMapper.findDomainByUserCode(permissionUserDTO.getCode());
+        Assert.notNull(permissionUserRole, "用户\"" + permissionUserDTO.getName() + "\"未分配角色");
 
-        return new LoginUserDTO(permissionUser.getCode(),  // 返回用户编码
+        return new LoginUserDTO(permissionUserDTO.getCode(),  // 返回用户编码
                 loginUserSigninDTO.getUserName(),   // 返回用户名
                 permissionUserRole.getRoleCode());  // 返回角色编码
         // TODO 获取权限信息
