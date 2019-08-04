@@ -25,18 +25,18 @@ public class PermissionUserDTOController {
 
     @PutMapping
     @ApiOperation(value="增加一个用户管理信息")
-    public Result<Object> add(@RequestBody PermissionUserDTO permissionUserDTO){
+    public Result<PermissionUserDTO> add(@RequestBody PermissionUserDTO permissionUserDTO){
         permissionUserDTOService.add(permissionUserDTO);
         permissionUserRoleService.insertCodeName(permissionUserDTO.getCode(),permissionUserDTO.getRoleName());
-        return ResultUtil.success();
+        return ResultUtil.success(permissionUserDTOService.findByName(permissionUserDTO.getName()));
     }
 
     @PostMapping
     @ApiOperation(value = "更新一个用户管理信息")
-    public Result<Object> update(@RequestBody PermissionUserDTO permissionUserDTO){
+    public Result<PermissionUserDTO> update(@RequestBody PermissionUserDTO permissionUserDTO){
         permissionUserDTOService.update(permissionUserDTO);
         permissionUserRoleService.updateCodeName(permissionUserDTO.getCode(),permissionUserDTO.getRoleName());
-        return ResultUtil.success();
+        return ResultUtil.success(permissionUserDTOService.findByName(permissionUserDTO.getName()));
     }
 
     @DeleteMapping
@@ -51,5 +51,17 @@ public class PermissionUserDTOController {
     @ApiOperation(value = "查询所有用户管理信息")
     public Result<List<PermissionUserDTO>> findAll(){
         return ResultUtil.success(permissionUserDTOService.findAll());
+    }
+
+    @GetMapping("/findByName")
+    @ApiOperation(value = "根据用户名查找用户信息")
+    public Result<PermissionUserDTO> findByName(@RequestParam("name") String name){
+     return ResultUtil.success(permissionUserDTOService.findByName(name));
+    }
+
+    @GetMapping("/findByCode")
+    @ApiOperation(value = "根据用户编码查找用户信息")
+    public Result<PermissionUserDTO> findByCode(@RequestParam("code") int code){
+        return ResultUtil.success(permissionUserDTOService.findByCode(code));
     }
 }

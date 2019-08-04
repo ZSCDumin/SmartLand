@@ -42,4 +42,18 @@ public interface PermissionUserDTOMapper {
      * @author YalandHong
      */
     PermissionUser findDomainByName(String name);
+
+    /**
+     * 根据用户名查找用户信息DTO
+     * @param name
+     * @return
+     */
+    PermissionUserDTO findByName(String name);
+
+    /**
+     * 根据用户编码查找用户信息DTO
+     * @param code
+     * @return
+     */
+    PermissionUserDTO findByCode(int code);
 }

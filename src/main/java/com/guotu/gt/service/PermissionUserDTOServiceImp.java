@@ -32,4 +32,14 @@ public class PermissionUserDTOServiceImp implements PermissionUserDTOService{
     public List<PermissionUserDTO> findAll(){
         return permissionUserDTOMapper.findAll();
     }
+
+    @Override
+    public PermissionUserDTO findByName(String name){
+     return permissionUserDTOMapper.findByName(name);
+    }
+
+    @Override
+    public PermissionUserDTO findByCode(int code){
+        return permissionUserDTOMapper.findByCode(code);
+    }
 }
