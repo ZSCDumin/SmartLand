@@ -33,4 +33,17 @@ public interface PermissionUserDTOService {
      */
     List<PermissionUserDTO> findAll();
 
+    /**
+     * 根据用户名查找用户信息
+     * @param name
+     * @return
+     */
+    PermissionUserDTO findByName(String name);
+
+    /**
+     * 根据用户编码查找用户信息DTO
+     * @param code
+     * @return
+     */
+    PermissionUserDTO findByCode(int code);
 }
