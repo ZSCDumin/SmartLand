@@ -10,10 +10,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,13 +42,17 @@ public class PermissionRoleController {
     @PostMapping("/update")
     @ApiOperation(value = "根据编码修改角色", notes = "更新角色的名字和描述。不能修改系统角色")
     public Result<Object> updateByCode(@RequestBody @Valid PermissionRoleDTO permissionRoleDTO,
+                                       BindingResult bindingResult,
                                        @ApiParam(value = "执行操作的用户编码", required = true)
                                        @RequestParam Integer operatorCode) {
+        if (bindingResult.hasErrors()) {  // 验证参数合法性
+            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
+        }
 
         PermissionRoleDTO oldRole = permissionRoleService.updateByCode(permissionRoleDTO);
         // 记录操作日志
         basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.UPDATE,
-                "角色\"" + oldRole.getName() + "\"", new Date());
+                "角色\"" + oldRole.getName() + "\"");
 
         return ResultUtil.success();
     }
@@ -62,7 +66,7 @@ public class PermissionRoleController {
         PermissionRoleDTO newRole = permissionRoleService.insert(name, description);
         // 记录操作日志
         basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.INSERT,
-                "角色\"" + newRole.getName() + "\"", new Date());
+                "角色\"" + newRole.getName() + "\"");
         return ResultUtil.success(newRole);
     }
 
@@ -75,7 +79,7 @@ public class PermissionRoleController {
         PermissionRoleDTO deletedRole = permissionRoleService.deleteByCode(code);
         // 记录操作日志
         basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.DELETE,
-                "角色\"" + deletedRole.getName() + "\"", new Date());
+                "角色\"" + deletedRole.getName() + "\"");
         return ResultUtil.success();
     }
 

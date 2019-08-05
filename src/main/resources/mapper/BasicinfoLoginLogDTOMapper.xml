@@ -8,6 +8,12 @@
         delete from basicinfo_login_log where code = #{code}
     </delete>
 
+    <!-- 根据用户编码删除 -->
+    <delete id="deleteByUserCode" parameterType="Integer">
+        DELETE FROM basicinfo_login_log
+        WHERE user_code =#{userCode}
+    </delete>
+
     <!--根据时间段查询记录-->
     <select id="search" resultType="BasicinfoLoginLogDTO">
         select bll.code, bll.name, bd.name as department, bll.ip_address, bll.machine_name, bll.log_time
@@ -24,4 +30,15 @@
         right join basicinfo_login_log bll on pu.code = bll.user_code
         left join basicinfo_department bd on bd.code =pu.department_code
     </select>
+
+    <!-- 新增登录日志 -->
+    <insert id="insert" parameterType="BasicinfoLoginLog" useGeneratedKeys="true" keyProperty="code">
+        INSERT INTO basicinfo_login_log (user_code, name, ip_address, machine_name, log_time)
+        VALUES (#{userCode},
+        (SELECT name FROM permission_user WHERE code = #{userCode}),
+        #{ipAddress},
+        #{machineName},
+        #{logTime})
+    </insert>
+
 </mapper>

@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/basicinfologinlogdto")
-@Api(tags = "用户登录日志管理")
+@Api(tags = "登录日志管理")
 public class BasicinfoLoginLogDTOController {
 
     @Autowired

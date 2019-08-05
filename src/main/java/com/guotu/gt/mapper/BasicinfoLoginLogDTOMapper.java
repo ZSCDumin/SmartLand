@@ -1,5 +1,6 @@
 package com.guotu.gt.mapper;
 
+import com.guotu.gt.domain.BasicinfoLoginLog;
 import com.guotu.gt.dto.BasicinfoLoginLogDTO;
 import org.springframework.stereotype.Repository;
 
@@ -29,4 +30,15 @@ public interface BasicinfoLoginLogDTOMapper {
      * @return
      */
     List<BasicinfoLoginLogDTO> open();
+
+    /**
+     * 根据用户编码删除
+     * @author YalandHong
+     */
+    void deleteByUserCode(Integer userCode);
+
+    /**
+     * 插入
+     */
+    void insert(BasicinfoLoginLog basicinfoLoginLog);
 }

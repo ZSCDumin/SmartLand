@@ -12,16 +12,16 @@ import java.util.Date;
 @Data
 public class BasicinfoLoginLogDTO {
 
-    @ApiModelProperty("用户登录日志信息编码")
+    @ApiModelProperty(value = "用户登录日志信息编码", required = true)
     private int code;
 
-    @ApiModelProperty("用户名称")
+    @ApiModelProperty(value = "用户名称", required = true)
     private String name;
 
     @ApiModelProperty("所在机构")
     private String department;
 
-    @ApiModelProperty("登录IP地址")
+    @ApiModelProperty(value = "登录IP地址", required = true)
     private String ipAddress;
 
     @ApiModelProperty("登录机器名称")

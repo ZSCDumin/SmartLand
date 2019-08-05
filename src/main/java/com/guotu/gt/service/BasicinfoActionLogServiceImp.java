@@ -30,8 +30,8 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
         endTime.setMinutes(59);
         endTime.setSeconds(59);
 
-        System.out.println(startTime.toString());
-        System.out.println(endTime.toString());
+        //System.out.println(startTime.toString());
+        //System.out.println(endTime.toString());
 
         // 检查日期是否合法 okay
         Assert.isTrue(endTime.after(startTime), "结束时间必须等于或晚于开始时间");
@@ -76,16 +76,15 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
      * @param optObject 操作对象
      * @param optType 操作类型
      * @param dataDescription 操作数据
-     * @param optTime 操作时间
      */
     @Override
-    public void insert(Integer userCode, String optObject, String optType, String dataDescription, Date optTime) {
+    public void insert(Integer userCode, String optObject, String optType, String dataDescription) {
         // 判断指定的用户编码是否存在
         Assert.notNull(permissionUserDTOMapper.findByCode(userCode),
                 "日志插入失败：不存在编码为" + userCode + "的用户");
         // 插入操作日志
         basicinfoActionLogMapper.insert(
-                new BasicinfoActionLog(null, userCode, optObject, optType, dataDescription, optTime));
+                new BasicinfoActionLog(null, userCode, optObject, optType, dataDescription, new Date()));
     }
 
     @Autowired

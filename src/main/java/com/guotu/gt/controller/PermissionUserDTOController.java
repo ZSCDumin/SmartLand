@@ -13,7 +13,6 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -36,7 +35,7 @@ public class PermissionUserDTOController {
         permissionUserRoleService.insertCodeName(permissionUserDTO.getCode(),permissionUserDTO.getRoleName());
         //记录操作日志
         basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.INSERT,
-                "用户\"" + permissionUserDTO.getName() + "\"", new Date());
+                "用户\"" + permissionUserDTO.getName() + "\"");
         // 将插入后的用户返回给前端
         return ResultUtil.success(permissionUserDTOService.findByName(permissionUserDTO.getName()));
     }
@@ -53,7 +52,7 @@ public class PermissionUserDTOController {
         permissionUserRoleService.updateCodeName(permissionUserDTO.getCode(),permissionUserDTO.getRoleName());
         // 记录操作日志
         basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.UPDATE,
-                "用户\"" + oldUser.getName() + "\"", new Date());
+                "用户\"" + oldUser.getName() + "\"");
         // 将更新之后的结果返回给前端
         return ResultUtil.success(permissionUserDTOService.findByName(permissionUserDTO.getName()));
     }
@@ -72,7 +71,7 @@ public class PermissionUserDTOController {
         // 记录操作日志
         if (deletedUser != null) {
             basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.DELETE,
-                    "用户\"" + deletedUser.getName() + "\"", new Date());
+                    "用户\"" + deletedUser.getName() + "\"");
         }
         // 将删除的用户编码返回给前端
         return ResultUtil.success(code);
