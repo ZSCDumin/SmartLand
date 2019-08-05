@@ -21,7 +21,8 @@ public class PermissionRoleMenu2OperationController {
     private PermissionRoleMenu2OperationService permissionRoleMenu2OperationService;
 
     @PutMapping
-    @ApiOperation("修改角色权限")
+    @ApiOperation(value="修改角色权限",
+                  notes = "只需要传该角色的编码和拥有的权限的菜单编码和操作编码即可")
     public Result<Object> change(@RequestBody @ApiParam(value = "角色操纵权限列表") List<PermissionRoleMenu2Operation> permissionRoleMenu2OperationList,
                                  @RequestParam(value = "roleCode") @ApiParam(value = "角色编码") int roleCode){
         permissionRoleMenu2OperationService.deleteByRoleCode(roleCode);
