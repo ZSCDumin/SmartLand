@@ -13,13 +13,13 @@ public class Result<T> {
     /**
      * 编码
      */
-    @ApiModelProperty("状态码，0表示操作成功")
+    @ApiModelProperty(value = "状态码，0表示操作成功", required = true)
     private Integer code;
 
     /**
      * 信息
      */
-    @ApiModelProperty("状态信息，返回\"操作成功\"，或者说明错误原因")
+    @ApiModelProperty(value = "状态信息，返回\"操作成功\"，或者说明错误原因", required = true)
     private String message;
 
     /**

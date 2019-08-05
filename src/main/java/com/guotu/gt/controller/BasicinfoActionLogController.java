@@ -1,6 +1,5 @@
 package com.guotu.gt.controller;
 
-import com.guotu.gt.domain.BasicinfoActionLog;
 import com.guotu.gt.dto.BasicinfoActionLogDTO;
 import com.guotu.gt.dto.Result;
 import com.guotu.gt.service.BasicinfoActionLogService;
@@ -28,7 +27,7 @@ public class BasicinfoActionLogController {
 
     // 注意：只能有一个RequestBody！
     @GetMapping("/search")
-    @ApiOperation(value = "获取时间段内的所有操作")
+    @ApiOperation(value = "获取指定时间段内的所有操作")
     public Result<List<BasicinfoActionLogDTO>> getActionByPeriod(
             @ApiParam(value = "开始时间", required = true, example = "2019-01-02")
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,
@@ -44,7 +43,7 @@ public class BasicinfoActionLogController {
     }
 
     @DeleteMapping("/delete")
-    @ApiOperation(value = "根据编码删除操作")
+    @ApiOperation(value = "根据编码删除操作记录条目")
     public Result<Object> deleteByCode(@ApiParam(value = "操作编码", required = true)
                                            @RequestParam Integer code) {
         basicinfoActionLogService.deleteByCode(code);

@@ -17,7 +17,7 @@
         where bll.log_time between #{start} and #{end}
     </select>
 
-    <!--查询当天所有记录-->
+    <!--查询所有记录-->
     <select id="open" resultType="BasicinfoLoginLogDTO">
         select bll.code, bll.name, bd.name as department, bll.ip_address, bll.machine_name, bll.log_time
         from permission_user pu

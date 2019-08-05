@@ -24,7 +24,7 @@ public interface BasicinfoLoginLogDTOService {
     List<BasicinfoLoginLogDTO> search(Date start, Date end);
 
     /**
-     * 获取当日所有登录日志
+     * 获取所有登录日志
      * @return
      */
     List<BasicinfoLoginLogDTO> open();

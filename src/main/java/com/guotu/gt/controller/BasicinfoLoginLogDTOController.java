@@ -22,7 +22,7 @@ public class BasicinfoLoginLogDTOController {
     private BasicinfoLoginLogDTOService basicinfoLoginLogDTOService;
 
     @DeleteMapping
-    @ApiOperation("根据编码删除一条登陆日志")
+    @ApiOperation("根据编码删除一条登录日志")
     public Result<Object> delete(@RequestParam("code") int code){
         basicinfoLoginLogDTOService.delete(code);
         return ResultUtil.success();
@@ -36,7 +36,7 @@ public class BasicinfoLoginLogDTOController {
     }
 
     @GetMapping("/open")
-    @ApiOperation("获取当日所有登录日志")
+    @ApiOperation("获取所有登录日志")
     public Result<List<BasicinfoLoginLogDTO>> open(){
         return ResultUtil.success(basicinfoLoginLogDTOService.open());
     }
