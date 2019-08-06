@@ -1,9 +1,12 @@
 package com.guotu.gt.service;
 
+import com.guotu.gt.domain.BasicinfoLoginLog;
 import com.guotu.gt.dto.BasicinfoLoginLogDTO;
 import com.guotu.gt.mapper.BasicinfoLoginLogDTOMapper;
+import com.guotu.gt.mapper.PermissionUserDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.Date;
 import java.util.List;
@@ -27,5 +30,18 @@ public class BasicinfoLoginLogDTOServiceImp implements BasicinfoLoginLogDTOServi
     @Override
     public List<BasicinfoLoginLogDTO> open(){
         return basicinfoLoginLogDTOMapper.open();
+    }
+
+    /**
+     * 新增一个登录日志
+     * @param userCode 登录用户的编码
+     * @param ipAddress 登录IP
+     * @param machineName 登录机器名
+     */
+    @Override
+    public void insert(Integer userCode, String ipAddress, String machineName) {
+        // 插入登录日志
+        basicinfoLoginLogDTOMapper.insert(
+                new BasicinfoLoginLog(null, userCode, ipAddress, machineName, new Date()));
     }
 }

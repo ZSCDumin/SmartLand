@@ -36,10 +36,16 @@ public class LoginUserServiceImp implements LoginUserService {
         PermissionUserRole permissionUserRole = permissionUserRoleMapper.findDomainByUserCode(permissionUserDTO.getCode());
         Assert.notNull(permissionUserRole, "用户\"" + permissionUserDTO.getName() + "\"未分配角色");
 
-        return new LoginUserDTO(permissionUserDTO.getCode(),  // 返回用户编码
+        LoginUserDTO loginUserDTO = new LoginUserDTO(permissionUserDTO.getCode(),  // 返回用户编码
                 loginUserSigninDTO.getUserName(),   // 返回用户名
                 permissionUserRole.getRoleCode());  // 返回角色编码
         // TODO 获取权限信息
+
+        // 记录登录日志
+        basicinfoLoginLogDTOService.insert(loginUserDTO.getUserCode(),
+                loginUserSigninDTO.getIpAddress(), loginUserSigninDTO.getMachineName());
+
+        return loginUserDTO;
     }
 
 
@@ -48,4 +54,7 @@ public class LoginUserServiceImp implements LoginUserService {
 
     @Autowired
     private PermissionUserRoleMapper permissionUserRoleMapper;
+
+    @Autowired
+    private BasicinfoLoginLogDTOService basicinfoLoginLogDTOService;
 }

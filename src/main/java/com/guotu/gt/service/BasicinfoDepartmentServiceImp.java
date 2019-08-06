@@ -1,6 +1,7 @@
 package com.guotu.gt.service;
 
 import com.guotu.gt.domain.BasicinfoDepartment;
+import com.guotu.gt.dto.BasicinfoDepartmentDTO;
 import com.guotu.gt.mapper.BasicinfoDepartmentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,13 @@ public class BasicinfoDepartmentServiceImp implements BasicinfoDepartmentService
     private BasicinfoDepartmentMapper basicinfoDepartmentMapper;
 
     @Override
-    public BasicinfoDepartment add(BasicinfoDepartment basicinfoDepartment){
-        return basicinfoDepartmentMapper.add(basicinfoDepartment);
+    public void add(BasicinfoDepartment basicinfoDepartment){
+        basicinfoDepartmentMapper.add(basicinfoDepartment);
     }
 
     @Override
-    public BasicinfoDepartment update(BasicinfoDepartment basicinfoDepartment){
-        return basicinfoDepartmentMapper.update(basicinfoDepartment);
+    public void update(BasicinfoDepartment basicinfoDepartment){
+        basicinfoDepartmentMapper.update(basicinfoDepartment);
     }
 
     @Override
@@ -28,12 +29,12 @@ public class BasicinfoDepartmentServiceImp implements BasicinfoDepartmentService
     }
 
     @Override
-    public BasicinfoDepartment findByCode(int code){
+    public BasicinfoDepartmentDTO findByCode(int code){
         return basicinfoDepartmentMapper.findByCode(code);
     }
 
     @Override
-    public List<BasicinfoDepartment> findAll(){
+    public List<BasicinfoDepartmentDTO> findAll(){
         return basicinfoDepartmentMapper.findAll();
     }
 }

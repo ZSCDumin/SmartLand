@@ -1,5 +1,6 @@
 package com.guotu.gt.mapper;
 
+import com.guotu.gt.domain.BasicinfoLoginLog;
 import com.guotu.gt.dto.BasicinfoLoginLogDTO;
 import org.springframework.stereotype.Repository;
 
@@ -25,8 +26,19 @@ public interface BasicinfoLoginLogDTOMapper {
     List<BasicinfoLoginLogDTO> search(Date start, Date end);
 
     /**
-     * 获取当日所有登录日志
+     * 获取所有登录日志
      * @return
      */
     List<BasicinfoLoginLogDTO> open();
+
+    /**
+     * 根据用户编码删除
+     * @author YalandHong
+     */
+    void deleteByUserCode(Integer userCode);
+
+    /**
+     * 插入
+     */
+    void insert(BasicinfoLoginLog basicinfoLoginLog);
 }

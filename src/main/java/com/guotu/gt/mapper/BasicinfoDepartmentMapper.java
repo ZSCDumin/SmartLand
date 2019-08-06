@@ -1,6 +1,7 @@
 package com.guotu.gt.mapper;
 
 import com.guotu.gt.domain.BasicinfoDepartment;
+import com.guotu.gt.dto.BasicinfoDepartmentDTO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,14 +14,14 @@ public interface BasicinfoDepartmentMapper {
      * @param basicinfoDepartment
      * @return
      */
-    BasicinfoDepartment add(BasicinfoDepartment basicinfoDepartment);
+    void add(BasicinfoDepartment basicinfoDepartment);
 
     /**
      * 更新一个机构信息
      * @param basicinfoDepartment
      * @return
      */
-    BasicinfoDepartment update(BasicinfoDepartment basicinfoDepartment);
+    void update(BasicinfoDepartment basicinfoDepartment);
 
     /**
      * 根据code删除一个机构信息
@@ -33,11 +34,11 @@ public interface BasicinfoDepartmentMapper {
      * @param code
      * @return
      */
-    BasicinfoDepartment findByCode(int code);
+    BasicinfoDepartmentDTO findByCode(int code);
 
     /**
      * 查询所有机构信息
      * @return
      */
-    List<BasicinfoDepartment> findAll();
+    List<BasicinfoDepartmentDTO> findAll();
 }

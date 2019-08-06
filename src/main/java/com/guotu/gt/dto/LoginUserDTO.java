@@ -14,13 +14,13 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class LoginUserDTO {
-    @ApiModelProperty("用户编码")
+    @ApiModelProperty(value = "用户编码", required = true)
     private Integer userCode;
 
-    @ApiModelProperty("用户名")
+    @ApiModelProperty(value = "用户名", required = true)
     private String userName;
 
-    @ApiModelProperty("角色编码")
+    @ApiModelProperty(value = "角色编码", required = true)
     private Integer roleCode;
 
     /*@ApiModelProperty("角色名")

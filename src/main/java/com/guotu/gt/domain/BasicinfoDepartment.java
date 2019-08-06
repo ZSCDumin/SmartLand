@@ -34,4 +34,6 @@ public class BasicinfoDepartment {
    @ApiModelProperty("所属机构名称")
    private String departmentName;
 
+   @ApiModelProperty("行政地区代码，外键")
+   private Integer regionId;
 }

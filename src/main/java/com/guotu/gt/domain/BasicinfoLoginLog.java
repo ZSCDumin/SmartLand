@@ -14,7 +14,7 @@ import java.util.Date;
  * @author YalandHong
  *
  */
-@ApiModel("用户登录日志信息实体")
+@ApiModel("用户登录日志插入数据实体")
 @Data
 @AllArgsConstructor
 public class BasicinfoLoginLog {
@@ -24,8 +24,9 @@ public class BasicinfoLoginLog {
     @ApiModelProperty("用户编号，外键")
     private Integer userCode;
 
-    @ApiModelProperty("用户名称")
-    private String name;
+    // 用户名称在插入的时候由数据库查询
+    /*@ApiModelProperty("用户名称")
+    private String name;*/
 
     @ApiModelProperty("登录IP地址")
     private String ipAddress;

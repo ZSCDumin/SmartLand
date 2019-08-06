@@ -45,9 +45,7 @@ public interface BasicinfoActionLogService {
      * @param optObject 操作对象
      * @param optType 操作类型
      * @param dataDescription 操作数据
-     * @param optTime 操作时间
      */
-    void insert(Integer userCode, String optObject, String optType, String dataDescription, Date optTime);
-
+    void insert(Integer userCode, String optObject, String optType, String dataDescription);
 
 }

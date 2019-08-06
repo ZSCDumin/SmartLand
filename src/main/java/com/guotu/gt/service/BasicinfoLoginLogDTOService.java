@@ -24,8 +24,16 @@ public interface BasicinfoLoginLogDTOService {
     List<BasicinfoLoginLogDTO> search(Date start, Date end);
 
     /**
-     * 获取当日所有登录日志
+     * 获取所有登录日志
      * @return
      */
     List<BasicinfoLoginLogDTO> open();
+
+    /**
+     * 新增一个登录日志
+     * @param userCode 登录用户的编码
+     * @param ipAddress 登录IP
+     * @param machineName 登录机器名
+     */
+    void insert(Integer userCode, String ipAddress, String machineName);
 }
