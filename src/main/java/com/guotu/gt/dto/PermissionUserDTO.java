@@ -1,10 +1,10 @@
 package com.guotu.gt.dto;
 
-import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-@Api("用户信息DTO")
+@ApiModel("用户信息DTO")
 @Data
 public class PermissionUserDTO {
 

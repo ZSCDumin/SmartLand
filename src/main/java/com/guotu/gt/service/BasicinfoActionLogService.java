@@ -27,6 +27,12 @@ public interface BasicinfoActionLogService {
     void deleteByCode(Integer code);
 
     /**
+     * 根据用户编码删除操作日志
+     * @param userCode 用户编码
+     */
+    void deleteByUserCode(Integer userCode);
+
+    /**
      * 查询所有操作
      * @return 操作记录列表
      */
@@ -39,7 +45,7 @@ public interface BasicinfoActionLogService {
      * @param optObject 操作对象
      * @param optType 操作类型
      * @param dataDescription 操作数据
-     * @param optTime 操作时间
      */
-    void insert(Integer userCode, String optObject, String optType, String dataDescription, Date optTime);
+    void insert(Integer userCode, String optObject, String optType, String dataDescription);
+
 }

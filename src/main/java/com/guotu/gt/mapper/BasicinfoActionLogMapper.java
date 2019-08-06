@@ -34,6 +34,12 @@ public interface BasicinfoActionLogMapper {
     void deleteByCode(Integer code);
 
     /**
+     * 根据用户编码删除操作日志
+     * @param userCode 用户编码
+     */
+    void deleteByUserCode(Integer userCode);
+
+    /**
      * 根据编码查询操作人的用户名
      * @param code 操作编码
      * @return 操作信息
