@@ -47,9 +47,10 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
     @Override
     public PermissionRoleDTO updateByCode(PermissionRoleDTO permissionRoleDTO) {
 
-        //判断名字是否为空  okay
+        /*
+        //判断名字是否为空，由Controller Valid NotBlank完成
         Assert.notNull(permissionRoleDTO.getName(), "角色名不能为空");
-        Assert.isTrue(!permissionRoleDTO.getName().trim().isEmpty(), "角色名不能为空白");
+        Assert.isTrue(!permissionRoleDTO.getName().trim().isEmpty(), "角色名不能为空白");*/
 
         //判断角色编码是否存在，同时获取之前的角色信息
         PermissionRole oldRole = permissionRoleMapper.selectDomainByCode(permissionRoleDTO.getCode());
