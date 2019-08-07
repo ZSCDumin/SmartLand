@@ -1,6 +1,10 @@
 package com.guotu.gt.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.guotu.gt.domain.PermissionRole;
+import com.guotu.gt.dto.PageBean;
 import com.guotu.gt.dto.PermissionRoleDTO;
 import com.guotu.gt.mapper.PermissionRoleMapper;
 import com.guotu.gt.mapper.PermissionRoleMenu2OperationMapper;
@@ -27,6 +31,18 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
     @Override
     public List<PermissionRoleDTO> selectAll() {
         return permissionRoleMapper.selectAll();
+    }
+
+    /**
+     * 分页查询所有角色
+     * @param pageNum  页码
+     * @param pageSize 页面大小
+     * @return 指定页面的角色信息
+     */
+    @Override
+    public PageBean<PermissionRoleDTO> selectAllByPage(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return new PageBean<>(permissionRoleMapper.selectAll());
     }
 
     /**

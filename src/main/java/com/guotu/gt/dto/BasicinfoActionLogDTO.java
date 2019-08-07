@@ -28,7 +28,7 @@ public class BasicinfoActionLogDTO {
     @ApiModelProperty(value = "操作描述", required = true)
     private String description;
 
-    @ApiModelProperty(value = "操作时间", required = true)
+    @ApiModelProperty(value = "操作时间", required = true, example = "2012-12-01 01:24:59")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")  // 规定日期格式和时区
     private Date optTime;

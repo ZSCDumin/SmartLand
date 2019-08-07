@@ -1,6 +1,7 @@
 package com.guotu.gt.controller;
 
 import com.guotu.gt.constant.OperationType;
+import com.guotu.gt.dto.PageBean;
 import com.guotu.gt.dto.PermissionRoleDTO;
 import com.guotu.gt.dto.Result;
 import com.guotu.gt.service.BasicinfoActionLogService;
@@ -10,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +33,15 @@ public class PermissionRoleController {
     @ApiOperation(value = "获取所有角色")
     public Result<List<PermissionRoleDTO>> getAllRole() {
         return ResultUtil.success(permissionRoleService.selectAll());
+    }
+
+    @GetMapping(value = "/allByPage")
+    @ApiOperation(value = "分页获取所有角色", notes = "需要提供页码和每一页的大小")
+    public Result<PageBean<PermissionRoleDTO>> getAllRoleByPage(
+            @ApiParam(value = "页码") @RequestParam(defaultValue = "1") int page,
+            @ApiParam(value = "每页的条目数") @RequestParam(defaultValue = "10") int size) {
+        Assert.isTrue(size > 0, "页码必须是正整数");
+        return ResultUtil.success(permissionRoleService.selectAllByPage(page, size));
     }
 
     @GetMapping(value = "/allRoleName")
