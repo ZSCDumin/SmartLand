@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-@ApiModel("用户管理DTO")
+@ApiModel("权限管理DTO")
 @Data
 public class UserManagementDTO {
     @ApiModelProperty("操作名称")

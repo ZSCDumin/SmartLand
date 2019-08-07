@@ -1,6 +1,7 @@
 package com.guotu.gt.controller;
 
 import com.guotu.gt.constant.OperationType;
+import com.guotu.gt.dto.PageBean;
 import com.guotu.gt.dto.PermissionUserDTO;
 import com.guotu.gt.dto.Result;
 import com.guotu.gt.service.BasicinfoActionLogService;
@@ -11,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,10 +29,14 @@ public class PermissionUserDTOController {
     PermissionUserRoleService permissionUserRoleService;
 
     @PutMapping
-    @ApiOperation(value="增加一个用户管理信息")
+    @ApiOperation(value="增加一个用户信息")
     public Result<PermissionUserDTO> add(@RequestBody PermissionUserDTO permissionUserDTO,
                                          @ApiParam(value = "执行操作的用户编码", required = true)
                                          @RequestParam Integer operatorCode){
+        // 重名判断
+        Assert.isNull(permissionUserDTOService.findByName(permissionUserDTO.getName()),
+                "已经存在一个名为\"" + permissionUserDTO.getName() + "\"的用户");
+
         permissionUserDTOService.add(permissionUserDTO);
         permissionUserRoleService.insertCodeName(permissionUserDTO.getCode(),permissionUserDTO.getRoleName());
         //记录操作日志
@@ -41,12 +47,16 @@ public class PermissionUserDTOController {
     }
 
     @PostMapping
-    @ApiOperation(value = "更新一个用户管理信息")
+    @ApiOperation(value = "更新一个用户信息")
     public Result<PermissionUserDTO> update(@RequestBody PermissionUserDTO permissionUserDTO,
                                             @ApiParam(value = "执行操作的用户编码", required = true)
                                             @RequestParam Integer operatorCode){
         // 获取更新之前的用户
         PermissionUserDTO oldUser = permissionUserDTOService.findByCode(permissionUserDTO.getCode());
+        Assert.notNull(oldUser, "不存在编码为" + permissionUserDTO.getCode() + "的用户");
+
+        // 暂时没有做重名校验
+
         // 更新用户信息
         permissionUserDTOService.update(permissionUserDTO);
         permissionUserRoleService.updateCodeName(permissionUserDTO.getCode(),permissionUserDTO.getRoleName());
@@ -58,29 +68,38 @@ public class PermissionUserDTOController {
     }
 
     @DeleteMapping
-    @ApiOperation(value = "根据code删除一个用户管理信息")
+    @ApiOperation(value = "根据code删除一个用户信息")
     public Result<Integer> delete(@RequestParam("code") int code,
                                   @ApiParam(value = "执行操作的用户编码", required = true)
                                   @RequestParam Integer operatorCode){
         // 获取删除的用户
         PermissionUserDTO deletedUser = permissionUserDTOService.findByCode(code);
+        Assert.notNull(deletedUser, "不存在编码为" + code + "的用户");
+
         // 删除用户以及关联数据
         permissionUserRoleService.deleteByUserCode(code);
         basicinfoActionLogService.deleteByUserCode(code);
         permissionUserDTOService.delete(code);
         // 记录操作日志
-        if (deletedUser != null) {
-            basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.DELETE,
+        basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.DELETE,
                     "用户\"" + deletedUser.getName() + "\"");
-        }
         // 将删除的用户编码返回给前端
         return ResultUtil.success(code);
     }
 
     @GetMapping("/findAll")
-    @ApiOperation(value = "查询所有用户管理信息")
+    @ApiOperation(value = "查询所有用户信息")
     public Result<List<PermissionUserDTO>> findAll(){
         return ResultUtil.success(permissionUserDTOService.findAll());
+    }
+
+    @GetMapping("/findAllByPage")
+    @ApiOperation(value = "分页查询用户信息")
+    public Result<PageBean<PermissionUserDTO>> findAllByPage(
+            @ApiParam(value = "页码") @RequestParam(defaultValue = "1") int page,
+            @ApiParam(value = "每页的条目数") @RequestParam(defaultValue = "10") int size){
+        Assert.isTrue(size > 0, "页码必须是正整数");
+        return ResultUtil.success(permissionUserDTOService.findAllByPage(page, size));
     }
 
     @GetMapping("/findByName")

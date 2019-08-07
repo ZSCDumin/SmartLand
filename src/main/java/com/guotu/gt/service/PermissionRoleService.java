@@ -1,5 +1,7 @@
 package com.guotu.gt.service;
 
+import com.github.pagehelper.PageInfo;
+import com.guotu.gt.dto.PageBean;
 import com.guotu.gt.dto.PermissionRoleDTO;
 
 import java.util.List;
@@ -19,10 +21,25 @@ public interface PermissionRoleService {
     List<PermissionRoleDTO> selectAll();
 
     /**
+     * 分页查询所有角色
+     * @param pageNum  页码
+     * @param pageSize 页面大小
+     * @return 指定页面的角色信息
+     */
+    PageBean<PermissionRoleDTO> selectAllByPage(Integer pageNum, Integer pageSize);
+
+    /**
      * 获取所有角色的姓名
      * @return 角色姓名列表
      */
     List<String> selectAllRoleName();
+
+    /**
+     * 根据编码查找角色
+     * @param code 角色编码
+     * @return 角色信息
+     */
+    PermissionRoleDTO selectByCode(Integer code);
 
     /**
      * 根据编码更新角色信息

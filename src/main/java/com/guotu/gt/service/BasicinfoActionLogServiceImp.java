@@ -1,7 +1,9 @@
 package com.guotu.gt.service;
 
+import com.github.pagehelper.PageHelper;
 import com.guotu.gt.domain.BasicinfoActionLog;
 import com.guotu.gt.dto.BasicinfoActionLogDTO;
+import com.guotu.gt.dto.PageBean;
 import com.guotu.gt.mapper.BasicinfoActionLogMapper;
 import com.guotu.gt.mapper.PermissionUserDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,14 @@ import org.springframework.util.Assert;
 
 import java.util.Date;
 import java.util.List;
+
+/**
+ * 操作日志管理 - 服务层实现
+ *
+ * 使用了一些过期的Date操作函数，图个方便
+ *
+ * @author YalandHong
+ */
 
 @Service
 public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
@@ -21,6 +31,7 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
      * @return 操作记录列表
      */
     @Override
+    @SuppressWarnings("deprecation")
     public List<BasicinfoActionLogDTO> selectByPeriod(Date startTime, Date endTime) {
 
         startTime.setHours(0);
@@ -37,6 +48,32 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
         Assert.isTrue(endTime.after(startTime), "结束时间必须等于或晚于开始时间");
 
         return basicinfoActionLogMapper.selectByPeriod(startTime, endTime);
+    }
+
+    /**
+     * 分页查询指定时间段内的操作记录
+     * @param startTime 开始时间
+     * @param endTime 结束时间
+     * @param pageNum 页码
+     * @param pageSize 页面大小
+     * @return 指定页面的操作日志
+     */
+    @Override
+    @SuppressWarnings("deprecation")
+    public PageBean<BasicinfoActionLogDTO> selectByPeriodByPage(Date startTime, Date endTime,
+                                                                Integer pageNum, Integer pageSize) {
+        startTime.setHours(0);
+        startTime.setMinutes(0);
+        startTime.setSeconds(0);
+        endTime.setHours(23);
+        endTime.setMinutes(59);
+        endTime.setSeconds(59);
+
+        // 检查日期是否合法 okay
+        Assert.isTrue(endTime.after(startTime), "结束时间必须等于或晚于开始时间");
+
+        PageHelper.startPage(pageNum, pageSize);
+        return new PageBean<>(basicinfoActionLogMapper.selectByPeriod(startTime, endTime));
     }
 
     /**
@@ -68,6 +105,16 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
     @Override
     public List<BasicinfoActionLogDTO> selectAll() {
         return basicinfoActionLogMapper.selectAll();
+    }
+
+    /**
+     * 分页查询所有操作
+     * @return 指定页面的操作记录列表
+     */
+    @Override
+    public PageBean<BasicinfoActionLogDTO> selectAllByPage(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return new PageBean<>(basicinfoActionLogMapper.selectAll());
     }
 
     /**

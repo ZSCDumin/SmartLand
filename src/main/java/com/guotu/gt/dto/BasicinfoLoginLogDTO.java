@@ -21,13 +21,13 @@ public class BasicinfoLoginLogDTO {
     @ApiModelProperty("所在机构")
     private String department;
 
-    @ApiModelProperty(value = "登录IP地址", required = true)
+    @ApiModelProperty(value = "登录IP地址", required = true, example = "111.22.3.456")
     private String ipAddress;
 
     @ApiModelProperty("登录机器名称")
     private String machineName;  //null
 
-    @ApiModelProperty("登录时间")
+    @ApiModelProperty(value = "登录时间", required = true, example = "2012-12-01 01:24:59")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone= "GMT+8")
     private Date logTime;
