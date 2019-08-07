@@ -55,6 +55,15 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
     }
 
     /**
+     * 根据编码查找角色
+     * @param code 角色编码
+     * @return 角色信息
+     */
+    public PermissionRoleDTO selectByCode(Integer code) {
+        return permissionRoleMapper.selectByCode(code);
+    }
+
+    /**
      * 根据角色编码更新角色信息
      * @param permissionRoleDTO 新的角色信息
      * @return 返回旧的角色信息
