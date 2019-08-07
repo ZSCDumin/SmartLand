@@ -13,6 +13,14 @@ import org.springframework.util.Assert;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 操作日志管理 - 服务层实现
+ *
+ * 使用了一些过期的Date操作函数，图个方便
+ *
+ * @author YalandHong
+ */
+
 @Service
 public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
 
@@ -23,6 +31,7 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
      * @return 操作记录列表
      */
     @Override
+    @SuppressWarnings("deprecation")
     public List<BasicinfoActionLogDTO> selectByPeriod(Date startTime, Date endTime) {
 
         startTime.setHours(0);
@@ -50,6 +59,7 @@ public class BasicinfoActionLogServiceImp implements BasicinfoActionLogService {
      * @return 指定页面的操作日志
      */
     @Override
+    @SuppressWarnings("deprecation")
     public PageBean<BasicinfoActionLogDTO> selectByPeriodByPage(Date startTime, Date endTime,
                                                                 Integer pageNum, Integer pageSize) {
         startTime.setHours(0);

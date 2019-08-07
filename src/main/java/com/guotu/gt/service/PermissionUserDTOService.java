@@ -1,5 +1,6 @@
 package com.guotu.gt.service;
 
+import com.guotu.gt.dto.PageBean;
 import com.guotu.gt.dto.PermissionUserDTO;
 
 import java.util.List;
@@ -26,10 +27,18 @@ public interface PermissionUserDTOService {
     void delete(int code);
 
     /**
-     * 查询所有操作信息
-     * @return
+     * 查询所有用户信息
+     * @return 用户信息列表
      */
     List<PermissionUserDTO> findAll();
+
+    /**
+     * 分页查找用户信息
+     * @param pageNum 页码
+     * @param pageSize 页面大小
+     * @return 指定页码的用户信息
+     */
+    PageBean<PermissionUserDTO> findAllByPage(Integer pageNum, Integer pageSize);
 
     /**
      * 根据用户名查找用户信息
