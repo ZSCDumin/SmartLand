@@ -1,6 +1,7 @@
 package com.guotu.gt.service;
 
 import com.guotu.gt.domain.PermissionRoleMenu2Operation;
+import com.guotu.gt.dto.PageBean;
 import com.guotu.gt.dto.UserManagementDTO;
 
 import java.util.List;
@@ -25,4 +26,13 @@ public interface PermissionRoleMenu2OperationService {
      * @return
      */
     List<UserManagementDTO> open(int roleCode);
+
+    /**
+     * 分页查找角色权限
+     * @param roleCode 角色编码
+     * @param pageNum 页码
+     * @param pageSize 页面大小
+     * @return 分页权限信息
+     */
+    PageBean<UserManagementDTO> openByPage(int roleCode, int pageNum, int pageSize);
 }

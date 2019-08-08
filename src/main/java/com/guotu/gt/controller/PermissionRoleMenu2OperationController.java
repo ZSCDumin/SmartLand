@@ -2,10 +2,7 @@ package com.guotu.gt.controller;
 
 import com.guotu.gt.constant.OperationType;
 import com.guotu.gt.domain.PermissionRoleMenu2Operation;
-import com.guotu.gt.dto.PermissionRoleDTO;
-import com.guotu.gt.dto.PermissionRoleMenu2OperationDTO;
-import com.guotu.gt.dto.Result;
-import com.guotu.gt.dto.UserManagementDTO;
+import com.guotu.gt.dto.*;
 import com.guotu.gt.service.BasicinfoActionLogService;
 import com.guotu.gt.service.PermissionMenu2OperationService;
 import com.guotu.gt.service.PermissionRoleMenu2OperationService;
@@ -16,10 +13,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,11 +77,22 @@ public class PermissionRoleMenu2OperationController {
         return ResultUtil.success();
     }
 
-    @GetMapping
+    @GetMapping("/all")
     @ApiOperation("获取角色权限信息")
     public Result<List<UserManagementDTO>> open(@RequestParam @ApiParam(value = "角色编码", required = true) int roleCode){
         Assert.notNull(permissionRoleService.selectByCode(roleCode), "不存在编码为" + roleCode + "的角色");
 		return ResultUtil.success(permissionRoleMenu2OperationService.open(roleCode));
+    }
+
+    @GetMapping("/allByPage")
+    @ApiOperation("分页获取角色权限信息")
+    public Result<PageBean<UserManagementDTO>> openByPage(
+            @RequestParam @ApiParam(value = "角色编码", required = true) int roleCode,
+            @RequestParam(defaultValue = "1") @ApiParam(value = "页码") int page,
+            @RequestParam(defaultValue = "10") @ApiParam(value = "页面大小") int size){
+        Assert.isTrue(size > 0, "页码必须是正整数");
+        Assert.notNull(permissionRoleService.selectByCode(roleCode), "不存在编码为" + roleCode + "的角色");
+        return ResultUtil.success(permissionRoleMenu2OperationService.openByPage(roleCode, page, size));
     }
 
     private static final String INTERFACE_NAME = "权限管理";

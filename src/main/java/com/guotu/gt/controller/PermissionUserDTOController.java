@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,9 +31,9 @@ public class PermissionUserDTOController {
 
     @PutMapping
     @ApiOperation(value="增加一个用户信息")
-    public Result<PermissionUserDTO> add(@RequestBody PermissionUserDTO permissionUserDTO,
+    public Result<PermissionUserDTO> add(@RequestBody @Valid PermissionUserDTO permissionUserDTO,
                                          @ApiParam(value = "执行操作的用户编码", required = true)
-                                         @RequestParam Integer operatorCode){
+                                         @RequestParam Integer operatorCode) {
         // 重名判断
         Assert.isNull(permissionUserDTOService.findByName(permissionUserDTO.getName()),
                 "已经存在一个名为\"" + permissionUserDTO.getName() + "\"的用户");
@@ -48,14 +49,17 @@ public class PermissionUserDTOController {
 
     @PostMapping
     @ApiOperation(value = "更新一个用户信息")
-    public Result<PermissionUserDTO> update(@RequestBody PermissionUserDTO permissionUserDTO,
+    public Result<PermissionUserDTO> update(@RequestBody @Valid PermissionUserDTO permissionUserDTO,
                                             @ApiParam(value = "执行操作的用户编码", required = true)
                                             @RequestParam Integer operatorCode){
         // 获取更新之前的用户
         PermissionUserDTO oldUser = permissionUserDTOService.findByCode(permissionUserDTO.getCode());
         Assert.notNull(oldUser, "不存在编码为" + permissionUserDTO.getCode() + "的用户");
 
-        // 暂时没有做重名校验
+        // 重名判断
+        PermissionUserDTO checkUser = permissionUserDTOService.findByName(permissionUserDTO.getName());
+        Assert.isTrue((checkUser == null) || (checkUser.getCode() == permissionUserDTO.getCode()),
+                "已经存在一个名为\"" + permissionUserDTO.getName() + "\"的用户");
 
         // 更新用户信息
         permissionUserDTOService.update(permissionUserDTO);
