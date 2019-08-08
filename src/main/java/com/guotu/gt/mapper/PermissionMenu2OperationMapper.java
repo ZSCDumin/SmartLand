@@ -40,4 +40,11 @@ public interface PermissionMenu2OperationMapper {
      * @return
      */
     List<PermissionMenu2Operation> findAll();
+
+    /**
+     * 判断指定的菜单操作分配实体是否存在
+     * @param permissionMenu2Operation 菜单操作分配实体
+     * @return 1表示存在，0表示不存在
+     */
+    Integer checkExists(PermissionMenu2Operation permissionMenu2Operation);
 }

@@ -33,4 +33,11 @@
     <select id="findAll" resultType="PermissionMenu2Operation">
         select * from permission_menu2_operation
     </select>
+
+    <select id="checkExists" parameterType="PermissionMenu2Operation" resultType="Integer">
+        SELECT EXISTS(
+        SELECT * FROM permission_menu2_operation
+        WHERE menu2_code =#{menu2Code} AND operation_code = #{operationCode}
+        )
+    </select>
 </mapper>

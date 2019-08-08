@@ -38,4 +38,12 @@ public interface PermissionMenu2OperationService {
      * @return
      */
     List<PermissionMenu2Operation> findAll();
+
+    /**
+     * 判断指定的菜单和操作是否存在
+     * @param menu2Code 二级菜单编码
+     * @param operationCode 操作编码
+     * @return 是否存在
+     */
+    boolean checkExists(int menu2Code, int operationCode);
 }
