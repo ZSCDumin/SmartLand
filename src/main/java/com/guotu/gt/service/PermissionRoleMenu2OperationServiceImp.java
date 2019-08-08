@@ -1,6 +1,8 @@
 package com.guotu.gt.service;
 
+import com.github.pagehelper.PageHelper;
 import com.guotu.gt.domain.PermissionRoleMenu2Operation;
+import com.guotu.gt.dto.PageBean;
 import com.guotu.gt.dto.UserManagementDTO;
 import com.guotu.gt.mapper.PermissionRoleMenu2OperationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,19 @@ public class PermissionRoleMenu2OperationServiceImp implements PermissionRoleMen
     @Override
     public List<UserManagementDTO> open(int roleCode){
         return permissionRoleMenu2OperationMapper.open(roleCode);
+    }
+
+    /**
+     * 分页查找角色权限
+     * @param roleCode 角色编码
+     * @param pageNum 页码
+     * @param pageSize 页面大小
+     * @return 分页权限信息
+     */
+    @Override
+    public PageBean<UserManagementDTO> openByPage(int roleCode, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return new PageBean<>(permissionRoleMenu2OperationMapper.open(roleCode));
     }
 
 }

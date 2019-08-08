@@ -17,12 +17,12 @@ public class PermissionMenu2Operation {
      * 二级菜单信息表的外键
      */
     @ApiModelProperty("菜单编码，外键")
-    private int code;
+    private int menu2Code;
 
     /**
      * 操作信息表的外键
      */
     @ApiModelProperty("操作编码，外键")
-    private int name;
+    private int operationCode;
 
 }
