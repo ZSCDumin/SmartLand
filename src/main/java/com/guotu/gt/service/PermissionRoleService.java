@@ -1,6 +1,5 @@
 package com.guotu.gt.service;
 
-import com.github.pagehelper.PageInfo;
 import com.guotu.gt.dto.PageBean;
 import com.guotu.gt.dto.PermissionRoleDTO;
 
@@ -40,6 +39,13 @@ public interface PermissionRoleService {
      * @return 角色信息
      */
     PermissionRoleDTO selectByCode(Integer code);
+
+    /**
+     * 根据角色姓名查找角色信息
+     * @param name 角色名
+     * @return 角色信息
+     */
+    PermissionRoleDTO selectByName(String name);
 
     /**
      * 根据编码更新角色信息

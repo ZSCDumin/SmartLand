@@ -5,6 +5,7 @@ import com.guotu.gt.dto.PageBean;
 import com.guotu.gt.dto.PermissionUserDTO;
 import com.guotu.gt.dto.Result;
 import com.guotu.gt.service.BasicinfoActionLogService;
+import com.guotu.gt.service.PermissionRoleService;
 import com.guotu.gt.service.PermissionUserDTOService;
 import com.guotu.gt.service.PermissionUserRoleService;
 import com.guotu.gt.utils.ResultUtil;
@@ -24,10 +25,13 @@ import java.util.List;
 public class PermissionUserDTOController {
     
     @Autowired
-    PermissionUserDTOService permissionUserDTOService;
+    private PermissionUserDTOService permissionUserDTOService;
 
     @Autowired
-    PermissionUserRoleService permissionUserRoleService;
+    private PermissionUserRoleService permissionUserRoleService;
+
+    @Autowired
+    private PermissionRoleService permissionRoleService;
 
     @PutMapping
     @ApiOperation(value="增加一个用户信息")
@@ -37,6 +41,10 @@ public class PermissionUserDTOController {
         // 重名判断
         Assert.isNull(permissionUserDTOService.findByName(permissionUserDTO.getName()),
                 "已经存在一个名为\"" + permissionUserDTO.getName() + "\"的用户");
+
+        // 角色名判断
+        Assert.notNull(permissionRoleService.selectByName(permissionUserDTO.getRoleName()),
+                "不存在\"" + permissionUserDTO.getRoleName() + "\"这个角色");
 
         permissionUserDTOService.add(permissionUserDTO);
         permissionUserRoleService.insertCodeName(permissionUserDTO.getCode(),permissionUserDTO.getRoleName());
@@ -60,6 +68,10 @@ public class PermissionUserDTOController {
         PermissionUserDTO checkUser = permissionUserDTOService.findByName(permissionUserDTO.getName());
         Assert.isTrue((checkUser == null) || (checkUser.getCode() == permissionUserDTO.getCode()),
                 "已经存在一个名为\"" + permissionUserDTO.getName() + "\"的用户");
+
+        // 角色名判断
+        Assert.notNull(permissionRoleService.selectByName(permissionUserDTO.getRoleName()),
+                "不存在\"" + permissionUserDTO.getRoleName() + "\"这个角色");
 
         // 更新用户信息
         permissionUserDTOService.update(permissionUserDTO);

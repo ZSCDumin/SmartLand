@@ -1,8 +1,6 @@
 package com.guotu.gt.service;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.guotu.gt.domain.PermissionRole;
 import com.guotu.gt.dto.PageBean;
 import com.guotu.gt.dto.PermissionRoleDTO;
@@ -61,6 +59,16 @@ public class PermissionRoleServiceImp implements PermissionRoleService {
      */
     public PermissionRoleDTO selectByCode(Integer code) {
         return permissionRoleMapper.selectByCode(code);
+    }
+
+    /**
+     * 根据角色姓名查找角色信息
+     * @param name 角色名
+     * @return 角色信息
+     */
+    @Override
+    public PermissionRoleDTO selectByName(String name) {
+        return permissionRoleMapper.selectByName(name);
     }
 
     /**
