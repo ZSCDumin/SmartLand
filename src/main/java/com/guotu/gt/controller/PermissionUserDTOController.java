@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -36,9 +37,14 @@ public class PermissionUserDTOController {
     @PutMapping
     @ApiOperation(value="增加一个用户信息")
     public Result<PermissionUserDTO> add(@RequestBody @Valid PermissionUserDTO permissionUserDTO,
+	                                     BindingResult bindingResult,
                                          @ApiParam(value = "执行操作的用户编码", required = true)
                                          @RequestParam Integer operatorCode) {
-        // 重名判断
+        if (bindingResult.hasErrors()) {  // 验证参数合法性
+            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
+        }
+		
+		// 重名判断
         Assert.isNull(permissionUserDTOService.findByName(permissionUserDTO.getName()),
                 "已经存在一个名为\"" + permissionUserDTO.getName() + "\"的用户");
 
@@ -58,9 +64,15 @@ public class PermissionUserDTOController {
     @PostMapping
     @ApiOperation(value = "更新一个用户信息")
     public Result<PermissionUserDTO> update(@RequestBody @Valid PermissionUserDTO permissionUserDTO,
+	                                        BindingResult bindingResult,
                                             @ApiParam(value = "执行操作的用户编码", required = true)
                                             @RequestParam Integer operatorCode){
-        // 获取更新之前的用户
+        if (bindingResult.hasErrors()) {  // 验证参数合法性
+            return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
+        }
+        // 用户编码是int类型，不会为null，自动会初始化为0
+		
+		// 获取更新之前的用户
         PermissionUserDTO oldUser = permissionUserDTOService.findByCode(permissionUserDTO.getCode());
         Assert.notNull(oldUser, "不存在编码为" + permissionUserDTO.getCode() + "的用户");
 
