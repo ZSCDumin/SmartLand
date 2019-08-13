@@ -1,12 +1,10 @@
-package com.guotu.gt.mapper;
+package com.guotu.gt.service;
 
 import com.guotu.gt.domain.BasicinfoRegion;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface BasicinfoRegionMapper {
+public interface BasicinfoRegionService {
 
     /**
      * 根据地区编码进行查询

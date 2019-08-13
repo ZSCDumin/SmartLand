@@ -4,17 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guotu.gt.mapper.BasicinfoRegionMapper">
     <!--根据地区编码查找-->
-    <select id="findByCode" parameterType="int">
-        select * from basicinfo_region where code = #{code}
+    <select id="findByCode" parameterType="int" resultType="BasicinfoRegion">
+        select * from basicinfo_region where region_id = #{code}
     </select>
 
     <!--根据地区等级查找-->
-    <select id="findByLevel" parameterType="int">
+    <select id="findByLevel" parameterType="int" resultType="BasicinfoRegion">
         select * from basicinfo_region where region_level = #{level}
     </select>
 
     <!--根据上级地区查找-->
-    <select id="findByParent" parameterType="int">
+    <select id="findByParent" parameterType="int" resultType="BasicinfoRegion">
         select * from basicinfo_region where region_parent_id = #{parentId}
+    </select>
+
+    <!--查找所有地区-->
+    <select id="findAll" resultType="BasicinfoRegion">
+        select * from basicinfo_region
     </select>
 </mapper>
