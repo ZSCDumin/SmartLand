@@ -6,19 +6,36 @@
 
     <!--增加一个机构信息-->
     <insert id="add" parameterType="BasicinfoDepartment" useGeneratedKeys="true" keyProperty="code">
-        INSERT INTO basicinfo_department( name, info, department_code, department_name, region_id)
-        VALUES (#{name},#{info},#{departmentCode},#{departmentName},#{regionId})
+        INSERT INTO basicinfo_department
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            name, info,
+        <if test="departmentCode != 0">
+            department_code,department_name,
+        </if>
+            region_id
+        </trim>
+        <trim prefix="VALUE (" suffix=")" suffixOverrides=",">
+            #{name},#{info},
+            <if test="departmentCode != 0">
+                #{departmentCode},#{departmentName},
+            </if>
+            #{regionId}
+        </trim>
     </insert>
 
     <!--更新一个机构信息-->
     <update id="update" parameterType="BasicinfoDepartment">
-        update basicinfo_department set
-        code = #{code},
-        name = #{name},
-        info = #{info},
-        department_code = #{departmentCode},
-        department_name = #{departmentName},
-        region_id = #{regionId}
+        update basicinfo_department
+        <set>
+            code = #{code},
+            name = #{name},
+            info = #{info},
+            <if test="departmentCode != 0">
+                department_code = #{departmentCode},
+                department_name = #{departmentName},
+            </if>
+            region_id = #{regionId}
+        </set>
         where code = #{code}
     </update>
 
