@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 public class PermissionUserDTO {
 
     @ApiModelProperty("用户编码")
-    @NotNull(message = "用户编码不能为空")
     private int code;
 
     @ApiModelProperty("用户名")
@@ -20,6 +19,7 @@ public class PermissionUserDTO {
     private String name;
 
     @ApiModelProperty("密码")
+	@NotBlank(message = "密码不能为空白，必须至少包含一个有效字符")
     private String password;
 
     @ApiModelProperty("邮箱")
@@ -29,8 +29,10 @@ public class PermissionUserDTO {
     private String contact;
 
     @ApiModelProperty("角色")
+    @NotBlank(message = "角色名称不能为空，必须至少包含一个有效字符")
     private String roleName;
 
     @ApiModelProperty("所属机构")
+	@NotNull(message = "所属机构名不能为空")
     private String department;
 }
