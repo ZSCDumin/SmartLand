@@ -54,8 +54,13 @@ public class BasicinfoDepartmentController {
     @DeleteMapping
     @ApiOperation(value = "根据code删除一个机构信息")
     public Result<Object> delete(@RequestParam("code")@ApiParam(value = "机构编码") int code){
-        basicinfoDepartmentService.delete(code);
-        return ResultUtil.success();
+        if(basicinfoDepartmentService.findByParent(code).size()==0){
+            basicinfoDepartmentService.delete(code);
+            return ResultUtil.success(code);
+        }
+        else{
+            return ResultUtil.error("存在下级机构");
+        }
     }
 
     @GetMapping("/findByCode")

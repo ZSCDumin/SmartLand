@@ -40,4 +40,9 @@ public interface BasicinfoDepartmentService {
      */
     List<BasicinfoDepartmentDTO> findAll();
 
+    /**
+     * 根据上级机构查询
+     * @return
+     */
+    List<BasicinfoDepartment> findByParent(int parentCode);
 }

@@ -37,4 +37,9 @@ public class BasicinfoDepartmentServiceImp implements BasicinfoDepartmentService
     public List<BasicinfoDepartmentDTO> findAll(){
         return basicinfoDepartmentMapper.findAll();
     }
+
+    @Override
+    public List<BasicinfoDepartment> findByParent(int parentCode){
+        return basicinfoDepartmentMapper.findByParent(parentCode);
+    }
 }
