@@ -6,7 +6,6 @@ import com.guotu.gt.dto.PermissionUserDTO;
 import com.guotu.gt.mapper.PermissionUserDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -56,5 +55,10 @@ public class PermissionUserDTOServiceImp implements PermissionUserDTOService{
     @Override
     public PermissionUserDTO findByCode(int code){
         return permissionUserDTOMapper.findByCode(code);
+    }
+
+    @Override
+    public List<PermissionUserDTO> findByDepartment(int departmentCode){
+        return permissionUserDTOMapper.findByDepartment(departmentCode);
     }
 }

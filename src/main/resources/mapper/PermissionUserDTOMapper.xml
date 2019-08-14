@@ -66,4 +66,15 @@
          left join permission_user_role pur on pu.code = pur.user_code
          where pu.code = #{code}
     </select>
+
+    <!--根据用户所属机构查询用户信息实体-->
+    <select id="findByDepartment" resultType="PermissionUserDTO">
+        select pu.code, pu.name, pu.password, pu.email, pu.contact,
+        (select pr.name from permission_role pr where pr.code =pur.role_code) as roleName,
+        bd.name as department
+         from permission_user pu
+         left join basicinfo_department bd on pu.department_code = bd.code
+         left join permission_user_role pur on pu.code = pur.user_code
+         where pu.department_code = #{departmentCode}
+    </select>
 </mapper>

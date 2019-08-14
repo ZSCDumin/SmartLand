@@ -6,6 +6,7 @@ import com.guotu.gt.dto.BasicinfoDepartmentDTO;
 import com.guotu.gt.dto.Result;
 import com.guotu.gt.service.BasicinfoDepartmentService;
 import com.guotu.gt.service.BasicinfoRegionService;
+import com.guotu.gt.service.PermissionUserDTOService;
 import com.guotu.gt.utils.ResultUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,6 +28,9 @@ public class BasicinfoDepartmentController {
 
     @Autowired
     private BasicinfoRegionService basicinfoRegionService;
+
+    @Autowired
+    private PermissionUserDTOService permissionUserDTOService;
 
     @PutMapping
     @ApiOperation(value="增加一个机构信息")
@@ -61,12 +65,13 @@ public class BasicinfoDepartmentController {
     @DeleteMapping
     @ApiOperation(value = "根据code删除一个机构信息")
     public Result<Object> delete(@RequestParam("code")@ApiParam(value = "机构编码") int code){
+        Assert.isNull(permissionUserDTOService.findByDepartment(code),"该机构存在所属用户");
         if(basicinfoDepartmentService.findByParent(code).size()==0){
             basicinfoDepartmentService.delete(code);
             return ResultUtil.success(code);
         }
         else{
-            return ResultUtil.error("存在下级机构");
+            return ResultUtil.error("该机构存在下级机构");
         }
     }
 
