@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class BasicinfoDepartmentController {
     @PutMapping
     @ApiOperation(value="增加一个机构信息")
     public Result<BasicinfoDepartmentDTO> add(@RequestBody BasicinfoDepartment basicinfoDepartment){
+        Assert.notNull(basicinfoDepartmentService.findByCode(basicinfoDepartment.getDepartmentCode()),"所属机构编码不存在");
+        Assert.notNull(basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()),"所属行政区域不存在");
         String s1;
         String s2;
         s1=basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()).getRegionName();
@@ -42,6 +45,8 @@ public class BasicinfoDepartmentController {
     @PostMapping
     @ApiOperation(value = "更新一个机构信息")
     public Result<BasicinfoDepartmentDTO> update(@RequestBody BasicinfoDepartment basicinfoDepartment){
+        Assert.notNull(basicinfoDepartmentService.findByCode(basicinfoDepartment.getDepartmentCode()),"所属机构编码不存在");
+        Assert.notNull(basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()),"所属行政区域不存在");
         String s1;
         String s2;
         s1=basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()).getRegionName();
