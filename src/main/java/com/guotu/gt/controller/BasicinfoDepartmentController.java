@@ -31,6 +31,7 @@ public class BasicinfoDepartmentController {
     @PutMapping
     @ApiOperation(value="增加一个机构信息")
     public Result<BasicinfoDepartmentDTO> add(@RequestBody BasicinfoDepartment basicinfoDepartment){
+        if(basicinfoDepartment.getDepartmentCode()!=0)
         Assert.notNull(basicinfoDepartmentService.findByCode(basicinfoDepartment.getDepartmentCode()),"所属机构编码不存在");
         Assert.notNull(basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()),"所属行政区域不存在");
         String s1;
@@ -45,6 +46,7 @@ public class BasicinfoDepartmentController {
     @PostMapping
     @ApiOperation(value = "更新一个机构信息")
     public Result<BasicinfoDepartmentDTO> update(@RequestBody BasicinfoDepartment basicinfoDepartment){
+        if(basicinfoDepartment.getDepartmentCode()!=0)
         Assert.notNull(basicinfoDepartmentService.findByCode(basicinfoDepartment.getDepartmentCode()),"所属机构编码不存在");
         Assert.notNull(basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()),"所属行政区域不存在");
         String s1;
