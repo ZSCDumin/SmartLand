@@ -6,11 +6,13 @@ import com.guotu.gt.dto.BasicinfoDepartmentDTO;
 import com.guotu.gt.dto.Result;
 import com.guotu.gt.service.BasicinfoDepartmentService;
 import com.guotu.gt.service.BasicinfoRegionService;
+import com.guotu.gt.service.PermissionUserDTOService;
 import com.guotu.gt.utils.ResultUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -27,9 +29,15 @@ public class BasicinfoDepartmentController {
     @Autowired
     private BasicinfoRegionService basicinfoRegionService;
 
+    @Autowired
+    private PermissionUserDTOService permissionUserDTOService;
+
     @PutMapping
     @ApiOperation(value="增加一个机构信息")
     public Result<BasicinfoDepartmentDTO> add(@RequestBody BasicinfoDepartment basicinfoDepartment){
+        if(basicinfoDepartment.getDepartmentCode()!=0)
+        Assert.notNull(basicinfoDepartmentService.findByCode(basicinfoDepartment.getDepartmentCode()),"所属机构编码不存在");
+        Assert.notNull(basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()),"所属行政区域不存在");
         String s1;
         String s2;
         s1=basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()).getRegionName();
@@ -42,6 +50,9 @@ public class BasicinfoDepartmentController {
     @PostMapping
     @ApiOperation(value = "更新一个机构信息")
     public Result<BasicinfoDepartmentDTO> update(@RequestBody BasicinfoDepartment basicinfoDepartment){
+        if(basicinfoDepartment.getDepartmentCode()!=0)
+        Assert.notNull(basicinfoDepartmentService.findByCode(basicinfoDepartment.getDepartmentCode()),"所属机构编码不存在");
+        Assert.notNull(basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()),"所属行政区域不存在");
         String s1;
         String s2;
         s1=basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()).getRegionName();
@@ -54,8 +65,14 @@ public class BasicinfoDepartmentController {
     @DeleteMapping
     @ApiOperation(value = "根据code删除一个机构信息")
     public Result<Object> delete(@RequestParam("code")@ApiParam(value = "机构编码") int code){
-        basicinfoDepartmentService.delete(code);
-        return ResultUtil.success();
+        Assert.isNull(permissionUserDTOService.findByDepartment(code),"该机构存在所属用户");
+        if(basicinfoDepartmentService.findByParent(code).size()==0){
+            basicinfoDepartmentService.delete(code);
+            return ResultUtil.success(code);
+        }
+        else{
+            return ResultUtil.error("该机构存在下级机构");
+        }
     }
 
     @GetMapping("/findByCode")

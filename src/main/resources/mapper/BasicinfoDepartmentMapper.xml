@@ -81,4 +81,9 @@
     left JOIN basicinfo_region AS br3 ON br3.region_id = br2.region_parent_id
     </select>
 
+    <!--查询所有-->
+    <select id="findByParent" resultType="BasicinfoDepartment">
+            select * from basicinfo_department
+            where department_code = #{parentCode}
+    </select>
 </mapper>

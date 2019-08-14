@@ -53,4 +53,11 @@ public interface PermissionUserDTOService {
      * @return
      */
     PermissionUserDTO findByCode(int code);
+
+    /**
+     * 根据所属机构查找
+     * @param departmentCode
+     * @return
+     */
+    List<PermissionUserDTO> findByDepartment(int departmentCode);
 }
