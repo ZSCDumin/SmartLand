@@ -15,7 +15,7 @@ public interface BasicinfoLoginLogDTOMapper {
      * @param code
      * @return
      */
-    BasicinfoLoginLogDTO delete(int code);
+    void delete(int code);
 
     /**
      * 根据输入的日期范围查询
@@ -41,4 +41,11 @@ public interface BasicinfoLoginLogDTOMapper {
      * 插入
      */
     void insert(BasicinfoLoginLog basicinfoLoginLog);
+
+    /**
+     * 根据日志编码查询
+     * @param logCode
+     * @return
+     */
+    BasicinfoLoginLogDTO findByLogCode(int logCode);
 }

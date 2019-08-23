@@ -83,4 +83,9 @@ public class BasicinfoLoginLogDTOServiceImp implements BasicinfoLoginLogDTOServi
         basicinfoLoginLogDTOMapper.insert(
                 new BasicinfoLoginLog(null, userCode, ipAddress, machineName, new Date()));
     }
+
+    @Override
+    public BasicinfoLoginLogDTO findByLogCode(int logCode){
+        return basicinfoLoginLogDTOMapper.findByLogCode(logCode);
+    }
 }

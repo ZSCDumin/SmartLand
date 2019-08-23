@@ -1,6 +1,5 @@
 package com.guotu.gt.controller;
 
-
 import com.guotu.gt.domain.BasicinfoDepartment;
 import com.guotu.gt.dto.BasicinfoDepartmentDTO;
 import com.guotu.gt.dto.Result;
@@ -33,7 +32,7 @@ public class BasicinfoDepartmentController {
     private PermissionUserDTOService permissionUserDTOService;
 
     @PutMapping
-    @ApiOperation(value="增加一个机构信息")
+    @ApiOperation(value="增加一个机构信息",notes = "机构名称和行政区域必填")
     public Result<BasicinfoDepartmentDTO> add(@RequestBody BasicinfoDepartment basicinfoDepartment){
         if(basicinfoDepartment.getDepartmentCode()!=0)
         Assert.notNull(basicinfoDepartmentService.findByCode(basicinfoDepartment.getDepartmentCode()),"所属机构编码不存在");
@@ -48,7 +47,7 @@ public class BasicinfoDepartmentController {
     }
 
     @PostMapping
-    @ApiOperation(value = "更新一个机构信息")
+    @ApiOperation(value = "更新一个机构信息",notes = "机构编码必填")
     public Result<BasicinfoDepartmentDTO> update(@RequestBody BasicinfoDepartment basicinfoDepartment){
         if(basicinfoDepartment.getDepartmentCode()!=0)
         Assert.notNull(basicinfoDepartmentService.findByCode(basicinfoDepartment.getDepartmentCode()),"所属机构编码不存在");

@@ -18,6 +18,11 @@ public class GtApplication {
         SpringApplication.run(GtApplication.class, args);
     }
 
+    /**
+     * 跨域配置
+     *
+     * @return
+     */
     private CorsConfiguration buildConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("*");

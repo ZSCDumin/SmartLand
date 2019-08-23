@@ -26,9 +26,10 @@ public class BasicinfoLoginLogDTOController {
 
     @DeleteMapping
     @ApiOperation("根据编码删除一条登录日志")
-    public Result<Object> delete(@RequestParam("code") int code){
+    public Result<Integer> delete(@RequestParam("code") int code){
+        Assert.notNull(basicinfoLoginLogDTOService.findByLogCode(code),"该条日志不存在");
         basicinfoLoginLogDTOService.delete(code);
-        return ResultUtil.success();
+        return ResultUtil.success(code);
     }
 
     @GetMapping("/search")
