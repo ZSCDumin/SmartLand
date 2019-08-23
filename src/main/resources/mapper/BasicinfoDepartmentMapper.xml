@@ -28,7 +28,9 @@
         update basicinfo_department
         <set>
             code = #{code},
-            name = #{name},
+            <if test="name != null and name !=''">
+                name = #{name},
+            </if>
             info = #{info},
             <if test="departmentCode != 0">
                 department_code = #{departmentCode},
