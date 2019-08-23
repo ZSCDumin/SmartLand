@@ -51,4 +51,11 @@ public interface BasicinfoLoginLogDTOService {
      * @param machineName 登录机器名
      */
     void insert(Integer userCode, String ipAddress, String machineName);
+
+    /**
+     * 根据日志编码查询
+     * @param logCode
+     * @return
+     */
+    BasicinfoLoginLogDTO findByLogCode(int logCode);
 }

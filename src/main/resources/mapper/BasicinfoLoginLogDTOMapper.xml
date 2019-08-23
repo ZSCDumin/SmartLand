@@ -41,4 +41,12 @@
         #{logTime})
     </insert>
 
+    <!--查询所有记录-->
+    <select id="findByLogCode" resultType="BasicinfoLoginLogDTO">
+        select bll.code, bll.name, bd.name as department, bll.ip_address, bll.machine_name, bll.log_time
+        from permission_user pu
+        right join basicinfo_login_log bll on pu.code = bll.user_code
+        left join basicinfo_department bd on bd.code =pu.department_code
+        where bll.code = #{logCode}
+    </select>
 </mapper>
