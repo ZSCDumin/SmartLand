@@ -43,6 +43,7 @@ public class BasicinfoDepartmentController {
     public Result<BasicinfoDepartmentDTO> add(@RequestBody BasicinfoDepartment basicinfoDepartment,
                                               @ApiParam(value = "执行操作的用户编码", required = true)
                                               @RequestParam Integer operatorCode){
+        Assert.notNull(permissionUserDTOService.findByCode(operatorCode),"执行操作的用户编码不存在");
         if(basicinfoDepartment.getDepartmentCode()!=0)
         Assert.notNull(basicinfoDepartmentService.findByCode(basicinfoDepartment.getDepartmentCode()),"所属机构编码不存在");
         Assert.notNull(basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()),"所属行政区域不存在");
@@ -63,6 +64,7 @@ public class BasicinfoDepartmentController {
     public Result<BasicinfoDepartmentDTO> update(@RequestBody BasicinfoDepartment basicinfoDepartment,
                                                  @ApiParam(value = "执行操作的用户编码", required = true)
                                                  @RequestParam Integer operatorCode){
+        Assert.notNull(permissionUserDTOService.findByCode(operatorCode),"执行操作的用户编码不存在");
         if(basicinfoDepartment.getDepartmentCode()!=0)
         Assert.notNull(basicinfoDepartmentService.findByCode(basicinfoDepartment.getDepartmentCode()),"所属机构编码不存在");
         Assert.notNull(basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()),"所属行政区域不存在");
@@ -83,6 +85,7 @@ public class BasicinfoDepartmentController {
     @ApiOperation(value = "根据code删除一个机构信息")
     public Result<Object> delete(@RequestParam("code")@ApiParam(value = "机构编码") int code,
                                  @ApiParam(value = "执行操作的用户编码", required = true) @RequestParam Integer operatorCode){
+        Assert.notNull(permissionUserDTOService.findByCode(operatorCode),"执行操作的用户编码不存在");
         Assert.notNull(permissionUserDTOService.findByDepartment(code),"该机构存在所属用户");
         if(basicinfoDepartmentService.findByParent(code).size()==0){
             String name=basicinfoDepartmentService.findByCode(code).getName();
