@@ -54,7 +54,7 @@ public class BasicinfoDepartmentController {
         basicinfoDepartmentService.add(basicinfoDepartment);
         //记录操作日志
         basicinfoActionLogService.insert(operatorCode,INTERFACE_NAME, OperationType.INSERT,
-                "角色\"" + permissionUserDTOService.findByCode(operatorCode).getRoleName()+ "\"");
+                "机构\"" + basicinfoDepartment.getName()+ "\"");
         return ResultUtil.success(basicinfoDepartmentService.findByCode(basicinfoDepartment.getCode()));
     }
 
@@ -71,10 +71,11 @@ public class BasicinfoDepartmentController {
         s1=basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()).getRegionName();
         s2=basicinfoDepartment.getName();
         basicinfoDepartment.setName(s1+s2);
+        String oldName=basicinfoDepartmentService.findByCode(basicinfoDepartment.getCode()).getName();
         basicinfoDepartmentService.update(basicinfoDepartment);
         //记录操作日志
         basicinfoActionLogService.insert(operatorCode,INTERFACE_NAME, OperationType.UPDATE,
-                "角色\"" + permissionUserDTOService.findByCode(operatorCode).getRoleName()+ "\"");
+                "机构\"" + oldName+ "\"");
         return ResultUtil.success(basicinfoDepartmentService.findByCode(basicinfoDepartment.getCode()));
     }
 
@@ -84,10 +85,11 @@ public class BasicinfoDepartmentController {
                                  @ApiParam(value = "执行操作的用户编码", required = true) @RequestParam Integer operatorCode){
         Assert.notNull(permissionUserDTOService.findByDepartment(code),"该机构存在所属用户");
         if(basicinfoDepartmentService.findByParent(code).size()==0){
+            String name=basicinfoDepartmentService.findByCode(code).getName();
             basicinfoDepartmentService.delete(code);
             //记录操作日志
             basicinfoActionLogService.insert(operatorCode,INTERFACE_NAME, OperationType.DELETE,
-                    "角色\"" +permissionUserDTOService.findByCode(operatorCode).getRoleName()+ "\"");
+                    "机构\"" + name + "\"");
             return ResultUtil.success(code);
         }
         else{
