@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * 用户登录时输入的信息
@@ -25,10 +24,10 @@ public class LoginUserSigninDTO {
     @NotBlank(message = "密码不能为空")
     private String password;
 
-    @ApiModelProperty(value = "IP地址", required = true)
+    /*@ApiModelProperty(value = "IP地址", required = true)
     @NotBlank(message = "IP地址不能为空")
     private String ipAddress;
 
     @ApiModelProperty("机器名")
-    private String machineName;
+    private String machineName;*/
 }

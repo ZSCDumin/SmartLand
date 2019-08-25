@@ -1,7 +1,6 @@
 package com.guotu.gt.service;
 
 import com.guotu.gt.dto.LoginUserDTO;
-import com.guotu.gt.dto.LoginUserSigninDTO;
 
 /**
  * 用户登录 - 服务接口
@@ -12,9 +11,12 @@ import com.guotu.gt.dto.LoginUserSigninDTO;
 public interface LoginUserService {
 
     /**
-     * 登录，返回用户信息
-     * @param loginUserSigninDTO 登录信息，包括用户名和密码
-     * @return 用户及角色基本信息
+     * 用户登录，并返回用户信息
+     * @param userName 用户名
+     * @param password 密码
+     * @param ipAddress IP地址
+     * @param machineName 机器名
+     * @return 用户信息
      */
-    LoginUserDTO login(LoginUserSigninDTO loginUserSigninDTO);
+    LoginUserDTO login(String userName, String password, String ipAddress, String machineName);
 }
