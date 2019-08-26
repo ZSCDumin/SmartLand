@@ -6,6 +6,7 @@ import com.guotu.gt.dto.PermissionRoleDTO;
 import com.guotu.gt.dto.Result;
 import com.guotu.gt.service.BasicinfoActionLogService;
 import com.guotu.gt.service.PermissionRoleService;
+import com.guotu.gt.service.PermissionUserDTOService;
 import com.guotu.gt.utils.ResultUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -60,7 +61,11 @@ public class PermissionRoleController {
             return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
         }
 
+        // 判断操作用户的合法性
+        Assert.notNull(permissionUserDTOService.findByCode(operatorCode),"执行操作的用户编码不存在");
+
         PermissionRoleDTO oldRole = permissionRoleService.updateByCode(permissionRoleDTO);
+
         // 记录操作日志
         basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.UPDATE,
                 "角色\"" + oldRole.getName() + "\"");
@@ -74,7 +79,11 @@ public class PermissionRoleController {
                     @ApiParam(value = "角色描述") @RequestParam(required = false) String description,
                     @ApiParam(value = "执行操作的用户编码", required = true) @RequestParam Integer operatorCode) {
 
+        // 判断操作用户的合法性
+        Assert.notNull(permissionUserDTOService.findByCode(operatorCode),"执行操作的用户编码不存在");
+
         PermissionRoleDTO newRole = permissionRoleService.insert(name, description);
+
         // 记录操作日志
         basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.INSERT,
                 "角色\"" + newRole.getName() + "\"");
@@ -87,7 +96,11 @@ public class PermissionRoleController {
     public Result<Object> deleteByCode(@ApiParam(value = "角色编码", required = true) @RequestParam Integer code,
                     @ApiParam(value = "执行操作的用户编码", required = true) @RequestParam Integer operatorCode) {
 
+        // 判断操作用户的合法性
+        Assert.notNull(permissionUserDTOService.findByCode(operatorCode),"执行操作的用户编码不存在");
+
         PermissionRoleDTO deletedRole = permissionRoleService.deleteByCode(code);
+
         // 记录操作日志
         basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.DELETE,
                 "角色\"" + deletedRole.getName() + "\"");
@@ -99,6 +112,9 @@ public class PermissionRoleController {
 
     @Autowired
     private BasicinfoActionLogService basicinfoActionLogService;
+
+    @Autowired
+    private PermissionUserDTOService permissionUserDTOService;
 
     private static final String INTERFACE_NAME = "角色管理";
 }
