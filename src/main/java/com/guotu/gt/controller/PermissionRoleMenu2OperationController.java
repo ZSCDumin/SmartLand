@@ -3,10 +3,7 @@ package com.guotu.gt.controller;
 import com.guotu.gt.constant.OperationType;
 import com.guotu.gt.domain.PermissionRoleMenu2Operation;
 import com.guotu.gt.dto.*;
-import com.guotu.gt.service.BasicinfoActionLogService;
-import com.guotu.gt.service.PermissionMenu2OperationService;
-import com.guotu.gt.service.PermissionRoleMenu2OperationService;
-import com.guotu.gt.service.PermissionRoleService;
+import com.guotu.gt.service.*;
 import com.guotu.gt.utils.ResultUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,6 +31,9 @@ public class PermissionRoleMenu2OperationController {
     @Autowired
     private BasicinfoActionLogService basicinfoActionLogService;
 
+    @Autowired
+    private PermissionUserDTOService permissionUserDTOService;
+
     @PutMapping
     @ApiOperation(value="修改角色权限",
                   notes = "只需要传该角色的编码和拥有的权限的菜单编码和操作编码即可")
@@ -41,6 +41,10 @@ public class PermissionRoleMenu2OperationController {
 								@RequestBody List<PermissionRoleMenu2OperationDTO> permissionRoleMenu2OperationDTOList,
                                  @RequestParam @ApiParam(value = "角色编码", required = true) int roleCode,
                                  @ApiParam(value = "执行操作的用户编码", required = true) @RequestParam Integer operatorCode){
+
+        // 操作用户编码判断
+        Assert.notNull(permissionUserDTOService.findByCode(operatorCode),"执行操作的用户编码不存在");
+
         // 判断角色编码是否合法
         PermissionRoleDTO editRole = permissionRoleService.selectByCode(roleCode);
         Assert.notNull(editRole, "不存在编码为" + roleCode + "的角色");

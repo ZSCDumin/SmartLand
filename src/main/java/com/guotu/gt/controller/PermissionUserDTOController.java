@@ -43,6 +43,9 @@ public class PermissionUserDTOController {
         if (bindingResult.hasErrors()) {  // 验证参数合法性
             return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
         }
+
+        // 操作用户编码判断
+        Assert.notNull(permissionUserDTOService.findByCode(operatorCode),"执行操作的用户编码不存在");
 		
 		// 重名判断
         Assert.isNull(permissionUserDTOService.findByName(permissionUserDTO.getName()),
@@ -54,6 +57,7 @@ public class PermissionUserDTOController {
 
         permissionUserDTOService.add(permissionUserDTO);
         permissionUserRoleService.insertCodeName(permissionUserDTO.getCode(),permissionUserDTO.getRoleName());
+
         //记录操作日志
         basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.INSERT,
                 "用户\"" + permissionUserDTO.getName() + "\"");
@@ -71,6 +75,9 @@ public class PermissionUserDTOController {
             return ResultUtil.error(bindingResult.getFieldError().getDefaultMessage());
         }
         // 用户编码是int类型，不会为null，自动会初始化为0
+
+        // 操作用户编码判断
+        Assert.notNull(permissionUserDTOService.findByCode(operatorCode),"执行操作的用户编码不存在");
 		
 		// 获取更新之前的用户
         PermissionUserDTO oldUser = permissionUserDTOService.findByCode(permissionUserDTO.getCode());
@@ -100,6 +107,11 @@ public class PermissionUserDTOController {
     public Result<Integer> delete(@RequestParam("code") int code,
                                   @ApiParam(value = "执行操作的用户编码", required = true)
                                   @RequestParam Integer operatorCode){
+
+        // 操作用户编码判断
+        Assert.notNull(permissionUserDTOService.findByCode(operatorCode),"执行操作的用户编码不存在");
+		Assert.isTrue(!operatorCode.equals(code), "错误：执行操作的用户试图删除自己");
+
         // 获取删除的用户
         PermissionUserDTO deletedUser = permissionUserDTOService.findByCode(code);
         Assert.notNull(deletedUser, "不存在编码为" + code + "的用户");
@@ -108,9 +120,11 @@ public class PermissionUserDTOController {
         permissionUserRoleService.deleteByUserCode(code);
         basicinfoActionLogService.deleteByUserCode(code);
         permissionUserDTOService.delete(code);
+
         // 记录操作日志
         basicinfoActionLogService.insert(operatorCode, INTERFACE_NAME, OperationType.DELETE,
                     "用户\"" + deletedUser.getName() + "\"");
+
         // 将删除的用户编码返回给前端
         return ResultUtil.success(code);
     }
