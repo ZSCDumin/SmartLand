@@ -1,8 +1,10 @@
 package com.guotu.gt.controller;
 
+import com.guotu.gt.constant.OperationType;
 import com.guotu.gt.domain.BasicinfoDepartment;
 import com.guotu.gt.dto.BasicinfoDepartmentDTO;
 import com.guotu.gt.dto.Result;
+import com.guotu.gt.service.BasicinfoActionLogService;
 import com.guotu.gt.service.BasicinfoDepartmentService;
 import com.guotu.gt.service.BasicinfoRegionService;
 import com.guotu.gt.service.PermissionUserDTOService;
@@ -31,9 +33,17 @@ public class BasicinfoDepartmentController {
     @Autowired
     private PermissionUserDTOService permissionUserDTOService;
 
+    @Autowired
+    private BasicinfoActionLogService basicinfoActionLogService;
+
+    private static final String INTERFACE_NAME = "机构管理";
+
     @PutMapping
     @ApiOperation(value="增加一个机构信息",notes = "机构名称和行政区域必填")
-    public Result<BasicinfoDepartmentDTO> add(@RequestBody BasicinfoDepartment basicinfoDepartment){
+    public Result<BasicinfoDepartmentDTO> add(@RequestBody BasicinfoDepartment basicinfoDepartment,
+                                              @ApiParam(value = "执行操作的用户编码", required = true)
+                                              @RequestParam Integer operatorCode){
+        Assert.notNull(permissionUserDTOService.findByCode(operatorCode),"执行操作的用户编码不存在");
         if(basicinfoDepartment.getDepartmentCode()!=0)
         Assert.notNull(basicinfoDepartmentService.findByCode(basicinfoDepartment.getDepartmentCode()),"所属机构编码不存在");
         Assert.notNull(basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()),"所属行政区域不存在");
@@ -43,12 +53,18 @@ public class BasicinfoDepartmentController {
         s2=basicinfoDepartment.getName();
         basicinfoDepartment.setName(s1+s2);
         basicinfoDepartmentService.add(basicinfoDepartment);
+        //记录操作日志
+        basicinfoActionLogService.insert(operatorCode,INTERFACE_NAME, OperationType.INSERT,
+                "机构\"" + basicinfoDepartment.getName()+ "\"");
         return ResultUtil.success(basicinfoDepartmentService.findByCode(basicinfoDepartment.getCode()));
     }
 
     @PostMapping
     @ApiOperation(value = "更新一个机构信息",notes = "机构编码必填")
-    public Result<BasicinfoDepartmentDTO> update(@RequestBody BasicinfoDepartment basicinfoDepartment){
+    public Result<BasicinfoDepartmentDTO> update(@RequestBody BasicinfoDepartment basicinfoDepartment,
+                                                 @ApiParam(value = "执行操作的用户编码", required = true)
+                                                 @RequestParam Integer operatorCode){
+        Assert.notNull(permissionUserDTOService.findByCode(operatorCode),"执行操作的用户编码不存在");
         if(basicinfoDepartment.getDepartmentCode()!=0)
         Assert.notNull(basicinfoDepartmentService.findByCode(basicinfoDepartment.getDepartmentCode()),"所属机构编码不存在");
         Assert.notNull(basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()),"所属行政区域不存在");
@@ -57,16 +73,26 @@ public class BasicinfoDepartmentController {
         s1=basicinfoRegionService.findByCode(basicinfoDepartment.getRegionId()).getRegionName();
         s2=basicinfoDepartment.getName();
         basicinfoDepartment.setName(s1+s2);
+        String oldName=basicinfoDepartmentService.findByCode(basicinfoDepartment.getCode()).getName();
         basicinfoDepartmentService.update(basicinfoDepartment);
+        //记录操作日志
+        basicinfoActionLogService.insert(operatorCode,INTERFACE_NAME, OperationType.UPDATE,
+                "机构\"" + oldName+ "\"");
         return ResultUtil.success(basicinfoDepartmentService.findByCode(basicinfoDepartment.getCode()));
     }
 
     @DeleteMapping
     @ApiOperation(value = "根据code删除一个机构信息")
-    public Result<Object> delete(@RequestParam("code")@ApiParam(value = "机构编码") int code){
-        Assert.isNull(permissionUserDTOService.findByDepartment(code),"该机构存在所属用户");
+    public Result<Object> delete(@RequestParam("code")@ApiParam(value = "机构编码") int code,
+                                 @ApiParam(value = "执行操作的用户编码", required = true) @RequestParam Integer operatorCode){
+        Assert.notNull(permissionUserDTOService.findByCode(operatorCode),"执行操作的用户编码不存在");
+        Assert.notNull(permissionUserDTOService.findByDepartment(code),"该机构存在所属用户");
         if(basicinfoDepartmentService.findByParent(code).size()==0){
+            String name=basicinfoDepartmentService.findByCode(code).getName();
             basicinfoDepartmentService.delete(code);
+            //记录操作日志
+            basicinfoActionLogService.insert(operatorCode,INTERFACE_NAME, OperationType.DELETE,
+                    "机构\"" + name + "\"");
             return ResultUtil.success(code);
         }
         else{
